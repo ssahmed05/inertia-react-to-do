@@ -3,11 +3,12 @@ import Input from '@/Components/Input'
 import Label from '@/Components/Label'
 import Authenticated from '@/Layouts/Authenticated'
 import { Inertia } from '@inertiajs/inertia'
-import { Head, useForm } from '@inertiajs/inertia-react'
+import { Head, useForm} from '@inertiajs/inertia-react'
 import React from 'react'
 
-const Add = (props, msg) => {
+const Add = (props) => {
 
+    const { errors } = props;
     const { data, setData, processing } = useForm({
         name: '',
         color: '#0000',
@@ -27,6 +28,7 @@ const Add = (props, msg) => {
         });
 
     }
+
     return (
         <Authenticated
             auth={props.auth}
@@ -51,8 +53,9 @@ const Add = (props, msg) => {
                                         autoComplete="name"
                                         isFocused={true}
                                         handleChange={onHandleChange}
-                                        required
+
                                     />
+                                    <span className='text-red-500'>{errors.name}</span>
                                 </div>
 
                                 <div className="mt-4">
@@ -64,7 +67,7 @@ const Add = (props, msg) => {
                                         value={data.color}
                                         handleChange={onHandleChange}
                                         />
-
+                                    <span className='text-red-500'>{errors.color}</span>
                                 </div>
                                 <div className="mt-4">
                                     <Label forInput="status" value="Status" />
@@ -92,6 +95,7 @@ const Add = (props, msg) => {
                                         <option value="Active">Active</option>
                                         <option value="In-active">In-Active</option>
                                     </select>
+                                    <span className='text-red-500'>{errors.activeStatus}</span>
                                 </div>
 
 

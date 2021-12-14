@@ -16,8 +16,13 @@ class TaskGroupController extends Controller
      */
     public function index()
     {
-        $data['groupList'] = TaskGroup::all();
-       return Inertia::render('TaskGroup/List', $data);
+        return Inertia::render('TaskGroup/List');
+    }
+
+    public function taskGroupList(){
+
+        $data = TaskGroup::paginate(5);
+        return $data;
     }
 
     /**
@@ -51,7 +56,7 @@ class TaskGroupController extends Controller
         $taskGroup->color  = $request->color ;
         $taskGroup->status = $request->activeStatus ;
         $taskGroup->save();
-        return redirect()->route('task.group.list');
+        return redirect()->route('task.group.list')->with('message' , "Task Group Added");
 
     }
 
