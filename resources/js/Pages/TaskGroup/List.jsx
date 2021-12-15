@@ -75,7 +75,9 @@ const List = (props) => {
                                     <div className="bg-white p-6 mt-5 border-b-4 shadow-sm" style={{ borderBottom: "3", borderColor: record.color }}>
                                         <div className="flex justify-between">
                                             <label className='m-3 text-md'>{record.name}</label>
-                                            <Button className='bg-indigo-500'>Open</Button>
+                                            <InertiaLink href={route('task.list', {id: record.id} )}>
+                                                <Button className='bg-indigo-500'>Open</Button>
+                                            </InertiaLink>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +93,7 @@ const List = (props) => {
                 }
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="overflow-hidden shadow-lg sm:rounded-lg ">
-                        <div className="flex justify-center">
+                        <div className="flex justify-center mt-2">
 
                             <Pagination
                                 activePage={state?.groupList?.current_page ? state?.groupList?.current_page : 0}

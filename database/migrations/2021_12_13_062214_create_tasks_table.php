@@ -21,6 +21,7 @@ class CreateTasksTable extends Migration
             $table->string('explaination');
             $table->string('status');
             $table->date('date_of_assign');
+            $table->date('deadline');
             $table->date('date_of_complete');
             $table->string('created_by');
 

@@ -35,6 +35,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Task-Group-Add', [App\Http\Controllers\TaskGroupController::class, 'create'])->name('task.group.add');
     Route::post('/Task-Group-Add', [App\Http\Controllers\TaskGroupController::class, 'store'])->name('task.group.store');
 
+    Route::get('/Task/{id}', [App\Http\Controllers\TaskController::class, 'index'])->name('task.list');
+    Route::get('/Task-List/{id}', [App\Http\Controllers\TaskController::class, 'taskList']);
+    Route::post('/Task-Add', [App\Http\Controllers\TaskController::class, 'store'])->name('task.store');
+
+
 });
 
 require __DIR__.'/auth.php';

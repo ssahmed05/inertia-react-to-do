@@ -11,7 +11,7 @@ const Add = (props) => {
     const { errors } = props;
     const { data, setData, processing } = useForm({
         name: '',
-        color: '#0000',
+        color: '#3730a3',
         activeStatus: '',
     });
     const onHandleChange = (e) => {
