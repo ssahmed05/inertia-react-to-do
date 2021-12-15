@@ -12,7 +12,7 @@ const Add = (props) => {
     const { data, setData, processing } = useForm({
         name: '',
         color: '#3730a3',
-        activeStatus: '',
+        activeStatus: 'Active',
     });
     const onHandleChange = (e) => {
 

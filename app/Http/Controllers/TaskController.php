@@ -25,7 +25,7 @@ class TaskController extends Controller
 
     public function taskList($id){
 
-        $data = Task::where('task_group_id',$id)->paginate(5);
+        $data = Task::where('task_group_id',$id)->paginate(10);
         return $data;
 
     }
@@ -50,6 +50,7 @@ class TaskController extends Controller
             'date_of_assign' => 'required|date',
             'deadline' => 'required',
         ]);
+
         $task = new Task;
         $task->task_group_id  = $request->taskGroupId;
         $task->task           = $request->task;
@@ -58,8 +59,10 @@ class TaskController extends Controller
         $task->date_of_assign = date("Y-m-d",strtotime($request->date_of_assign));
         $task->deadline       = date("Y-m-d",strtotime($request->deadline));
         $task->created_by     = $request->created_by;
-        $task->save();
-        return redirect()->route('task.list', ['id' => $request->taskGroupId])->with('message' , "Task Added");
+        if($task->save()) {
+            return redirect()->route('task.list', ['id' => $request->taskGroupId])->with('message' , "Task Added");
+
+        }
     }
 
     /**
