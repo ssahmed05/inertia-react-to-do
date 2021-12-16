@@ -11,30 +11,23 @@ import { Inertia } from '@inertiajs/inertia'
 
 const List = (props) => {
 
-    const { taskGroup, errors } = props;
+    const { taskGroup } = props;
     const [alert, setAlert] = useState(props.flash.message != null ? true : false);
     const [kaam, setKaam] = useState({
         taskList: "",
     })
 
-    const [show, setShow] = useState(Object.keys(errors).length == 0 ? false : true);
-
-
-    const visibleHandle = () => show == false? setShow(true) : setShow(false)  ;
-
-
     const fetchData = async (pageNumber = 1) => {
 
         const api = await fetch(`/Task-List/${props.id}?page=${pageNumber}`);
-        // const api = await fetch(`/Task-Group-List?page=${pageNumber}`);
-
         setKaam({
             taskList: await api.json()
         });
     };
 
     // Add Task
-    const { data, setData, processing } = useForm({
+
+    const initState = {
         taskGroupId: taskGroup.id,
         task: '',
         explanation: '',
@@ -42,20 +35,49 @@ const List = (props) => {
         date_of_assign: new Date().toLocaleDateString(),
         deadline: new Date().toLocaleDateString(),
         created_by: props.auth.user.name,
+    }
 
-    });
+    const { data, errors, setData, reset, post } = useForm(initState);
 
-    const onHandleChange = (e) => {
+    const [show, setShow] = useState(Object.keys(errors).length == 0 ? false : true);
+    const visibleHandle   = () => show == false? setShow(true) : setShow(false) ;
+    const onHandleChange  = (e) => {
+
         setData(e.target.name, e.target.value);
+
     }
     const submit = (e) => {
         e.preventDefault();
-        Inertia.visit(route('task.store'), {
-            method: 'post',
-            data: data
+
+        post(route('task.store'), {
+
+            preserveScroll: true,
+
+            onSuccess: (e) => setAlert(true),
+
+            onError: (e) => {
+                console.log(e);
+            },
+            onFinish : () => {
+                reset();
+                document.getElementById('textAreaAzab').value = "";
+            }
+
         });
+
+
     }
 
+    // const onTextBox = () => {
+
+    //     let textAreaAzab = document.getElementById('textAreaAzab').value;
+    //     console.log(textAreaAzab);
+    //     console.log("=========== New Value ==============");
+    //     document.getElementById('textAreaAzab').value = "";
+    //     console.log(data);
+
+
+    // }
     useEffect(() => {
         fetchData();
 
@@ -70,6 +92,9 @@ const List = (props) => {
             <Head title="Task" />
 
             <div className="py-12">
+
+                {/* Alert */}
+
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     {
                         alert ? (
@@ -86,6 +111,101 @@ const List = (props) => {
                         ) : null
                     }
                 </div>
+
+                {/* Alert End */}
+                {/* Add Task */}
+
+                {show ?
+                <>
+                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                 <div className="overflow-hidden shadow-lg">
+                     <div className="bg-indigo-700 text-white p-6 border-b border-gray-200">
+                         <label htmlFor="">Add Task</label>
+
+                     </div>
+
+                 </div>
+             </div>
+                <div className="max-w-7xl mb-2 mx-auto sm:px-6 lg:px-8">
+                    <div className="overflow-hidden shadow-lg">
+                        <div className="bg-white p-6 border-b border-gray-200">
+                            <form onSubmit={submit}>
+                                <div>
+                                    <Label forInput="task" value="Task" />
+
+                                    <Input
+                                        type="text"
+                                        name="task"
+                                        value={data.task}
+                                        className="mt-1 block w-full"
+                                        autoComplete="task"
+                                        handleChange={onHandleChange}
+
+                                    />
+                                    <span className='text-red-500'>{errors.task}</span>
+                                </div>
+
+                                <div className='mt-4'>
+                                    <Label forInput="explanation" value="Explanation" />
+                                    <textarea
+                                        className="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize rounded-md mt-1 block w-full"
+                                        type="text"
+                                        name="explanation"
+                                        defaultValue={data.explanation}
+                                        id='textAreaAzab'
+                                        autoComplete="task"
+                                        onChange={onHandleChange}
+                                    />
+                                    <span className='text-red-500'>{errors.explanation}</span>
+                                </div>
+                                <div className='mt-4'>
+                                    <Label forInput="status" value="Status (Progress)" />
+
+                                    <Input
+                                        type="text"
+                                        name="status"
+                                        value={data.status}
+                                        className="mt-1 block w-full"
+                                        autoComplete="status"
+                                        handleChange={onHandleChange}
+
+                                    />
+                                    <span className='text-red-500'>{errors.status}</span>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+
+                                    <div className='mt-4'>
+                                        <Label forInput="assign_date" value="Assign Date" />
+                                        <Datepicker
+                                            name='date_of_assign'
+                                            handleChange={(date) => setData('date_of_assign', date.toLocaleDateString())}
+                                        />
+                                        <span className='text-red-500'>{errors.date_of_assign}</span>
+                                    </div>
+                                    <div className='mt-4'>
+                                        <Label forInput="deadline" value="Deadline" />
+                                        <Datepicker
+                                            name='deadline'
+                                            handleChange={(date) => setData('deadline', date.toLocaleDateString())}
+                                        />
+                                        <span className='text-red-500'>{errors.date_of_assign}</span>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center justify-end mt-4">
+
+
+                                    <Button className="ml-4" >
+                                        Add Task
+                                    </Button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                </>
+                 : null}
 
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="overflow-hidden shadow-lg sm:rounded-lg">
@@ -243,100 +363,6 @@ const List = (props) => {
 
                 {/* Task List End */}
 
-
-                {/* Add Task */}
-
-                {show ?
-                <>
-
-                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                 <div className="overflow-hidden shadow-lg">
-                     <div className="bg-indigo-700 text-white p-6 border-b border-gray-200">
-                         <label htmlFor="">Add Task</label>
-
-                     </div>
-
-                 </div>
-             </div>
-                <div className="max-w-7xl mb-2 mx-auto sm:px-6 lg:px-8">
-                    <div className="overflow-hidden shadow-lg">
-                        <div className="bg-white p-6 border-b border-gray-200">
-                            <form onSubmit={submit}>
-                                <div>
-                                    <Label forInput="task" value="Task" />
-
-                                    <Input
-                                        type="text"
-                                        name="task"
-                                        value={data.task}
-                                        className="mt-1 block w-full"
-                                        autoComplete="task"
-                                        handleChange={onHandleChange}
-
-                                    />
-                                    <span className='text-red-500'>{errors.task}</span>
-                                </div>
-                                <div className='mt-4'>
-                                    <Label forInput="explanation" value="Explanation" />
-                                    <textarea
-                                        className="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize rounded-md mt-1 block w-full"
-                                        type="text"
-                                        name="explanation"
-                                        defaultValue={data.explanation}
-                                        autoComplete="task"
-                                        onChange={onHandleChange}
-                                    >
-                                    </textarea>
-                                    <span className='text-red-500'>{errors.explanation}</span>
-                                </div>
-                                <div className='mt-4'>
-                                    <Label forInput="status" value="Status (Progress)" />
-
-                                    <Input
-                                        type="text"
-                                        name="status"
-                                        value={data.status}
-                                        className="mt-1 block w-full"
-                                        autoComplete="status"
-                                        handleChange={onHandleChange}
-
-                                    />
-                                    <span className='text-red-500'>{errors.task}</span>
-                                </div>
-                                <div className="grid grid-cols-2 gap-4">
-
-                                    <div className='mt-4'>
-                                        <Label forInput="assign_date" value="Assign Date" />
-                                        <Datepicker
-                                            name='date_of_assign'
-                                            handleChange={(date) => setData('date_of_assign', date.toLocaleDateString())}
-                                        />
-                                        <span className='text-red-500'>{errors.date_of_assign}</span>
-                                    </div>
-                                    <div className='mt-4'>
-                                        <Label forInput="deadline" value="Deadline" />
-                                        <Datepicker
-                                            name='deadline'
-                                            handleChange={(date) => setData('deadline', date.toLocaleDateString())}
-                                        />
-                                        <span className='text-red-500'>{errors.date_of_assign}</span>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center justify-end mt-4">
-
-
-                                    <Button className="ml-4" processing={processing}>
-                                        Add Task
-                                    </Button>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-                </>
-                 : null}
 
             </div>
 

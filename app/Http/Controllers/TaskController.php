@@ -61,7 +61,6 @@ class TaskController extends Controller
         $task->created_by     = $request->created_by;
         if($task->save()) {
             return redirect()->route('task.list', ['id' => $request->taskGroupId])->with('message' , "Task Added");
-
         }
     }
 

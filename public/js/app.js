@@ -6518,7 +6518,7 @@ var Datepicker = function Datepicker(_ref) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)((react_datepicker__WEBPACK_IMPORTED_MODULE_3___default()), {
     name: name,
-    className: " mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm ",
+    className: " mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm reset",
     onChange: function onChange(e) {
       handleChange(e);
       setStartDate(e);
@@ -8228,8 +8228,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var List = function List(props) {
   var _kaam$taskList, _kaam$taskList2, _kaam$taskList3, _kaam$taskList4, _kaam$taskList5, _kaam$taskList6, _kaam$taskList7;
 
-  var taskGroup = props.taskGroup,
-      errors = props.errors;
+  var taskGroup = props.taskGroup;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(props.flash.message != null ? true : false),
       _useState2 = _slicedToArray(_useState, 2),
@@ -8242,15 +8241,6 @@ var List = function List(props) {
       _useState4 = _slicedToArray(_useState3, 2),
       kaam = _useState4[0],
       setKaam = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(Object.keys(errors).length == 0 ? false : true),
-      _useState6 = _slicedToArray(_useState5, 2),
-      show = _useState6[0],
-      setShow = _useState6[1];
-
-  var visibleHandle = function visibleHandle() {
-    return show == false ? setShow(true) : setShow(false);
-  };
 
   var fetchData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -8292,7 +8282,7 @@ var List = function List(props) {
   }(); // Add Task
 
 
-  var _useForm = (0,_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.useForm)({
+  var initState = {
     taskGroupId: taskGroup.id,
     task: '',
     explanation: '',
@@ -8300,10 +8290,23 @@ var List = function List(props) {
     date_of_assign: new Date().toLocaleDateString(),
     deadline: new Date().toLocaleDateString(),
     created_by: props.auth.user.name
-  }),
+  };
+
+  var _useForm = (0,_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.useForm)(initState),
       data = _useForm.data,
+      errors = _useForm.errors,
       setData = _useForm.setData,
-      processing = _useForm.processing;
+      reset = _useForm.reset,
+      post = _useForm.post;
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(Object.keys(errors).length == 0 ? false : true),
+      _useState6 = _slicedToArray(_useState5, 2),
+      show = _useState6[0],
+      setShow = _useState6[1];
+
+  var visibleHandle = function visibleHandle() {
+    return show == false ? setShow(true) : setShow(false);
+  };
 
   var onHandleChange = function onHandleChange(e) {
     setData(e.target.name, e.target.value);
@@ -8311,11 +8314,27 @@ var List = function List(props) {
 
   var submit = function submit(e) {
     e.preventDefault();
-    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_9__.Inertia.visit(route('task.store'), {
-      method: 'post',
-      data: data
+    post(route('task.store'), {
+      preserveScroll: true,
+      onSuccess: function onSuccess(e) {
+        return setAlert(true);
+      },
+      onError: function onError(e) {
+        console.log(e);
+      },
+      onFinish: function onFinish() {
+        reset();
+        document.getElementById('textAreaAzab').value = "";
+      }
     });
-  };
+  }; // const onTextBox = () => {
+  //     let textAreaAzab = document.getElementById('textAreaAzab').value;
+  //     console.log(textAreaAzab);
+  //     console.log("=========== New Value ==============");
+  //     document.getElementById('textAreaAzab').value = "";
+  //     console.log(data);
+  // }
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     fetchData();
@@ -8377,7 +8396,118 @@ var List = function List(props) {
             })]
           })]
         }) : null
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+      }), show ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+          className: "max-w-7xl mx-auto sm:px-6 lg:px-8",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+            className: "overflow-hidden shadow-lg",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+              className: "bg-indigo-700 text-white p-6 border-b border-gray-200",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("label", {
+                htmlFor: "",
+                children: "Add Task"
+              })
+            })
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+          className: "max-w-7xl mb-2 mx-auto sm:px-6 lg:px-8",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+            className: "overflow-hidden shadow-lg",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+              className: "bg-white p-6 border-b border-gray-200",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("form", {
+                onSubmit: submit,
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_6__["default"], {
+                    forInput: "task",
+                    value: "Task"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Input__WEBPACK_IMPORTED_MODULE_7__["default"], {
+                    type: "text",
+                    name: "task",
+                    value: data.task,
+                    className: "mt-1 block w-full",
+                    autoComplete: "task",
+                    handleChange: onHandleChange
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                    className: "text-red-500",
+                    children: errors.task
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                  className: "mt-4",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_6__["default"], {
+                    forInput: "explanation",
+                    value: "Explanation"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("textarea", {
+                    className: "border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize rounded-md mt-1 block w-full",
+                    type: "text",
+                    name: "explanation",
+                    defaultValue: data.explanation,
+                    id: "textAreaAzab",
+                    autoComplete: "task",
+                    onChange: onHandleChange
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                    className: "text-red-500",
+                    children: errors.explanation
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                  className: "mt-4",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_6__["default"], {
+                    forInput: "status",
+                    value: "Status (Progress)"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Input__WEBPACK_IMPORTED_MODULE_7__["default"], {
+                    type: "text",
+                    name: "status",
+                    value: data.status,
+                    className: "mt-1 block w-full",
+                    autoComplete: "status",
+                    handleChange: onHandleChange
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                    className: "text-red-500",
+                    children: errors.status
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                  className: "grid grid-cols-2 gap-4",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                    className: "mt-4",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_6__["default"], {
+                      forInput: "assign_date",
+                      value: "Assign Date"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Datepicker__WEBPACK_IMPORTED_MODULE_8__["default"], {
+                      name: "date_of_assign",
+                      handleChange: function handleChange(date) {
+                        return setData('date_of_assign', date.toLocaleDateString());
+                      }
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                      className: "text-red-500",
+                      children: errors.date_of_assign
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                    className: "mt-4",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_6__["default"], {
+                      forInput: "deadline",
+                      value: "Deadline"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Datepicker__WEBPACK_IMPORTED_MODULE_8__["default"], {
+                      name: "deadline",
+                      handleChange: function handleChange(date) {
+                        return setData('deadline', date.toLocaleDateString());
+                      }
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
+                      className: "text-red-500",
+                      children: errors.date_of_assign
+                    })]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                  className: "flex items-center justify-end mt-4",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                    className: "ml-4",
+                    children: "Add Task"
+                  })
+                })]
+              })
+            })
+          })
+        })]
+      }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
         className: "max-w-7xl mx-auto sm:px-6 lg:px-8",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
           className: "overflow-hidden shadow-lg sm:rounded-lg",
@@ -8550,118 +8680,7 @@ var List = function List(props) {
             })
           })
         })
-      }), show ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-          className: "max-w-7xl mx-auto sm:px-6 lg:px-8",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-            className: "overflow-hidden shadow-lg",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-              className: "bg-indigo-700 text-white p-6 border-b border-gray-200",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("label", {
-                htmlFor: "",
-                children: "Add Task"
-              })
-            })
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-          className: "max-w-7xl mb-2 mx-auto sm:px-6 lg:px-8",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-            className: "overflow-hidden shadow-lg",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-              className: "bg-white p-6 border-b border-gray-200",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("form", {
-                onSubmit: submit,
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_6__["default"], {
-                    forInput: "task",
-                    value: "Task"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Input__WEBPACK_IMPORTED_MODULE_7__["default"], {
-                    type: "text",
-                    name: "task",
-                    value: data.task,
-                    className: "mt-1 block w-full",
-                    autoComplete: "task",
-                    handleChange: onHandleChange
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-                    className: "text-red-500",
-                    children: errors.task
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-                  className: "mt-4",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_6__["default"], {
-                    forInput: "explanation",
-                    value: "Explanation"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("textarea", {
-                    className: "border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize rounded-md mt-1 block w-full",
-                    type: "text",
-                    name: "explanation",
-                    defaultValue: data.explanation,
-                    autoComplete: "task",
-                    onChange: onHandleChange
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-                    className: "text-red-500",
-                    children: errors.explanation
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-                  className: "mt-4",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_6__["default"], {
-                    forInput: "status",
-                    value: "Status (Progress)"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Input__WEBPACK_IMPORTED_MODULE_7__["default"], {
-                    type: "text",
-                    name: "status",
-                    value: data.status,
-                    className: "mt-1 block w-full",
-                    autoComplete: "status",
-                    handleChange: onHandleChange
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-                    className: "text-red-500",
-                    children: errors.task
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-                  className: "grid grid-cols-2 gap-4",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-                    className: "mt-4",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_6__["default"], {
-                      forInput: "assign_date",
-                      value: "Assign Date"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Datepicker__WEBPACK_IMPORTED_MODULE_8__["default"], {
-                      name: "date_of_assign",
-                      handleChange: function handleChange(date) {
-                        return setData('date_of_assign', date.toLocaleDateString());
-                      }
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-                      className: "text-red-500",
-                      children: errors.date_of_assign
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-                    className: "mt-4",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_6__["default"], {
-                      forInput: "deadline",
-                      value: "Deadline"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Datepicker__WEBPACK_IMPORTED_MODULE_8__["default"], {
-                      name: "deadline",
-                      handleChange: function handleChange(date) {
-                        return setData('deadline', date.toLocaleDateString());
-                      }
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-                      className: "text-red-500",
-                      children: errors.date_of_assign
-                    })]
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-                  className: "flex items-center justify-end mt-4",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_Components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                    className: "ml-4",
-                    processing: processing,
-                    children: "Add Task"
-                  })
-                })]
-              })
-            })
-          })
-        })]
-      }) : null]
+      })]
     })]
   });
 };
