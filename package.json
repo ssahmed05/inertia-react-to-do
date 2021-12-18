@@ -28,6 +28,8 @@
     },
     "dependencies": {
         "react-datepicker": "^4.5.0",
-        "react-js-pagination": "^3.0.2"
+        "react-js-pagination": "^3.0.2",
+        "react-multi-date-picker": "^3.3.0",
+        "react-toastify": "^8.1.0"
     }
 }

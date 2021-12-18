@@ -43,13 +43,15 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'task' => 'required|string|max:255',
             'explanation' => 'required',
             'status' => 'required',
-            'date_of_assign' => 'required|date',
+            'date_of_assign' => 'required',
             'deadline' => 'required',
         ]);
+
 
         $task = new Task;
         $task->task_group_id  = $request->taskGroupId;
@@ -60,7 +62,7 @@ class TaskController extends Controller
         $task->deadline       = date("Y-m-d",strtotime($request->deadline));
         $task->created_by     = $request->created_by;
         if($task->save()) {
-            return redirect()->route('task.list', ['id' => $request->taskGroupId])->with('message' , "Task Added");
+            return redirect()->route('task.list', ['id' => $request->taskGroupId])->with('message' , "New Task Added");
         }
     }
 

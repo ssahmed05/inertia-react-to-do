@@ -6,13 +6,15 @@ import Pagination from "react-js-pagination"
 import Label from '@/Components/Label'
 import Input from '@/Components/Input'
 import Datepicker from '@/Components/Datepicker'
-import { Inertia } from '@inertiajs/inertia'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const List = (props) => {
 
     const { taskGroup } = props;
-    const [alert, setAlert] = useState(props.flash.message != null ? true : false);
     const [kaam, setKaam] = useState({
         taskList: "",
     })
@@ -32,16 +34,16 @@ const List = (props) => {
         task: '',
         explanation: '',
         status: '',
-        date_of_assign: new Date().toLocaleDateString(),
-        deadline: new Date().toLocaleDateString(),
+        deadline: '',
+        date_of_assign: '',
         created_by: props.auth.user.name,
     }
 
     const { data, errors, setData, reset, post } = useForm(initState);
 
     const [show, setShow] = useState(Object.keys(errors).length == 0 ? false : true);
-    const visibleHandle   = () => show == false? setShow(true) : setShow(false) ;
-    const onHandleChange  = (e) => {
+    const visibleHandle = () => show == false ? setShow(true) : setShow(false);
+    const onHandleChange = (e) => {
 
         setData(e.target.name, e.target.value);
 
@@ -52,15 +54,24 @@ const List = (props) => {
         post(route('task.store'), {
 
             preserveScroll: true,
-
-            onSuccess: (e) => setAlert(true),
-
             onError: (e) => {
                 console.log(e);
             },
-            onFinish : () => {
+
+            onSuccess: () => {
+                toast.success('🦄 Wow so easy!', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
                 reset();
-                document.getElementById('textAreaAzab').value = "";
+                document.getElementById('textAreaAzab').value = ""; //there was no other way :(
+                    // console.log(document.getElementsByName('date_of_assign')[0].value);
+                fetchData();
             }
 
         });
@@ -68,20 +79,11 @@ const List = (props) => {
 
     }
 
-    // const onTextBox = () => {
-
-    //     let textAreaAzab = document.getElementById('textAreaAzab').value;
-    //     console.log(textAreaAzab);
-    //     console.log("=========== New Value ==============");
-    //     document.getElementById('textAreaAzab').value = "";
-    //     console.log(data);
-
-
-    // }
     useEffect(() => {
         fetchData();
 
     }, [])
+
     return (
 
         <Authenticated
@@ -90,128 +92,134 @@ const List = (props) => {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Task(s) for <span className='font-bold'>{taskGroup.name}</span></h2>}
         >
             <Head title="Task" />
-
+               {/* Alert */}
+               <ToastContainer
+                        position="top-center"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                    />
+            {/* Alert End */}
             <div className="py-12">
 
-                {/* Alert */}
 
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    {
-                        alert ? (
-                            <div id="alert-border-1" className="flex bg-green-100 dark:bg-green-200 border-t-4 border-green-500 p-4 mb-5" role="alert">
-                                <svg className="w-5 h-5 flex-shrink-0 text-green-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"></path></svg>
-                                <div className="ml-3 text-sm font-medium text-green-700">
-                                    {props.flash.message}
-                                </div>
-                                <button type="button" onClick={() => setAlert(false)} className="ml-auto -mx-1.5 -my-1.5 bg-green-100 dark:bg-green-200 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 dark:hover:bg-green-300 inline-flex h-8 w-8" data-collapse-toggle="alert-border-1" aria-label="Close">
-                                    <span className="sr-only">Dismiss</span>
-                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                                </button>
-                            </div>
-                        ) : null
-                    }
-                </div>
-
-                {/* Alert End */}
                 {/* Add Task */}
 
                 {show ?
-                <>
-                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                 <div className="overflow-hidden shadow-lg">
-                     <div className="bg-indigo-700 text-white p-6 border-b border-gray-200">
-                         <label htmlFor="">Add Task</label>
+                    <>
+                    {
 
-                     </div>
+                        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                            <div className="overflow-hidden shadow-lg">
+                                <div className="bg-indigo-700 text-white p-6 border-b border-gray-200">
+                                    <label htmlFor="">Add Task</label>
 
-                 </div>
-             </div>
-                <div className="max-w-7xl mb-2 mx-auto sm:px-6 lg:px-8">
-                    <div className="overflow-hidden shadow-lg">
-                        <div className="bg-white p-6 border-b border-gray-200">
-                            <form onSubmit={submit}>
-                                <div>
-                                    <Label forInput="task" value="Task" />
-
-                                    <Input
-                                        type="text"
-                                        name="task"
-                                        value={data.task}
-                                        className="mt-1 block w-full"
-                                        autoComplete="task"
-                                        handleChange={onHandleChange}
-
-                                    />
-                                    <span className='text-red-500'>{errors.task}</span>
                                 </div>
 
-                                <div className='mt-4'>
-                                    <Label forInput="explanation" value="Explanation" />
-                                    <textarea
-                                        className="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize rounded-md mt-1 block w-full"
-                                        type="text"
-                                        name="explanation"
-                                        defaultValue={data.explanation}
-                                        id='textAreaAzab'
-                                        autoComplete="task"
-                                        onChange={onHandleChange}
-                                    />
-                                    <span className='text-red-500'>{errors.explanation}</span>
-                                </div>
-                                <div className='mt-4'>
-                                    <Label forInput="status" value="Status (Progress)" />
-
-                                    <Input
-                                        type="text"
-                                        name="status"
-                                        value={data.status}
-                                        className="mt-1 block w-full"
-                                        autoComplete="status"
-                                        handleChange={onHandleChange}
-
-                                    />
-                                    <span className='text-red-500'>{errors.status}</span>
-                                </div>
-                                <div className="grid grid-cols-2 gap-4">
-
-                                    <div className='mt-4'>
-                                        <Label forInput="assign_date" value="Assign Date" />
-                                        <Datepicker
-                                            name='date_of_assign'
-                                            handleChange={(date) => setData('date_of_assign', date.toLocaleDateString())}
-                                        />
-                                        <span className='text-red-500'>{errors.date_of_assign}</span>
-                                    </div>
-                                    <div className='mt-4'>
-                                        <Label forInput="deadline" value="Deadline" />
-                                        <Datepicker
-                                            name='deadline'
-                                            handleChange={(date) => setData('deadline', date.toLocaleDateString())}
-                                        />
-                                        <span className='text-red-500'>{errors.date_of_assign}</span>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center justify-end mt-4">
-
-
-                                    <Button className="ml-4" >
-                                        Add Task
-                                    </Button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
 
-                    </div>
-                </div>
-                </>
-                 : null}
+
+                    }
+
+                        <div className="max-w-7xl mb-2 mx-auto sm:px-6 lg:px-8">
+                            <div className="overflow-hidden shadow-lg">
+                                <div className="bg-white p-6 border-b border-gray-200">
+                                    <form onSubmit={submit}>
+                                        <div>
+                                            <Label forInput="task" value="Task" />
+
+                                            <Input
+                                                type="text"
+                                                name="task"
+                                                value={data.task}
+                                                className="mt-1 block w-full"
+                                                autoComplete="task"
+                                                handleChange={onHandleChange}
+
+                                            />
+                                            <span className='text-red-500'>{errors.task}</span>
+                                        </div>
+
+                                        <div className='mt-4'>
+                                            <Label forInput="explanation" value="Explanation" />
+                                            <textarea
+                                                className="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize rounded-md mt-1 block w-full"
+                                                type="text"
+                                                name="explanation"
+                                                defaultValue={data.explanation}
+                                                id='textAreaAzab'
+                                                autoComplete="task"
+                                                onChange={onHandleChange}
+                                            />
+                                            <span className='text-red-500'>{errors.explanation}</span>
+                                        </div>
+                                        <div className='mt-4'>
+                                            <Label forInput="status" value="Status (Progress)" />
+
+                                            <Input
+                                                type="text"
+                                                name="status"
+                                                value={data.status}
+                                                className="mt-1 block w-full"
+                                                autoComplete="status"
+                                                handleChange={onHandleChange}
+
+                                            />
+                                            <span className='text-red-500'>{errors.status}</span>
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-4">
+
+                                            <div className='mt-4'>
+                                                <Label forInput="assign_date" value="Assign Date" />
+                                                <Datepicker
+                                                    name='date_of_assign'
+                                                    selected={new Date()}
+                                                    handleChange={(date) => setData('date_of_assign', date?.format?.('DD-MM-YYYY'))}
+
+                                                />
+                                                <span className='text-red-500'>{errors.date_of_assign}</span>
+                                            </div>
+                                            <div className='mt-4'>
+                                                <Label forInput="workEnd" value="DeadLine" />
+                                                <Datepicker
+                                                    name='deadline'
+                                                    selected={new Date()}
+                                                    handleChange={(endDate) => setData('deadline', endDate?.format?.("DD-MM-YYYY"))}
+
+                                                />
+                                                <span className='text-red-500'>{errors.deadline}</span>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div className="flex items-center justify-end mt-4">
+
+
+                                            <Button className="ml-4" >
+                                                Add Task
+                                            </Button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </>
+                    : null}
 
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="overflow-hidden shadow-lg sm:rounded-lg">
                         <div className="bg-indigo-700 text-white p-6 border-b border-gray-200">
                             <label htmlFor="">List Of Task</label>
-                            <button onClick={visibleHandle} className='float-right inline-flex items-center px-4 py-2 bg-indigo-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest active:bg-gray-900 transition ease-in-out duration-150' style={{marginTop: "-5px"}}>Add</button>
+                            <button onClick={visibleHandle} className='float-right inline-flex items-center px-4 py-2 bg-indigo-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest active:bg-gray-900 transition ease-in-out duration-150' style={{ marginTop: "-5px" }}>Add</button>
                         </div>
 
                     </div>
@@ -348,7 +356,7 @@ const List = (props) => {
                                 onChange={(pageNumber) => {
                                     fetchData(pageNumber)
                                 }}
-                                pageRangeDisplayed={8}
+                                pageRangeDisplayed={6}
                                 itemClass="py-4"
                                 innerClass="relative z-0 inline-flex rounded-full shadow-sm -space-x-px"
                                 activeClass='indigo-500'
