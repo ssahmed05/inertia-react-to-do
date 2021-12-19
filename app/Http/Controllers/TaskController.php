@@ -30,17 +30,7 @@ class TaskController extends Controller
 
     }
 
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
@@ -82,9 +72,10 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function edit(Task $task)
+    public function edit(Task $task, $id)
     {
-        //
+        $data['task'] = $task->find($id);
+        return Inertia::render("Task/Edit", $data);
     }
 
     /**
@@ -94,9 +85,25 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'task' => 'required|string|max:255',
+            'explanation' => 'required',
+            'date_of_assign' => 'required',
+            'deadline' => 'required',
+        ]);
+
+        $task                 = Task::find($id);
+        $task->task           = $request->task;
+        $task->explaination   = $request->explanation;
+        $task->date_of_assign = date("Y-m-d",strtotime($request->date_of_assign));
+        $task->deadline       = date("Y-m-d",strtotime($request->deadline));
+        $task->save();
+
+        if($task->save()) {
+            return redirect()->route('task.list', ['id' => $request->taskGroupId]);
+        }
     }
 
     /**
@@ -105,8 +112,9 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Task $task)
+    public function destroy(Task $task, $id)
     {
-        //
+        $resp = $task->destroy($id);
+        return back(302);
     }
 }

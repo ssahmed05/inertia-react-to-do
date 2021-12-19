@@ -1,16 +1,14 @@
 import Authenticated from '@/Layouts/Authenticated'
 import React, { useEffect, useState } from 'react'
 import { Head, InertiaLink, useForm } from '@inertiajs/inertia-react'
+import { Inertia } from '@inertiajs/inertia'
 import Button from '@/Components/Button'
 import Pagination from "react-js-pagination"
 import Label from '@/Components/Label'
 import Input from '@/Components/Input'
 import Datepicker from '@/Components/Datepicker'
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
 
 const List = (props) => {
 
@@ -25,7 +23,7 @@ const List = (props) => {
         setKaam({
             taskList: await api.json()
         });
-    };
+    }
 
     // Add Task
 
@@ -47,6 +45,8 @@ const List = (props) => {
         setData(e.target.name, e.target.value);
 
     }
+
+
     const submit = (e) => {
         e.preventDefault();
 
@@ -62,7 +62,7 @@ const List = (props) => {
                 reset();
 
                 toast.success('Task Added!', {
-                    position: "top-center",
+                    position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
@@ -70,7 +70,7 @@ const List = (props) => {
                     draggable: true,
                     progress: undefined,
                     theme: 'colored'
-                    });
+                });
                 document.getElementById('textAreaAzab').value = ""; //there was no other way :(
                 fetchData();
             }
@@ -80,10 +80,47 @@ const List = (props) => {
 
     }
 
-    useEffect(() => {
-        fetchData();
+    // Delete Task
+    function deleteTask(id) {
 
-    }, [])
+        Inertia.delete(route('task.delete', id), {
+            preserveScroll: true,
+
+            onError: (e) => {
+                console.log(e);
+            },
+            onSuccess: (res) => {
+
+                toast.error('Task Deleted', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: 'colored'
+                });
+                fetchData();
+
+            }
+
+        });
+    }
+
+    useEffect(() => {
+
+
+        fetchData();
+        return () => {
+            setKaam.current = false;
+            setShow.current = false;
+            setData.current = false;
+
+
+        }
+
+    })
 
     return (
 
@@ -93,8 +130,8 @@ const List = (props) => {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Task(s) for <span className='font-bold'>{taskGroup.name}</span></h2>}
         >
             <Head title="Task" />
-               {/* Alert */}
-               <ToastContainer/>
+            {/* Alert */}
+            <ToastContainer />
             {/* Alert End */}
             <div className="py-12">
 
@@ -103,20 +140,19 @@ const List = (props) => {
 
                 {show ?
                     <>
-                    {
+                        {
 
-                        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                            <div className="overflow-hidden shadow-lg">
-                                <div className="bg-indigo-700 text-white p-6 border-b border-gray-200">
-                                    <label htmlFor="">Add Task</label>
+                            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                                <div className="overflow-hidden shadow-lg">
+                                    <div className="bg-indigo-700 text-white p-6 border-b border-gray-200">
+                                        <label htmlFor="">Add Task</label>
+
+                                    </div>
 
                                 </div>
-
                             </div>
-                        </div>
 
-
-                    }
+                        }
 
                         <div className="max-w-7xl mb-2 mx-auto sm:px-6 lg:px-8">
                             <div className="overflow-hidden shadow-lg">
@@ -205,8 +241,8 @@ const List = (props) => {
                     <div className="flex flex-col">
                         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                    <table className="min-w-full divide-y divide-gray-200 border-collapse border border-gray-400">
+                                <div className="shadow overflow-hidden border-b border-indigo-200 sm:rounded-lg">
+                                    <table className="min-w-full divide-y divide-indigo-200 border-collapse ">
                                         <thead className="bg-gray-50">
                                             <tr>
                                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider">
@@ -219,22 +255,20 @@ const List = (props) => {
                                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider">
                                                     Progress
                                                 </th>
-                                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercas border border-gray-300e tracking-wider">
-                                                    Date Of Assign
+                                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercas border border-gray-300 tracking-wider">
+                                                    Start Date - End Date
                                                 </th>
-                                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider">
-                                                    Deadline
-                                                </th>
+
                                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider">
                                                     Date Of complete
                                                 </th>
-                                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider">
+                                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 text-right uppercase border border-gray-300 tracking-wider">
                                                     Action
                                                 </th>
 
                                             </tr>
                                         </thead>
-                                        <tbody className="bg-white divide-y divide-gray-200">
+                                        <tbody className="bg-white divide-y divide-indigo-200">
                                             {
 
                                                 kaam.taskList.data == "" ?
@@ -259,6 +293,7 @@ const List = (props) => {
                                                         kaam.taskList.data.map((record) => {
 
                                                             return (
+
                                                                 <tr key={record.id}>
                                                                     <td className="px-6 py-4 whitespace-nowrap">
                                                                         <div className="flex items-center">
@@ -280,20 +315,20 @@ const List = (props) => {
                                                                         </span>
                                                                     </td>
                                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                        {new Date(record.date_of_assign).toLocaleDateString()}
+                                                                        {new Date(record.date_of_assign).toLocaleDateString()} - {new Date(record.deadline).toLocaleDateString()}
                                                                     </td>
-                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                        {new Date(record.deadline).toLocaleDateString()}
-                                                                    </td>
+
                                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                                         {record.date_of_complete == null ? "Not Completed" : new Date(record.date_of_complete).toLocaleDateString()}
                                                                     </td>
                                                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                                        <a href="#" className="text-indigo-400 hover:text-indigo-900">Edit</a>
+                                                                        <InertiaLink href={route('task.edit', record.id)} className="font-bold text-indigo-400 hover:text-indigo-900">Edit</InertiaLink> &nbsp;
+                                                                        <a href="#" onClick={() => { deleteTask(record.id) }} className="font-bold text-red-400 hover:text-red-700">Delete</a>
                                                                     </td>
                                                                 </tr>
 
                                                             )
+
                                                         }) : (
                                                             <tr>
                                                                 <td colSpan={7} className="px-6 py-4 whitespace-nowrap">
@@ -322,8 +357,8 @@ const List = (props) => {
                 </div>
 
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="overflow-hidden shadow-lg sm:rounded-lg ">
-                        <div className="flex justify-center mb-4 mt-2">
+                    <div className="overflow-hidden shadow-lg bg-white sm:rounded-lg ">
+                        <div className="flex justify-center mb-4">
 
                             <Pagination
                                 activePage={kaam?.taskList?.current_page ? kaam?.taskList?.current_page : 0}

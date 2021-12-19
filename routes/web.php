@@ -38,6 +38,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Task/{id}', [App\Http\Controllers\TaskController::class, 'index'])->name('task.list');
     Route::get('/Task-List/{id}', [App\Http\Controllers\TaskController::class, 'taskList']);
     Route::post('/Task-Add', [App\Http\Controllers\TaskController::class, 'store'])->name('task.store');
+    Route::delete('/Task-Delete/{id}', [App\Http\Controllers\TaskController::class, 'destroy'])->name('task.delete');
+    Route::get('/Task-Edit/{id}', [App\Http\Controllers\TaskController::class, 'edit'])->name('task.edit');
+    Route::post('/Task-Edit/{id}', [App\Http\Controllers\TaskController::class, 'update'])->name('task.update');
 
 
 });
