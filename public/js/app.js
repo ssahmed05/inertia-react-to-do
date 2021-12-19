@@ -5172,7 +5172,6 @@ var List = function List(props) {
     taskGroupId: taskGroup.id,
     task: '',
     explanation: '',
-    status: '',
     deadline: '',
     date_of_assign: '',
     created_by: props.auth.user.name
@@ -5206,18 +5205,18 @@ var List = function List(props) {
         console.log(e);
       },
       onSuccess: function onSuccess() {
-        react_toastify__WEBPACK_IMPORTED_MODULE_9__.toast.success('🦄 Wow so easy!', {
+        reset();
+        react_toastify__WEBPACK_IMPORTED_MODULE_9__.toast.success('Task Added!', {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
-          progress: undefined
+          progress: undefined,
+          theme: 'colored'
         });
-        reset();
         document.getElementById('textAreaAzab').value = ""; //there was no other way :(
-        // console.log(document.getElementsByName('date_of_assign')[0].value);
 
         fetchData();
       }
@@ -5239,17 +5238,7 @@ var List = function List(props) {
     }),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.Head, {
       title: "Task"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_toastify__WEBPACK_IMPORTED_MODULE_9__.ToastContainer, {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      newestOnTop: false,
-      closeOnClick: true,
-      rtl: false,
-      pauseOnFocusLoss: true,
-      draggable: true,
-      pauseOnHover: true
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(react_toastify__WEBPACK_IMPORTED_MODULE_9__.ToastContainer, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
       className: "py-12",
       children: [show ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
@@ -5303,22 +5292,6 @@ var List = function List(props) {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
                     className: "text-red-500",
                     children: errors.explanation
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
-                  className: "mt-4",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_6__["default"], {
-                    forInput: "status",
-                    value: "Status (Progress)"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Components_Input__WEBPACK_IMPORTED_MODULE_7__["default"], {
-                    type: "text",
-                    name: "status",
-                    value: data.status,
-                    className: "mt-1 block w-full",
-                    autoComplete: "status",
-                    handleChange: onHandleChange
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("span", {
-                    className: "text-red-500",
-                    children: errors.status
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
                   className: "grid grid-cols-2 gap-4",
@@ -5445,7 +5418,7 @@ var List = function List(props) {
                             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
                               className: "text-md font-medium text-red-900",
                               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("p", {
-                                children: "No Record"
+                                children: "No Record Found"
                               })
                             })
                           })

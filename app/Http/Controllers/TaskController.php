@@ -47,7 +47,6 @@ class TaskController extends Controller
         $request->validate([
             'task' => 'required|string|max:255',
             'explanation' => 'required',
-            'status' => 'required',
             'date_of_assign' => 'required',
             'deadline' => 'required',
         ]);
@@ -57,7 +56,7 @@ class TaskController extends Controller
         $task->task_group_id  = $request->taskGroupId;
         $task->task           = $request->task;
         $task->explaination   = $request->explanation;
-        $task->status         = $request->status;
+        $task->status         = "Pending";
         $task->date_of_assign = date("Y-m-d",strtotime($request->date_of_assign));
         $task->deadline       = date("Y-m-d",strtotime($request->deadline));
         $task->created_by     = $request->created_by;

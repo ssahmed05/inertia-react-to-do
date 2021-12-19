@@ -33,7 +33,6 @@ const List = (props) => {
         taskGroupId: taskGroup.id,
         task: '',
         explanation: '',
-        status: '',
         deadline: '',
         date_of_assign: '',
         created_by: props.auth.user.name,
@@ -59,18 +58,20 @@ const List = (props) => {
             },
 
             onSuccess: () => {
-                toast.success('🦄 Wow so easy!', {
+
+                reset();
+
+                toast.success('Task Added!', {
                     position: "top-center",
-                    autoClose: 5000,
+                    autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
+                    theme: 'colored'
                     });
-                reset();
                 document.getElementById('textAreaAzab').value = ""; //there was no other way :(
-                    // console.log(document.getElementsByName('date_of_assign')[0].value);
                 fetchData();
             }
 
@@ -93,17 +94,7 @@ const List = (props) => {
         >
             <Head title="Task" />
                {/* Alert */}
-               <ToastContainer
-                        position="top-center"
-                        autoClose={5000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                    />
+               <ToastContainer/>
             {/* Alert End */}
             <div className="py-12">
 
@@ -159,21 +150,6 @@ const List = (props) => {
                                             />
                                             <span className='text-red-500'>{errors.explanation}</span>
                                         </div>
-                                        <div className='mt-4'>
-                                            <Label forInput="status" value="Status (Progress)" />
-
-                                            <Input
-                                                type="text"
-                                                name="status"
-                                                value={data.status}
-                                                className="mt-1 block w-full"
-                                                autoComplete="status"
-                                                handleChange={onHandleChange}
-
-                                            />
-                                            <span className='text-red-500'>{errors.status}</span>
-                                        </div>
-
                                         <div className="grid grid-cols-2 gap-4">
 
                                             <div className='mt-4'>
@@ -269,7 +245,7 @@ const List = (props) => {
 
                                                                     <div className="ml-4">
                                                                         <div className="text-md font-medium text-red-900">
-                                                                            <p>No Record</p>
+                                                                            <p>No Record Found</p>
                                                                         </div>
 
                                                                     </div>
