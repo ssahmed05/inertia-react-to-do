@@ -4769,7 +4769,7 @@ var Add = function Add(props) {
                   onChange: onHandleChange,
                   value: data.activeStatus,
                   name: "activeStatus",
-                  className: "form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+                  className: "form-select appearance-none\r block\r w-full\r px-3\r py-1.5\r text-base\r font-normal\r text-gray-700\r bg-white bg-clip-padding bg-no-repeat\r border border-solid border-gray-300\r rounded\r transition\r ease-in-out\r m-0\r focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
                   "aria-label": "Default select example",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
                     defaultValue: true,
@@ -5228,7 +5228,7 @@ var Edit = function Edit(props) {
                 className: "flex items-center justify-end mt-4",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_Components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
                   className: "ml-4",
-                  children: "Add Task"
+                  children: "Update"
                 })
               })]
             })
@@ -5267,7 +5267,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Datepicker__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Components/Datepicker */ "./resources/js/Components/Datepicker.js");
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.js");
 /* harmony import */ var react_toastify_dist_ReactToastify_css__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-toastify/dist/ReactToastify.css */ "./node_modules/react-toastify/dist/ReactToastify.css");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_range__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-range */ "./node_modules/react-range/lib/index.js");
+/* harmony import */ var react_range__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_range__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -5301,17 +5309,28 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var STEP = 0.1;
+var MIN = 0;
+var MAX = 100;
+
 var List = function List(props) {
   var _kaam$taskList, _kaam$taskList2, _kaam$taskList3, _kaam$taskList4, _kaam$taskList5, _kaam$taskList6, _kaam$taskList7;
 
   var taskGroup = props.taskGroup;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({
-    taskList: ""
+    values: [50]
   }),
       _useState2 = _slicedToArray(_useState, 2),
-      kaam = _useState2[0],
-      setKaam = _useState2[1];
+      state = _useState2[0],
+      setState = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({
+    taskList: ""
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      kaam = _useState4[0],
+      setKaam = _useState4[1];
 
   var fetchData = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -5369,10 +5388,10 @@ var List = function List(props) {
       reset = _useForm.reset,
       post = _useForm.post;
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(Object.keys(errors).length == 0 ? false : true),
-      _useState4 = _slicedToArray(_useState3, 2),
-      show = _useState4[0],
-      setShow = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(Object.keys(errors).length == 0 ? false : true),
+      _useState6 = _slicedToArray(_useState5, 2),
+      show = _useState6[0],
+      setShow = _useState6[1];
 
   var visibleHandle = function visibleHandle() {
     return show == false ? setShow(true) : setShow(false);
@@ -5439,62 +5458,62 @@ var List = function List(props) {
       setData.current = false;
     };
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)(_Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(_Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_1__["default"], {
     auth: props.auth,
     errors: props.errors,
-    header: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("h2", {
+    header: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("h2", {
       className: "font-semibold text-xl text-gray-800 leading-tight",
-      children: ["Task(s) for ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+      children: ["Task(s) for ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("span", {
         className: "font-bold",
         children: taskGroup.name
       })]
     }),
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.Head, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.Head, {
       title: "Task"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_toastify__WEBPACK_IMPORTED_MODULE_10__.ToastContainer, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_toastify__WEBPACK_IMPORTED_MODULE_10__.ToastContainer, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
       className: "py-12",
-      children: [show ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+      children: [show ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
           className: "max-w-7xl mx-auto sm:px-6 lg:px-8",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
             className: "overflow-hidden shadow-lg",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
               className: "bg-indigo-700 text-white p-6 border-b border-gray-200",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("label", {
                 htmlFor: "",
                 children: "Add Task"
               })
             })
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
           className: "max-w-7xl mb-2 mx-auto sm:px-6 lg:px-8",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
             className: "overflow-hidden shadow-lg",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
               className: "bg-white p-6 border-b border-gray-200",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("form", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("form", {
                 onSubmit: submit,
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_7__["default"], {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_7__["default"], {
                     forInput: "task",
                     value: "Task"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Components_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Components_Input__WEBPACK_IMPORTED_MODULE_8__["default"], {
                     type: "text",
                     name: "task",
                     value: data.task,
                     className: "mt-1 block w-full",
                     autoComplete: "task",
                     handleChange: onHandleChange
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("span", {
                     className: "text-red-500",
                     children: errors.task
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
                   className: "mt-4",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_7__["default"], {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_7__["default"], {
                     forInput: "explanation",
                     value: "Explanation"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("textarea", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("textarea", {
                     className: "border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize rounded-md mt-1 block w-full",
                     type: "text",
                     name: "explanation",
@@ -5502,18 +5521,18 @@ var List = function List(props) {
                     id: "textAreaAzab",
                     autoComplete: "task",
                     onChange: onHandleChange
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("span", {
                     className: "text-red-500",
                     children: errors.explanation
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
                   className: "grid grid-cols-2 gap-4",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
                     className: "mt-4",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_7__["default"], {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_7__["default"], {
                       forInput: "assign_date",
                       value: "Assign Date"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Components_Datepicker__WEBPACK_IMPORTED_MODULE_9__["default"], {
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Components_Datepicker__WEBPACK_IMPORTED_MODULE_9__["default"], {
                       name: "date_of_assign",
                       selected: new Date(),
                       handleChange: function handleChange(date) {
@@ -5521,16 +5540,16 @@ var List = function List(props) {
 
                         return setData('date_of_assign', date === null || date === void 0 ? void 0 : (_date$format = date.format) === null || _date$format === void 0 ? void 0 : _date$format.call(date, 'DD-MM-YYYY'));
                       }
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("span", {
                       className: "text-red-500",
                       children: errors.date_of_assign
                     })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
                     className: "mt-4",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_7__["default"], {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_7__["default"], {
                       forInput: "workEnd",
                       value: "DeadLine"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Components_Datepicker__WEBPACK_IMPORTED_MODULE_9__["default"], {
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Components_Datepicker__WEBPACK_IMPORTED_MODULE_9__["default"], {
                       name: "deadline",
                       selected: new Date(),
                       handleChange: function handleChange(endDate) {
@@ -5538,14 +5557,14 @@ var List = function List(props) {
 
                         return setData('deadline', endDate === null || endDate === void 0 ? void 0 : (_endDate$format = endDate.format) === null || _endDate$format === void 0 ? void 0 : _endDate$format.call(endDate, "DD-MM-YYYY"));
                       }
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("span", {
                       className: "text-red-500",
                       children: errors.deadline
                     })]
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
                   className: "flex items-center justify-end mt-4",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_Components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_Components_Button__WEBPACK_IMPORTED_MODULE_5__["default"], {
                     className: "ml-4",
                     children: "Add Task"
                   })
@@ -5554,16 +5573,16 @@ var List = function List(props) {
             })
           })
         })]
-      }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+      }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
         className: "max-w-7xl mx-auto sm:px-6 lg:px-8",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
           className: "overflow-hidden shadow-lg sm:rounded-lg",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
             className: "bg-indigo-700 text-white p-6 border-b border-gray-200",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("label", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("label", {
               htmlFor: "",
               children: "List Of Task"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("button", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("button", {
               onClick: visibleHandle,
               className: "float-right inline-flex items-center px-4 py-2 bg-indigo-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest active:bg-gray-900 transition ease-in-out duration-150",
               style: {
@@ -5573,60 +5592,56 @@ var List = function List(props) {
             })]
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
         className: "mt-4 max-w-7xl  mx-auto sm:px-6 lg:px-8",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
           className: "flex flex-col",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
             className: "-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
               className: "py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
                 className: "shadow overflow-hidden border-b border-indigo-200 sm:rounded-lg",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("table", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("table", {
                   className: "min-w-full divide-y divide-indigo-200 border-collapse ",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("thead", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("thead", {
                     className: "bg-gray-50",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("tr", {
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("tr", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("th", {
                         scope: "col",
                         className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider",
                         children: "Task"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("th", {
                         scope: "col",
                         className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider",
                         children: "Explanation"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("th", {
+                        scope: "col",
+                        className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercas border border-gray-300 tracking-wider",
+                        children: "Date"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("th", {
                         scope: "col",
                         className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider",
                         children: "Progress"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
-                        scope: "col",
-                        className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercas border border-gray-300 tracking-wider",
-                        children: "Start Date - End Date"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
-                        scope: "col",
-                        className: "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider",
-                        children: "Date Of complete"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("th", {
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("th", {
                         scope: "col",
                         className: "px-6 py-3 text-left text-xs font-medium text-gray-500 text-right uppercase border border-gray-300 tracking-wider",
                         children: "Action"
                       })]
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("tbody", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("tbody", {
                     className: "bg-white divide-y divide-indigo-200",
-                    children: kaam.taskList.data == "" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("tr", {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
+                    children: kaam.taskList.data == "" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("tr", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("td", {
                         colSpan: 7,
                         className: "px-6 py-4 whitespace-nowrap",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
                           className: "flex justify-center",
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
                             className: "ml-4",
-                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
                               className: "text-md font-medium text-red-900",
-                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("p", {
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("p", {
                                 children: "No Record Found"
                               })
                             })
@@ -5634,44 +5649,138 @@ var List = function List(props) {
                         })
                       })
                     }) : kaam !== null && kaam !== void 0 && (_kaam$taskList = kaam.taskList) !== null && _kaam$taskList !== void 0 && _kaam$taskList.data ? kaam.taskList.data.map(function (record) {
-                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("tr", {
-                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
-                          className: "px-6 py-4 whitespace-nowrap",
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("tr", {
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("td", {
+                          className: "px-6 py-4",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
                             className: "flex items-center",
-                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
                               className: "ml-4",
-                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+                              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
                                 className: "text-sm font-medium text-gray-900",
                                 children: record.task
                               })
                             })
                           })
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
-                          className: "px-6 py-4 whitespace-nowrap",
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("td", {
+                          className: "px-6 py-4",
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
                             className: "text-sm text-gray-900",
                             children: [" ", record.explaination]
                           })
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
-                          className: "px-6 py-4 whitespace-nowrap",
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("span", {
-                            className: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800",
-                            children: record.status
-                          })
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("td", {
-                          className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500",
-                          children: [new Date(record.date_of_assign).toLocaleDateString(), " - ", new Date(record.deadline).toLocaleDateString()]
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
-                          className: "px-6 py-4 whitespace-nowrap text-sm text-gray-500",
-                          children: record.date_of_complete == null ? "Not Completed" : new Date(record.date_of_complete).toLocaleDateString()
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("td", {
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("td", {
+                          className: "px-6 py-4 text-sm text-gray-500",
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
+                            className: "basis-full",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("label", {
+                              className: "font-bold",
+                              htmlFor: "",
+                              children: "Start Date : "
+                            }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("span", {
+                              children: new Date(record.date_of_assign).toLocaleDateString()
+                            })]
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
+                            className: "basis-full",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("label", {
+                              className: "font-bold",
+                              htmlFor: "",
+                              children: "Deadline : "
+                            }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("span", {
+                              children: new Date(record.deadline).toLocaleDateString()
+                            })]
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
+                            className: "basis-full",
+                            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("label", {
+                              className: "font-bold",
+                              htmlFor: "",
+                              children: "Status : "
+                            }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("span", {
+                              children: record.date_of_complete == null ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("span", {
+                                className: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800",
+                                children: record.status
+                              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("span", {
+                                className: "px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800",
+                                children: record.status + " (" + new Date(record.date_of_complete).toLocaleDateString() + " )"
+                              })
+                            })]
+                          })]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("td", {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_range__WEBPACK_IMPORTED_MODULE_12__.Range, {
+                            values: state.values,
+                            step: STEP,
+                            min: MIN,
+                            max: MAX,
+                            onChange: function onChange(values) {
+                              return setState({
+                                values: values
+                              });
+                            },
+                            renderTrack: function renderTrack(_ref2) {
+                              var props = _ref2.props,
+                                  children = _ref2.children;
+                              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
+                                onMouseDown: props.onMouseDown,
+                                onTouchStart: props.onTouchStart,
+                                style: _objectSpread(_objectSpread({}, props.style), {}, {
+                                  height: "36px",
+                                  display: "flex",
+                                  width: "100%"
+                                }),
+                                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
+                                  ref: props.ref,
+                                  style: {
+                                    height: "5px",
+                                    width: "100%",
+                                    borderRadius: "4px",
+                                    background: (0,react_range__WEBPACK_IMPORTED_MODULE_12__.getTrackBackground)({
+                                      values: state.values,
+                                      colors: ["#548BF4", "#ccc"],
+                                      min: MIN,
+                                      max: MAX
+                                    }),
+                                    alignSelf: "center"
+                                  },
+                                  children: children
+                                })
+                              });
+                            },
+                            renderThumb: function renderThumb(_ref3) {
+                              var props = _ref3.props,
+                                  isDragged = _ref3.isDragged;
+                              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", _objectSpread(_objectSpread({}, props), {}, {
+                                style: _objectSpread(_objectSpread({}, props.style), {}, {
+                                  height: "42px",
+                                  width: "42px",
+                                  borderRadius: "4px",
+                                  backgroundColor: "#FFF",
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  boxShadow: "0px 2px 6px #AAA"
+                                }),
+                                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
+                                  style: {
+                                    height: "16px",
+                                    width: "5px",
+                                    backgroundColor: isDragged ? "#548BF4" : "#CCC"
+                                  }
+                                })
+                              }));
+                            }
+                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("output", {
+                            style: {
+                              marginTop: "30px"
+                            },
+                            id: "output",
+                            children: state.values[0].toFixed(1)
+                          })]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("td", {
                           className: "px-6 py-4 whitespace-nowrap text-right text-sm font-medium",
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.InertiaLink, {
+                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.InertiaLink, {
                             href: route('task.edit', record.id),
                             className: "font-bold text-indigo-400 hover:text-indigo-900",
                             children: "Edit"
-                          }), " \xA0", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("a", {
+                          }), " \xA0", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("a", {
                             href: "#",
                             onClick: function onClick() {
                               deleteTask(record.id);
@@ -5681,15 +5790,15 @@ var List = function List(props) {
                           })]
                         })]
                       }, record.id);
-                    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("tr", {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
+                    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("tr", {
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("td", {
                         colSpan: 7,
                         className: "px-6 py-4 whitespace-nowrap",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
                           className: "flex items-center",
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
                             className: "ml-4",
-                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
                               className: "text-sm font-medium text-gray-900",
                               children: "Loading Please Wait..."
                             })
@@ -5703,13 +5812,13 @@ var List = function List(props) {
             })
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
         className: "max-w-7xl mx-auto sm:px-6 lg:px-8",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
           className: "overflow-hidden shadow-lg bg-white sm:rounded-lg ",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
             className: "flex justify-center mb-4",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(react_js_pagination__WEBPACK_IMPORTED_MODULE_6__["default"], {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(react_js_pagination__WEBPACK_IMPORTED_MODULE_6__["default"], {
               activePage: kaam !== null && kaam !== void 0 && (_kaam$taskList2 = kaam.taskList) !== null && _kaam$taskList2 !== void 0 && _kaam$taskList2.current_page ? kaam === null || kaam === void 0 ? void 0 : (_kaam$taskList3 = kaam.taskList) === null || _kaam$taskList3 === void 0 ? void 0 : _kaam$taskList3.current_page : 0,
               itemsCountPerPage: kaam !== null && kaam !== void 0 && (_kaam$taskList4 = kaam.taskList) !== null && _kaam$taskList4 !== void 0 && _kaam$taskList4.per_page ? kaam === null || kaam === void 0 ? void 0 : (_kaam$taskList5 = kaam.taskList) === null || _kaam$taskList5 === void 0 ? void 0 : _kaam$taskList5.per_page : 0,
               totalItemsCount: kaam !== null && kaam !== void 0 && (_kaam$taskList6 = kaam.taskList) !== null && _kaam$taskList6 !== void 0 && _kaam$taskList6.total ? kaam === null || kaam === void 0 ? void 0 : (_kaam$taskList7 = kaam.taskList) === null || _kaam$taskList7 === void 0 ? void 0 : _kaam$taskList7.total : 0,
@@ -57720,6 +57829,1069 @@ if (false) {} else {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", ({value:!0}));var e=__webpack_require__(/*! react */ "./node_modules/react/index.js"),t=__webpack_require__(/*! react-element-popper */ "./node_modules/react-element-popper/build/browser.min.js"),r=__webpack_require__(/*! react-date-object */ "./node_modules/react-date-object/dist/index.module.js");function n(e){return e&&"object"==typeof e&&"default"in e?e:{default:e}}var a=n(e),o=n(t),d=n(r);function i(e,t){var r=Object.keys(e);if(Object.getOwnPropertySymbols){var n=Object.getOwnPropertySymbols(e);t&&(n=n.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),r.push.apply(r,n)}return r}function l(e){for(var t=1;t<arguments.length;t++){var r=null!=arguments[t]?arguments[t]:{};t%2?i(Object(r),!0).forEach((function(t){c(e,t,r[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(r)):i(Object(r)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(r,t))}))}return e}function c(e,t,r){return t in e?Object.defineProperty(e,t,{value:r,enumerable:!0,configurable:!0,writable:!0}):e[t]=r,e}function u(){return(u=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e}).apply(this,arguments)}function s(e,t){if(null==e)return{};var r,n,a=function(e,t){if(null==e)return{};var r,n,a={},o=Object.keys(e);for(n=0;n<o.length;n++)r=o[n],t.indexOf(r)>=0||(a[r]=e[r]);return a}(e,t);if(Object.getOwnPropertySymbols){var o=Object.getOwnPropertySymbols(e);for(n=0;n<o.length;n++)r=o[n],t.indexOf(r)>=0||Object.prototype.propertyIsEnumerable.call(e,r)&&(a[r]=e[r])}return a}function p(e,t){return function(e){if(Array.isArray(e))return e}(e)||function(e,t){var r=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null==r)return;var n,a,o=[],d=!0,i=!1;try{for(r=r.call(e);!(d=(n=r.next()).done)&&(o.push(n.value),!t||o.length!==t);d=!0);}catch(e){i=!0,a=e}finally{try{d||null==r.return||r.return()}finally{if(i)throw a}}return o}(e,t)||m(e,t)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function f(e){return function(e){if(Array.isArray(e))return h(e)}(e)||function(e){if("undefined"!=typeof Symbol&&null!=e[Symbol.iterator]||null!=e["@@iterator"])return Array.from(e)}(e)||m(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function m(e,t){if(e){if("string"==typeof e)return h(e,t);var r=Object.prototype.toString.call(e).slice(8,-1);return"Object"===r&&e.constructor&&(r=e.constructor.name),"Map"===r||"Set"===r?Array.from(e):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?h(e,t):void 0}}function h(e,t){(null==t||t>e.length)&&(t=e.length);for(var r=0,n=new Array(t);r<t;r++)n[r]=e[r];return n}function y(e,t){var r="undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(!r){if(Array.isArray(e)||(r=m(e))||t&&e&&"number"==typeof e.length){r&&(e=r);var n=0,a=function(){};return{s:a,n:function(){return n>=e.length?{done:!0}:{done:!1,value:e[n++]}},e:function(e){throw e},f:a}}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}var o,d=!0,i=!1;return{s:function(){r=r.call(e)},n:function(){var e=r.next();return d=e.done,e},e:function(e){i=!0,o=e},f:function(){try{d||null==r.return||r.return()}finally{if(i)throw o}}}}function b(e){return Array.isArray(e)}function g(t){var r=t.state.date,n=r.calendar,o=r.locale,i=t.customWeekDays,l=t.weekStartDayIndex,c=t.displayWeekNumbers,u=t.weekNumber,s=e.useMemo((function(){var e=i;return b(e)&&e.length>=7?(e.length=7,e=e.map((function(e){return b(e)&e.length>1?e=e[1]:b(e)&&(e=e[0]),e}))):e=new d.default({year:1,calendar:n,locale:o}).weekDays.map((function(e){return e.shortName})),e}),[n,o,i]);return s=f(s).slice(l).concat(f(s).splice(0,l)),a.default.createElement("div",{className:"rmdp-week"},c&&a.default.createElement("div",{className:"rmdp-week-day"},u),s.map((function(e,t){return a.default.createElement("div",{key:t,className:"rmdp-week-day"},e)})))}function v(e,t){var r=arguments.length>2&&void 0!==arguments[2]&&arguments[2],n=arguments.length>3&&void 0!==arguments[3]&&arguments[3];if(!e||!t)return!1;if(e.year===t.year){if(n)return!0;if(e.monthIndex===t.monthIndex)return!!r||e.day===t.day}}function x(e,t,r){var n=r.multiple,a=r.range,o=r.selectedDate,i=r.onlyMonthPicker,l=r.onlyYearPicker,c=r.format,u=r.focused,s=r.weekPicker;e.setFormat(c);var p=new d.default(e);return[o=n?function(){var r=o.filter((function(t){return!v(e,t,i,l)}));r.length===o.length?r.push(p):p=r.find((function(e){return v(e,u)}));t&&r.sort((function(e,t){return e-t}));return r}():a?function(){if(s)return[new d.default(p).toFirstOfWeek(),new d.default(p).toLastOfWeek()];if(2===o.length||0===o.length)return[p];if(1===o.length)return[o[0],p].sort((function(e,t){return e-t}))}():p,p]}function w(e,t,r){var n=t[0],a=t[1],o=[];return 1===t.length?v(e,n,r)&&o.push("rmdp-range"):2===t.length&&(e.toDays()>=n.toDays()&&e.toDays()<=a.toDays()&&o.push("rmdp-range"),v(e,n,r)&&o.push("start"),v(e,a,r)&&o.push("end")),o.join(" ")}function k(t){var r=t.state,n=t.onChange,o=t.showOtherDays,i=void 0!==o&&o,s=t.mapDays,f=t.onlyShowInRangeDates,m=t.customWeekDays,h=t.sort,y=t.numberOfMonths,b=t.isRTL,k=t.weekStartDayIndex,D=t.handleFocusedDate,P=t.hideWeekDays,O=t.fullYear,C=p(t.monthAndYears,1)[0],E=t.displayWeekNumbers,N=t.weekNumber,S=void 0===N?"":N,M=e.useRef({}),I=r.today,Y=r.minDate,j=r.maxDate,R=r.range,L=r.date,A=r.selectedDate,F=r.onlyMonthPicker,W=r.onlyYearPicker,z=!F&&!W;M.current.date=L;var T=e.useMemo((function(){return z?function(e,t,r,n){if(!e)return[];for(var a=[],o=0;o<r;o++){var i=(e=new d.default(e).toFirstOfMonth()).monthIndex,l=[];e.toFirstOfWeek().add(n,"day"),e.monthIndex===i&&e.day>1&&e.subtract(7,"days");for(var c=0;c<6;c++){for(var u=[],s=0;s<7;s++)u.push({date:new d.default(e),day:e.format("D"),current:e.monthIndex===i}),e.day+=1;if(l.push(u),c>2&&e.monthIndex!==i&&!t)break}a.push(l)}return a}(M.current.date,i,y,k):[]}),[L.monthIndex,L.year,L.calendar,L.locale,z,i,y,k]);return z&&a.default.createElement("div",{className:"rmdp-day-picker ".concat(O?"rmdp-full-year":""),style:{display:O?"grid":"flex"}},T.map((function(e,t){return a.default.createElement("div",{key:t,style:c({},b?"marginLeft":"marginRight",t+(O?0:1)<y?"10px":"")},O&&a.default.createElement("div",{className:"rmdp-month-name"},C[t]),!P&&a.default.createElement(g,{state:r,customWeekDays:m,weekStartDayIndex:k,displayWeekNumbers:E,weekNumber:S}),e.map((function(e,o){return a.default.createElement("div",{key:o,className:"rmdp-week"},E&&a.default.createElement("div",{className:"rmdp-day rmdp-disabled"},a.default.createElement("span",null,e[0].date.format("WW"))),e.map((function(e,o){var c=function(e){if(!e.current&&!i)return{};var t={};return s.forEach((function(n){var a,o=n({date:e.date,today:I,currentMonth:r.date.month,selectedDate:r.selectedDate,isSameDate:v});(null===(a=o)||void 0===a?void 0:a.constructor)!==Object&&(o={}),(o.disabled||o.hidden)&&(e.disabled=!0),o.hidden&&(e.hidden=!0),t=l(l({},t),o)})),delete t.disabled,delete t.hidden,t}(e={date:e.date,day:e.day,current:e.current}),m=V(e)&&!e.disabled,b="".concat(m?"sd":""),g=c.children;m&&(b="".concat(b," ").concat(c.className||"")),delete c.className,delete c.children;var k=function(e,t){var r=["rmdp-day"],n=e.date,a=e.hidden,o=e.current;if(!V(e)||a)r.push("rmdp-day-hidden");else{(Y&&n<Y||j&&n>j||e.disabled)&&(r.push("rmdp-disabled"),e.disabled||(e.disabled=!0)),o||r.push("rmdp-deactive");var d=t>1&&o||1===t;e.disabled&&f||(v(n,I)&&r.push("rmdp-today"),i=n,[].concat(A).some((function(e){return v(e,i)}))&&d&&!R&&r.push("rmdp-selected")),R&&!e.disabled&&d&&r.push(w(n,A))}var i;return r.join(" ")}(e,y);return(e.hidden||e.disabled)&&(b=b.replace("sd","")),a.default.createElement("div",{key:o,className:k,onClick:function(){V(e)&&!e.disabled&&function(e,t,a){var o,i,c,u=e.date,s=e.current,f=r.selectedDate,m=r.focused,y=r.date,b=y,g=b.hour,v=b.minute,w=b.second;u.set({hour:(null===(o=f)||void 0===o?void 0:o.hour)||g,minute:(null===(i=f)||void 0===i?void 0:i.minute)||v,second:(null===(c=f)||void 0===c?void 0:c.second)||w}),1!==a||s?a>1&&!s&&(0===t&&u<y&&(y=new d.default(y).toFirstOfMonth()),t>0&&u.monthIndex>y.monthIndex+t&&t+1===a&&(y=new d.default(y).toFirstOfMonth().add(1,"month"))):y=new d.default(y).toFirstOfMonth();var k=p(x(u,h,r),2);f=k[0],m=k[1],n(f,l(l({},r),{},{date:y,focused:m,selectedDate:f})),D(m,u)}(e,t,y)}},a.default.createElement("span",u({className:b},c),V(e)&&!e.hidden?null!=g?g:e.day:""))})))})))})));function V(e){return!!e.current||i}}function D(e){var t=e.direction,r=e.onClick,n=e.disabled;return a.default.createElement("span",{className:"rmdp-arrow-container ".concat(t," ").concat(n?"disabled":""),onClick:r},a.default.createElement("i",{className:"rmdp-arrow"}))}function P(t){var r=t.state,n=t.setState,o=t.disableYearPicker,d=t.disableMonthPicker,i=t.buttons,c=t.renderButton,u=t.handleMonthChange,s=t.disabled,f=t.hideMonth,m=t.hideYear,h=t.isRTL,y=t.fullYear,b=p(t.monthAndYears,2),g=b[0],v=b[1],x={},w=r.date,k=r.onlyMonthPicker,P=r.onlyYearPicker,O=r.mustShowYearPicker,C=r.minDate,E=r.maxDate,N=r.year,S=r.today,M=C&&w.year<=C.year&&C.monthIndex>w.monthIndex-1,I=E&&w.year>=E.year&&E.monthIndex<w.monthIndex+1,Y=S.year+7;if(Y-=12*Math.floor((Y-N)/12),(f||y)&&m&&!i)return null;if((f&&m||P&&m||i&&m)&&(x.minHeight="36px"),(k||y)&&(C&&C.year>=w.year&&(M=!0),E&&E.year<=w.year&&(I=!0)),O||P){var j=Y-11;M=C&&C.year>j,I=E&&E.year<Y}return s&&(M=!0,I=!0),a.default.createElement("div",{className:"rmdp-header"},a.default.createElement("div",{style:{position:"relative",display:"flex"}},i&&R("left"),y?a.default.createElement("div",{className:"rmdp-header-values",style:x},!m&&w.format("YYYY")):g.map((function(e,t){return a.default.createElement("div",{key:t,className:"rmdp-header-values",style:x},!f&&a.default.createElement("span",{style:{cursor:s||d||k?"default":"pointer"},onClick:function(){return!d&&A("mustShowMonthPicker")}},e,!m&&(h?"،":",")),!m&&a.default.createElement("span",{style:{cursor:s||o||P?"default":"pointer"},onClick:function(){return!o&&A("mustShowYearPicker")}},v[t]))})),i&&R("right")));function R(t){var r=function(){return L("right"===t?1:-1)},n="left"===t&&M||"right"===t&&I;return c instanceof Function?c(t,r,n):e.isValidElement(c)?e.cloneElement(c,{direction:t,handleClick:r,disabled:n}):a.default.createElement(D,{direction:"rmdp-".concat(t),onClick:r,disabled:n})}function L(e){s||e<0&&M||e>0&&I||(y?w.year+=e:O||P?(N+=12*e,e<0&&C&&N<C.year&&(N=C.year),e>0&&E&&N>E.year&&(N=E.year)):(w.toFirstOfMonth(),k?w.year+=e:(w.month+=e,u(w))),n(l(l({},r),{},{date:w,year:N})))}function A(e){if(!s){var t={mustShowMonthPicker:!1,mustShowYearPicker:!1};t[e]=!r[e],n(l(l({},r),t))}}}function O(e){return b(e)||(e=[]),JSON.stringify(e)}function C(t){var r=t.state,n=t.onChange,o=t.customMonths,i=t.sort,c=t.handleMonthChange,u=t.handleFocusedDate,s=r.date,f=r.today,m=r.minDate,h=r.maxDate,y=r.calendar,g=r.locale,k=r.onlyMonthPicker,D=r.onlyYearPicker,P=r.range,C=r.onlyShowInRangeDates,E=(r.mustShowMonthPicker||k)&&!D;o=o&&O(o);var N=e.useMemo((function(){var e=o&&JSON.parse(o),t=[],n=0,a=new d.default({calendar:y,locale:g,format:r.date._format,year:r.date.year,month:1,day:1});b(e)&&e.length>=12?(e.length=12,e=e.map((function(e){return b(e)?e[0]:e}))):e=a.locale.months.map((function(e){return p(e,1)[0]}));for(var i=0;i<4;i++){for(var l=[],c=0;c<3;c++)l.push({date:new d.default(a),name:e[n]}),n++,a.add(1,"month");t.push(l)}return t}),[y,g,o,r.date.year,r.date._format]);return a.default.createElement("div",{className:"".concat(k?"only ":"","rmdp-month-picker"),style:{display:E?"block":"none"}},N.map((function(e,t){return a.default.createElement("div",{key:t,className:"rmdp-ym"},e.map((function(e,t){var r=e.date,n=e.name;return a.default.createElement("div",{key:t,className:M(r),onClick:function(){return S(r)}},a.default.createElement("span",{className:k?"sd":""},n))})))})));function S(e){var t=r.selectedDate,a=r.focused,o=e.year,d=e.monthIndex;if(!(m&&o<=m.year&&d<m.monthIndex||h&&o>=h.year&&d>h.monthIndex)){if(s.setMonth(d+1),k){var f=p(x(e,i,r),2);t=f[0],a=f[1]}else c(s);n(k?t:void 0,l(l({},r),{},{date:s,focused:a,selectedDate:t,mustShowMonthPicker:!1})),k&&u(a,e)}}function M(e){var t=["rmdp-day"],n=e.year,a=e.monthIndex,o=r.selectedDate;if((m&&(n<m.year||n===m.year&&a<m.monthIndex)||h&&(n>h.year||n===h.year&&a>h.monthIndex))&&t.push("rmdp-disabled"),!t.includes("rmdp-disabled")||!C)return v(f,e,!0)&&t.push("rmdp-today"),k?P?t.push(w(e,o,!0)):[].concat(o).some((function(t){return v(t,e,!0)}))&&t.push("rmdp-selected"):s.monthIndex===a&&t.push("rmdp-selected"),t.join(" ")}}function E(e,t){return e.replace(/[0-9]/g,(function(e){return t[e]}))}function N(t){var r=t.state,n=t.onChange,o=t.sort,i=t.handleFocusedDate,c=t.onYearChange,u=r.date,s=r.today,f=r.minDate,m=r.maxDate,h=r.onlyYearPicker,y=r.range,b=r.onlyShowInRangeDates,g=r.year,v=r.mustShowYearPicker||h,w=u.digits,k=s.year-4;k-=12*Math.ceil((k-g)/12);var D=e.useMemo((function(){for(var e=[],t=k,r=0;r<4;r++){for(var n=[],a=0;a<3;a++)n.push(t),t++;e.push(n)}return e}),[k]);return a.default.createElement("div",{className:"".concat(h?"only ":"","rmdp-year-picker"),style:{display:v?"block":"none"}},D.map((function(e,t){return a.default.createElement("div",{key:t,className:"rmdp-ym"},e.map((function(e,t){return a.default.createElement("div",{key:t,className:P(e),onClick:function(){return function(e){if(O(e))return;var t=new d.default(r.date).setYear(e),a=r.selectedDate,u=r.focused;if(h){var s=p(x(t,o,r),2);a=s[0],u=s[1]}else f&&t.monthIndex<f.monthIndex?t=t.setMonth(f.monthIndex+1):m&&t.monthIndex>m.monthIndex&&(t=t.setMonth(m.monthIndex+1)),null==c||c(t);n(h?a:void 0,l(l({},r),{},{date:t,focused:u,selectedDate:a,mustShowYearPicker:!1})),h&&i(u,t)}(e)}},a.default.createElement("span",{className:h?"sd":""},E(e.toString(),w)))})))})));function P(e){var t=["rmdp-day"],n=r.date,a=r.selectedDate;if(O(e)&&t.push("rmdp-disabled"),!t.includes("rmdp-disabled")||!b){if(s.year===e&&t.push("rmdp-today"),h)if(y){var o=a[0],d=a[1];1===a.length?e===o.year&&t.push("rmdp-range"):2===a.length&&(e>=o.year&&e<=d.year&&t.push("rmdp-range"),e===o.year&&t.push("start"),e===d.year&&t.push("end"))}else[].concat(a).some((function(t){return t&&t.year===e}))&&t.push("rmdp-selected");else e===n.year&&t.push("rmdp-selected");return t.join(" ")}}function O(e){return f&&e<f.year||m&&e>m.year}}function S(e,t,r){return r||(e?"MM/YYYY":t?"YYYY":"YYYY/MM/DD")}function M(e,t){return e instanceof d.default?e.setCalendar(t):e=new d.default({date:e,calendar:t}),e}function I(e){"_self"in a.default.createElement("div")&&console.warn(e.join("\n"))}var Y=new d.default,j=Y.calendar,R=Y.locale;function L(e,t){return e&&e.constructor!==Object&&(I(A("calendar")),e=void 0),t&&t.constructor!==Object&&(I(A("locale")),t=void 0),[e||j,t||R]}function A(e){return["".concat(e," must be an object"),"https://shahabyazdi.github.io/react-multi-date-picker/calendars/"]}function F(e){return e&&e.name?e.name.split("_")[1]:""}function W(e){return["fa","ar"].includes(F(e))}function z(e,t){void 0===t&&(t={});var r=t.insertAt;if(e&&"undefined"!=typeof document){var n=document.head||document.getElementsByTagName("head")[0],a=document.createElement("style");a.type="text/css","top"===r&&n.firstChild?n.insertBefore(a,n.firstChild):n.appendChild(a),a.styleSheet?a.styleSheet.cssText=e:a.appendChild(document.createTextNode(e))}}z(".rmdp-wrapper{background-color:#fff;border-radius:5px;direction:ltr;text-align:center;width:max-content}.rmdp-shadow{box-shadow:0 0 5px #8798ad}.rmdp-border{border:1px solid #cfd8e2}.rmdp-calendar{height:max-content;padding:4px}.rmdp-border-top{border-top:1px solid #cfd8e2}.rmdp-border-bottom{border-bottom:1px solid #cfd8e2}.rmdp-border-left{border-left:1px solid #cfd8e2}.rmdp-border-right{border-right:1px solid #cfd8e2}.rmdp-week,.rmdp-ym{display:flex;justify-content:space-between}.rmdp-ym{height:25%}.rmdp-day,.rmdp-week-day{color:#000;cursor:pointer;height:34px;position:relative;width:34px}.rmdp-week-day{color:#0074d9;cursor:default;font-size:13px;font-weight:500}.rmdp-day span,.rmdp-week-day{display:flex;flex-direction:column;justify-content:center}.rmdp-day span{border-radius:50%;bottom:3px;font-size:14px;left:3px;position:absolute;right:3px;top:3px}.rmdp-day.rmdp-today span{background-color:#7fdbff;color:#fff}.rmdp-day.rmdp-selected span:not(.highlight){background-color:#0074d9;box-shadow:0 0 3px #8798ad;color:#fff}.rmdp-day.rmdp-deactive,.rmdp-day.rmdp-disabled{color:#8798ad}.rmdp-day.rmdp-deactive.rmdp-selected span{background-color:#4ca6f5;box-shadow:0 0 3px #bac5d3}.rmdp-ym .rmdp-day{flex:1;margin:auto}.rmdp-ym .rmdp-day span{border-radius:12px;padding:2px 0}.rmdp-range{background-color:#0074d9;box-shadow:0 0 3px #8798ad;color:#fff}.rmdp-range.start{border-bottom-left-radius:50%;border-top-left-radius:50%}.rmdp-range.end{border-bottom-right-radius:50%;border-top-right-radius:50%}.rmdp-ym .rmdp-range.start{border-bottom-left-radius:15px;border-top-left-radius:15px}.rmdp-ym .rmdp-range.end{border-bottom-right-radius:15px;border-top-right-radius:15px}.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) span:hover{background-color:#7ea6f0;color:#fff}.rmdp-day-picker{padding:5px}.rmdp-header{font-size:14px;height:38px;line-height:37px;margin-top:5px}.rmdp-month-picker,.rmdp-year-picker{background-color:#fff;border-radius:0 0 5px 5px;bottom:2px;left:2px;position:absolute;right:2px;top:2px}.only.rmdp-month-picker,.only.rmdp-year-picker{height:240px;position:static;width:250px}.rmdp-header-values{color:#000;margin:auto}.rmdp-header-values span{padding:0 0 0 5px}.rmdp-arrow{border:solid #0074d9;border-width:0 2px 2px 0;display:inline-block;height:3px;margin-top:5px;padding:2px;width:3px}.rmdp-right i{margin-right:3px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg)}.rmdp-left i{margin-left:3px;transform:rotate(135deg);-webkit-transform:rotate(135deg)}.rmdp-left,.rmdp-right{position:absolute;top:54%;transform:translateY(-50%)}.rmdp-left{left:0}.rmdp-right{right:0}.rmdp-arrow-container{border-radius:50%;cursor:pointer;display:flex;height:20px;justify-content:center;margin:0 5px;width:20px}.rmdp-arrow-container:hover{background-color:#0074d9;box-shadow:0 0 3px #8798ad}.rmdp-arrow-container:hover .rmdp-arrow{border:solid #fff;border-width:0 2px 2px 0}.rmdp-arrow-container.disabled{cursor:default}.rmdp-arrow-container.disabled:hover{background-color:inherit;box-shadow:inherit}.rmdp-arrow-container.disabled .rmdp-arrow,.rmdp-arrow-container.disabled:hover .rmdp-arrow{border:solid gray;border-width:0 2px 2px 0}.rmdp-rtl{direction:rtl}.rmdp-rtl .rmdp-left i{margin-left:0;margin-right:3px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg)}.rmdp-rtl .rmdp-right i{margin-left:3px;margin-right:0;transform:rotate(135deg);-webkit-transform:rotate(135deg)}.rmdp-rtl .rmdp-right{left:0;right:auto}.rmdp-rtl .rmdp-left{left:auto;right:0}.rmdp-rtl .rmdp-range.start{border-bottom-left-radius:unset;border-bottom-right-radius:50%;border-top-left-radius:unset;border-top-right-radius:50%}.rmdp-rtl .rmdp-range.end{border-bottom-left-radius:50%;border-bottom-right-radius:unset;border-top-left-radius:50%;border-top-right-radius:unset}.rmdp-rtl .rmdp-range.start.end{border-radius:50%}.rmdp-rtl .rmdp-ym .rmdp-range.start{border-bottom-right-radius:15px;border-top-right-radius:15px}.rmdp-rtl .rmdp-ym .rmdp-range.end{border-bottom-left-radius:15px;border-top-left-radius:15px}.rmdp-day-hidden,.rmdp-day.rmdp-disabled{cursor:default}.rmdp-selected .highlight{box-shadow:0 0 3px #8798ad}.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) .highlight-red:hover{background-color:#ff6687}.rmdp-day:not(.rmdp-deactive) .highlight-red{color:#cc0303}.rmdp-day.rmdp-deactive .highlight-red{color:#e08e8e}.rmdp-day.rmdp-selected .highlight-red{background-color:#ea0034;color:#fff}.rmdp-day.rmdp-deactive.rmdp-selected .highlight-red{background-color:#e4b0ba;color:#fff}.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) .highlight-green:hover{background-color:#4db6ac}.rmdp-day:not(.rmdp-deactive) .highlight-green{color:#00796b}.rmdp-day.rmdp-deactive .highlight-green{color:#7ab3ac}.rmdp-day.rmdp-selected .highlight-green{background-color:#009688;color:#fff}.rmdp-day.rmdp-deactive.rmdp-selected .highlight-green{background-color:#749c98;color:#fff}.rmdp-day-hidden,.rmdp-day-hidden:hover span{background-color:unset;color:transparent}.rmdp-month-name{cursor:default;font-size:14px;margin:3px 0}.rmdp-full-year{grid-template-columns:1fr 1fr 1fr}@media (max-height:450px),(max-width:450px){.rmdp-day,.rmdp-week-day{height:28px;width:28px}.rmdp-day span{font-size:12px;padding-left:.5px}.only.rmdp-month-picker,.only.rmdp-year-picker{height:200px;width:205px}.rmdp-header{height:32px;line-height:32px}.rmdp-header,.rmdp-month-name{font-size:12px}.rmdp-full-year{grid-template-columns:1fr 1fr}}");var T=["datePickerProps","DatePicker"];function V(t,r){var n,o=t.value,i=t.calendar,c=t.locale,f=t.format,m=t.onlyMonthPicker,h=t.onlyYearPicker,y=t.range,g=void 0!==y&&y,v=t.multiple,x=void 0!==v&&v,w=t.className,D=t.weekDays,M=t.months,I=t.children,Y=t.onChange,j=t.showOtherDays,R=t.minDate,A=t.maxDate,F=t.mapDays,z=t.disableMonthPicker,V=t.disableYearPicker,q=t.formattingIgnoreList,_=t.onReady,K=t.onlyShowInRangeDates,U=void 0===K||K,H=t.zIndex,$=void 0===H?100:H,G=t.plugins,Q=void 0===G?[]:G,X=t.sort,Z=t.numberOfMonths,ee=void 0===Z?1:Z,te=t.currentDate,re=t.digits,ne=t.buttons,ae=void 0===ne||ne,oe=t.renderButton,de=t.weekStartDayIndex,ie=void 0===de?0:de,le=t.disableDayPicker,ce=t.onPropsChange,ue=t.onMonthChange,se=t.onYearChange,pe=t.onFocusedDateChange,fe=t.readOnly,me=t.disabled,he=t.hideMonth,ye=t.hideYear,be=t.hideWeekDays,ge=t.shadow,ve=void 0===ge||ge,xe=t.fullYear,we=t.displayWeekNumbers,ke=t.weekNumber,De=t.weekPicker;!te||te instanceof d.default||(console.warn("currentDate must be instance of DateObject"),te=void 0),("number"!=typeof ie||ie<0||ie>6)&&(ie=0),("number"!=typeof ee||ee<1||m||h)&&(ee=1),(x||g||b(o))&&(g||x||(x=!0),x&&g&&(x=!1)),De&&(g=!0,x=!1),xe&&(ee=12,m=!1,h=!1),h&&!he&&(he=!0);var Pe=L(i,c),Oe=p(Pe,2);i=Oe[0],c=Oe[1],f=S(m,h,f),q=O(q),F=[].concat(F).filter(Boolean),Q=[].concat.apply([],Q);var Ce=e.useState({}),Ee=p(Ce,2),Ne=Ee[0],Se=Ee[1],Me={},Ie=e.useRef({mustCallOnReady:!0,currentDate:te});e.useEffect((function(){Se((function(e){var t=Ie.current.currentDate,r=e.date,n=e.selectedDate,a=e.initialValue,u=e.focused,s=e.mustSortDates;function p(e){if(e)return e.calendar.name!==i.name&&e.setCalendar(i),e.locale.name!==c.name&&e.setLocale(c),e._format!==f&&e.setFormat(f),e.digits=re,e.ignoreList=JSON.parse(q),e}function y(e){return new d.default(t||e)}if(o)if(b(n=J(o,i,c,f)))r||(r=y(n[0]));else if(r&&1!==ee){var v=new d.default(r).toFirstOfMonth(),w=new d.default(r).add(ee-1,"months").toLastOfMonth();(n<v||n>w)&&(r=new d.default(n))}else r=y(n);else r||(r=y({calendar:i,locale:c,format:f})),a&&(n=void 0);if([].concat(n).forEach(p),p(r),x||g||b(o)){if(n||(n=[]),b(n)||(n=[n]),g&&n.length>2){var k=n[n.length-1];n=[n[0],k],u=k}x&&X&&!s?(s=!0,n.sort((function(e,t){return e-t}))):g&&n.sort((function(e,t){return e-t}))}else b(n)&&(n=n[n.length-1]);return xe&&r.toFirstOfYear(),delete Ie.current.currentDate,l(l({},e),{},{date:r,selectedDate:n,multiple:x,range:g,onlyMonthPicker:m,onlyYearPicker:h,initialValue:e.initialValue||o,value:o,focused:u,calendar:i,locale:c,format:f,mustSortDates:s,year:r.year,today:e.today||new d.default({calendar:i}),weekPicker:De})}))}),[o,i,c,f,m,h,g,x,X,ee,re,q,xe,De]),e.useEffect((function(){(R||A)&&Se((function(e){var t=e.calendar,r=e.locale,n=e.format,a=p(B(J(o,t,r,n),R,A,t),3),d=a[0],i=a[1],c=a[2];return l(l({},e),{},{inRangeDates:U?d:e.selectedDate,minDate:i,maxDate:c})}))}),[R,A,U,o]),Ne.today&&!Ie.current.isReady&&(Ie.current.isReady=!0),e.useEffect((function(){Ie.current.isReady&&Ie.current.mustCallOnReady&&_ instanceof Function&&(Ie.current.mustCallOnReady=!1,_())}),[Ie.current.isReady,_]);var Ye="rmdp-top-class "+_e(["top","bottom"]),je={top:[],bottom:[],left:[],right:[]},Re=W(null===(n=Ne.date)||void 0===n?void 0:n.locale),Le={state:Ne,setState:Se,onChange:Ve,sort:X,handleFocusedDate:Be,isRTL:Re,fullYear:xe,monthAndYears:He()},Ae=arguments[0],Fe=Ae.datePickerProps,We=Ae.DatePicker,ze=s(Ae,T);return Te(),Ne.today?a.default.createElement("div",{ref:Ue,className:"rmdp-wrapper rmdp-".concat(ve?"shadow":"border"," ").concat(w||""),style:{zIndex:$}},je.top,a.default.createElement("div",{style:{display:"flex"},className:Ye},je.left,!le&&a.default.createElement("div",{className:"rmdp-calendar ".concat(Re?"rmdp-rtl":""," ").concat(_e(["left","right"]))},a.default.createElement(P,u({},Le,{disableYearPicker:V,disableMonthPicker:z,buttons:ae,renderButton:oe,handleMonthChange:Je,disabled:me,hideMonth:he,hideYear:ye})),a.default.createElement("div",{style:{position:"relative"}},a.default.createElement(k,u({},Le,{showOtherDays:j,mapDays:F,onlyShowInRangeDates:U,customWeekDays:D,numberOfMonths:ee,weekStartDayIndex:ie,hideWeekDays:be,displayWeekNumbers:we,weekNumber:ke})),!xe&&a.default.createElement(a.default.Fragment,null,!z&&a.default.createElement(C,u({},Le,{customMonths:M,handleMonthChange:Je})),!V&&a.default.createElement(N,u({},Le,{onYearChange:se}))))),je.right),je.bottom,I):null;function Te(){if(Ie.current.isReady&&b(Q)){var t={state:Ne,setState:Se,registerListener:Ke,calendarProps:ze,datePickerProps:Fe,handleChange:Ve,Calendar:Ie.current.Calendar,DatePicker:We,handlePropsChange:qe,handleFocusedDate:function(e){return Be(e)}},r=function(e){return le?"bottom":e.props.position||"right"};Q.forEach((function(n,a){if("string"!=typeof n.type){var o={},d=r(n);if(je[d]&&!n.props.disabled){for(var i=0;i<Q.length;i++)if("string"!=typeof Q[i].type&&!Q[i].props.disabled){if(4===Object.keys(o).length)break;var c=r(Q[i]);["top","bottom"].includes(d)?(c===d&&i>a&&(o.bottom=!0),c===d&&i<a&&(o.top=!0)):(Ye.includes("border-top")&&(o.top=!0),Ye.includes("border-bottom")&&(o.bottom=!0),c===d&&i>a&&(o.right=!0),c===d&&i<a&&(o.left=!0))}je[d].push(e.cloneElement(n,l({key:a,position:d,nodes:o},t)))}}else"mapDays"===n.type&&F.push(n.fn(t))}))}}function Ve(e,t){if(!me){if(e||null===e){if(fe)return;Me.change&&Me.change.forEach((function(t){return t(e)}))}t&&Se(t),(e||null===e)&&(null==Y||Y(e)),qe({value:e})}}function qe(){var e,t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};if(!fe&&!me){var r=l(l(l(l({},ze),Fe),t),{},{value:null!==(e=t.value)&&void 0!==e?e:Ne.selectedDate});delete r.onPropsChange,null==ce||ce(r)}}function Be(e,t){fe||me||null==pe||pe(e,t)}function Je(e){null==ue||ue(e)}function _e(e){return le||!b(Q)?"":Array.from(new Set(Q.map((function(t){if(!t.props)return"";var r=t.props.position||"right";return e.includes(r)&&!t.props.disabled?"rmdp-border-"+r:""})))).join(" ")}function Ke(e,t){Me[e]||(Me[e]=[]),Me[e].push(t)}function Ue(e){if(e&&(e.date=Ne.date,e.set=function(e,t){me||Se(l(l({},Ne),{},{date:new d.default(Ne.date.set(e,t))}))}),Ie.current.Calendar=e,r instanceof Function)return r(e);r&&(r.current=e)}function He(){var e=Ne.date;if(!e)return[];for(var t=[],r=[],n=e.digits,a=0;a<ee;a++){var o=void 0,d=e.year,i=e.monthIndex+a;if(i>11&&(i-=12,d++),b(M)&&M.length>=12){var l=M[i];o=b(l)?l[0]:l}else o=e.months[i].name;d=E(d.toString(),n),t.push(o),r.push(d)}return[t,r]}}var q=e.forwardRef(V);function B(e,t,r,n){return t&&(t=M(t,n).set({hour:0,minute:0,second:0,millisecond:0})),r&&(r=M(r,n).set({hour:23,minute:59,second:59,millisecond:999})),b(e)&&(e=e.filter((function(e){return!(t&&e<t)&&!(r&&e>r)}))),[e,t,r]}function J(e,t,r,n){var a=[].concat(e).map((function(e){return e?e instanceof d.default?e:new d.default({date:e,calendar:t,locale:r,format:n}):{}})).filter((function(e){return e.isValid}));return b(e)?a:a[0]}z('.rmdp-visible{visibility:visible}.rmdp-invisible{visibility:hidden}.rmdp-input{border:1px solid #c0c4d6;border-radius:5px;height:22px;margin:1px 0;padding:2px 5px}.rmdp-input:focus{border:1px solid #a4b3c5;box-shadow:0 0 2px #a4b3c5;outline:none!important}.rmdp-button{background-color:#0074d9;border:none;border-radius:5px;color:#fff;cursor:pointer;display:inline-block;padding:7px 16px;text-align:center;text-decoration:none;transition:.3s}.rmdp-button:hover{background-color:#143ac5;transition:.4s}.rmdp-button:disabled{background-color:#8798ad}.rmdp-action-button{border-radius:unset;color:#2682d3;float:right;font-weight:700;margin:15px 10px 15px 0}.rmdp-action-button,.rmdp-action-button:hover{background-color:transparent}.rmdp-ep-arrow{overflow:hidden;will-change:transform}.rmdp-ep-arrow:after{background-color:#fff;content:"";height:12px;position:absolute;transform:rotate(45deg);width:12px}.rmdp-ep-shadow:after{box-shadow:0 0 6px #8798ad}.rmdp-ep-border:after{border:1px solid #cfd8e2}.rmdp-ep-arrow[direction=top]{border-bottom:1px solid #fff}.rmdp-ep-arrow[direction=left]{border-right:1px solid #fff}.rmdp-ep-arrow[direction=right]{border-left:1px solid #fff;margin-left:-1px}.rmdp-ep-arrow[direction=bottom]{border-top:1px solid #fff;margin-top:-1.5px}.rmdp-ep-arrow[direction=top]:after{left:4px;top:5px}.rmdp-ep-arrow[direction=bottom]:after{left:4px;top:-6px}.rmdp-ep-arrow[direction=left]:after{left:5px;top:3px}.rmdp-ep-arrow[direction=right]:after{left:-6px;top:3px}');var _=["value","calendar","locale","format","onlyMonthPicker","onlyYearPicker","onChange","range","multiple","name","id","title","placeholder","required","style","className","inputClass","disabled","render","weekDays","months","children","inputMode","scrollSensitive","hideOnScroll","minDate","maxDate","formattingIgnoreList","containerClassName","calendarPosition","editable","onOpen","onClose","arrowClassName","zIndex","arrow","fixMainPosition","onPositionChange","onPropsChange","digits","readOnly","shadow","onFocusedDateChange","type","weekPicker","mobileLabels","onOpenPickNewDate"];function K(t,r){var n=t.value,i=t.calendar,f=t.locale,m=t.format,h=t.onlyMonthPicker,g=t.onlyYearPicker,v=t.onChange,x=t.range,w=void 0!==x&&x,k=t.multiple,D=void 0!==k&&k,P=t.name,C=t.id,N=t.title,M=t.placeholder,Y=t.required,j=t.style,R=void 0===j?{}:j,A=t.className,z=void 0===A?"":A,T=t.inputClass,V=t.disabled,B=t.render,J=t.weekDays,K=t.months,U=t.children,G=t.inputMode,Q=t.scrollSensitive,X=void 0===Q||Q,Z=t.hideOnScroll,ee=t.minDate,te=t.maxDate,re=t.formattingIgnoreList,ne=t.containerClassName,ae=void 0===ne?"":ne,oe=t.calendarPosition,de=void 0===oe?"bottom-left":oe,ie=t.editable,le=void 0===ie||ie,ce=t.onOpen,ue=t.onClose,se=t.arrowClassName,pe=void 0===se?"":se,fe=t.zIndex,me=void 0===fe?100:fe,he=t.arrow,ye=void 0===he||he,be=t.fixMainPosition,ge=t.onPositionChange,ve=t.onPropsChange,xe=t.digits,we=t.readOnly,ke=t.shadow,De=void 0===ke||ke,Pe=t.onFocusedDateChange,Oe=t.type,Ce=t.weekPicker,Ee=t.mobileLabels,Ne=t.onOpenPickNewDate,Se=void 0===Ne||Ne,Me=s(t,_),Ie=e.useState(),Ye=p(Ie,2),je=Ye[0],Re=Ye[1],Le=e.useState(),Ae=p(Le,2),Fe=Ae[0],We=Ae[1],ze=e.useState(""),Te=p(ze,2),Ve=Te[0],qe=Te[1],Be=e.useState(!1),Je=p(Be,2),_e=Je[0],Ke=Je[1],Ue=e.useState(!1),He=p(Ue,2),$e=He[0],Ge=He[1],Qe=e.useRef(),Xe=e.useRef(),Ze=e.useRef(),et=e.useRef({}),tt=w||Ce?" ~ ":", ",rt=arguments[0],nt=ut(),at=e.useCallback((function(){if(!1!==(null==ue?void 0:ue())){var e=$(Xe);if(e&&e.blur(),et.current.mobile){var t=Ze.current.parentNode.parentNode;t.classList.remove("rmdp-calendar-container-mobile"),t.style.position="absolute",t.style.visibility="hidden"}Ke(!1),Ge(!1)}}),[ue]);nt&&!et.current.mobile&&(et.current=l(l({},et.current),{},{mobile:!0})),!nt&&et.current.mobile&&(et.current=l(l({},et.current),{},{mobile:!1})),re=O(re),m=S(h,g,m);var ot=L(i,f),dt=p(ot,2);return i=dt[0],f=dt[1],e.useEffect((function(){function e(e){if(_e&&!et.current.mobile){var t=[];if([Xe.current,Ze.current].forEach((function(r){!r||r.contains(e.target)||e.target.classList.contains("b-deselect")||t.push(r)})),2===t.length)return at();Ze.current&&Ze.current.contains(e.target)&&(Qe.current.removeTransition(),Qe.current.refreshPosition())}}function t(){Z&&_e&&at()}return document.addEventListener("click",e,!1),document.addEventListener("scroll",t,!0),function(){document.removeEventListener("click",e,!1),document.removeEventListener("scroll",t,!0)}}),[at,r,_e,Z]),e.useEffect((function(){var e=n,t=et.current,r=t.date,a=t.initialValue,o=function(){return e[e.length-1]};function c(e){if(e)return e instanceof d.default||(e=new d.default({date:e,calendar:i,locale:f,format:m})),e.calendar!==i&&e.setCalendar(i),e.set({weekDays:J,months:K,digits:xe,locale:f,format:m,ignoreList:JSON.parse(re)}),e}n||a||!r?a&&!n&&(a=void 0):e=r,w||D||b(e)?(b(e)||(e=[e]),e=e.map(c).filter((function(e){return void 0!==e})),w&&e.length>2&&(e=[e[0],o()]),qe(H(e,tt))):(b(e)&&(e=o()),e=c(e),document.activeElement!==$(Xe)&&qe(e?e.format():"")),et.current=l(l({},et.current),{},{date:e,separator:tt,initialValue:a||n}),et.current.mobile&&Qe.current.isOpen?We(e):Re(e)}),[n,i,f,m,w,D,tt,h,g,J,K,xe,re]),e.useEffect((function(){var e=et.current.selection;if(e){var t=$(Xe);t&&(t.setSelectionRange(e,e),et.current.selection=void 0,Qe.current.refreshPosition())}}),[Ve]),(D||w||b(je)||!le)&&(G="none"),a.default.createElement(o.default,u({ref:it,element:lt(),popper:_e&&ct(),active:!nt&&$e,position:de,arrow:!nt&&ye,fixMainPosition:!X||be,zIndex:me,onChange:!nt&&ge,containerClassName:"rmdp-container ".concat(ae),arrowClassName:["rmdp-ep-arrow","rmdp-ep-".concat(De?"shadow":"border"),z,pe].join(" ")},Me));function it(e){if(e&&(e.openCalendar=function(){return setTimeout((function(){return ft()}),10)},e.closeCalendar=at,e.isOpen=_e&&$e),Qe.current=e,r instanceof Function)return r(e);r&&(r.current=e)}function lt(){if("string"==typeof Oe&&I(["the type Prop is deprecated.","https://shahabyazdi.github.io/react-multi-date-picker/types/"]),B){var t,r=b(je)||D||w?H(je,tt):Ve;return a.default.createElement("div",{ref:Xe},e.isValidElement(B)?e.cloneElement(B,(c(t={},D||w?"stringDates":"stringDate",r),c(t,"value",r),c(t,"openCalendar",ft),c(t,"handleValueChange",yt),c(t,"locale",f),c(t,"separator",tt),t)):B instanceof Function?B(r,ft,yt,f,tt):null)}return a.default.createElement("input",{ref:Xe,type:"text",name:P,id:C,title:N,required:Y,onFocus:ft,className:T||"rmdp-input",placeholder:M,value:Ve,onChange:yt,style:R,autoComplete:"off",disabled:!!V,inputMode:G||(nt?"none":void 0),readOnly:we})}function ct(){return a.default.createElement(q,u({ref:Ze,value:Fe||je,onChange:ht,range:w,multiple:D,calendar:i,locale:f,format:m,onlyMonthPicker:h,onlyYearPicker:g,className:z+(nt?" rmdp-mobile":""),weekDays:J,months:K,digits:xe,minDate:ee,maxDate:te,formattingIgnoreList:JSON.parse(re),onPropsChange:ve,shadow:De,onReady:bt,DatePicker:Qe.current,datePickerProps:rt,onFocusedDateChange:gt,weekPicker:Ce},Me),U,nt&&st())}function ut(){return"string"==typeof z&&z.includes("rmdp-mobile")}function st(){var e=[].concat.apply([],rt.plugins||[]).some((function(e){var t=e.props;return!(void 0===t?{}:t).disabled}));return a.default.createElement("div",{className:"rmdp-action-buttons ".concat(W(f)?"rmdp-rtl":""," ").concat(e?"rmdp-border-top":"")},a.default.createElement("button",{type:"button",className:"rmdp-button rmdp-action-button",onClick:function(){Fe&&(ht(Fe,!0),We(void 0)),at()}},pt("OK")),a.default.createElement("button",{type:"button",className:"rmdp-button rmdp-action-button",onClick:function(){We(void 0),at()}},pt("CANCEL")))}function pt(e){var t;if(!f||"string"!=typeof f.name)return e;return(null==Ee?void 0:Ee[e])||(null===(t={en:{OK:"OK",CANCEL:"CANCEL"},fa:{OK:"تأیید",CANCEL:"لغو"},ar:{OK:"تأكيد",CANCEL:"الغاء"},hi:{OK:"पुष्टि",CANCEL:"रद्द करें"}}[F(f)])||void 0===t?void 0:t[e])||e}function ft(){if(!V&&!we&&!1!==(null==ce?void 0:ce())){if(mt()){var e=new d.default({calendar:i,locale:f,format:m,months:K,weekDays:J,digits:xe,ignoreList:JSON.parse(re)});(!ee||e>ee)&&(!te||e<te)&&(ht(e),null==ve||ve(l(l({},rt),{},{value:e})),et.current.date=e)}var t=$(Xe);nt&&t&&t.blur(),t||!_e?Ke(!0):at()}}function mt(){return Se&&!n&&!et.current.date&&!w&&!D&&!nt}function ht(e,t){if(nt&&!t)return We(e);Re(e),et.current=l(l({},et.current),{},{date:e}),null==v||v(e),e&&qe(H(e,tt))}function yt(e){if(!b(je)&&le){et.current.selection=e.target.selectionStart;var t=e.target.value,r={calendar:i,locale:f,format:m,ignoreList:JSON.parse(re)};if(xe=b(xe)?xe:f.digits,!t)return qe(""),ht(null);if(xe){var n,a,o=y(xe);try{for(o.s();!(n=o.n()).done;){var c=n.value;t=t.replace(new RegExp(c,"g"),xe.indexOf(c))}}catch(e){o.e(e)}finally{o.f()}ht((a=/(?=.*Y)(?=.*M)(?=.*D)/.test(m)?new d.default(l(l({},r),{},{date:t})):new d.default(r).parse(t)).isValid?a:null),qe(E(t,xe))}}}function bt(){if(Ge(!0),nt){var e=Ze.current.parentNode.parentNode;e.className="rmdp-calendar-container-mobile",e.style.position="fixed",e.style.transform="",setTimeout((function(){e.style.visibility="visible"}),50)}}function gt(e,t){b(et.current.date)||!t||nt||at(),null==Pe||Pe(e,t)}}var U=e.forwardRef(K);function H(e,t){var r=[].concat(e).map((function(e){return null!=e&&e.isValid?e.format():""}));return r.toString=function(){return this.filter(Boolean).join(t)},r}function $(e){if(e.current)return"INPUT"===e.current.tagName?e.current:e.current.querySelector("input")}Object.defineProperty(exports, "DateObject", ({enumerable:!0,get:function(){return d.default}})),exports.Calendar=q,exports["default"]=U,exports.getAllDatesInRange=function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:[],t=arguments.length>1?arguments[1]:void 0;if(!Array.isArray(e))return[];var r=e[0],n=e[e.length-1],a=[];if(!(r instanceof d.default&&n instanceof d.default&&r.isValid&&n.isValid&&!(r>n)))return[];for(r=new d.default(r),n=new d.default(n);r<=n;r.day++)a.push(t?r.toDate():new d.default(r));return a},exports.toDateObject=M;
+
+
+/***/ }),
+
+/***/ "./node_modules/react-range/lib/Range.js":
+/*!***********************************************!*\
+  !*** ./node_modules/react-range/lib/Range.js ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/react-range/lib/utils.js");
+var types_1 = __webpack_require__(/*! ./types */ "./node_modules/react-range/lib/types.js");
+var INCREASE_KEYS = ['ArrowRight', 'ArrowUp', 'k', 'PageUp'];
+var DECREASE_KEYS = ['ArrowLeft', 'ArrowDown', 'j', 'PageDown'];
+var Range = /** @class */ (function (_super) {
+    __extends(Range, _super);
+    function Range(props) {
+        var _this = _super.call(this, props) || this;
+        _this.trackRef = React.createRef();
+        _this.thumbRefs = [];
+        _this.markRefs = [];
+        _this.state = {
+            draggedTrackPos: [-1, -1],
+            draggedThumbIndex: -1,
+            thumbZIndexes: new Array(_this.props.values.length).fill(0).map(function (t, i) { return i; }),
+            isChanged: false,
+            markOffsets: []
+        };
+        _this.getOffsets = function () {
+            var _a = _this.props, direction = _a.direction, values = _a.values, min = _a.min, max = _a.max;
+            var trackElement = _this.trackRef.current;
+            var trackRect = trackElement.getBoundingClientRect();
+            var trackPadding = utils_1.getPaddingAndBorder(trackElement);
+            return _this.getThumbs().map(function (thumb, index) {
+                var thumbOffsets = { x: 0, y: 0 };
+                var thumbRect = thumb.getBoundingClientRect();
+                var thumbMargins = utils_1.getMargin(thumb);
+                switch (direction) {
+                    case types_1.Direction.Right:
+                        thumbOffsets.x = (thumbMargins.left + trackPadding.left) * -1;
+                        thumbOffsets.y =
+                            ((thumbRect.height - trackRect.height) / 2 + trackPadding.top) * -1;
+                        thumbOffsets.x +=
+                            trackRect.width * utils_1.relativeValue(values[index], min, max) -
+                                thumbRect.width / 2;
+                        return thumbOffsets;
+                    case types_1.Direction.Left:
+                        thumbOffsets.x = (thumbMargins.right + trackPadding.right) * -1;
+                        thumbOffsets.y =
+                            ((thumbRect.height - trackRect.height) / 2 + trackPadding.top) * -1;
+                        thumbOffsets.x +=
+                            trackRect.width -
+                                trackRect.width * utils_1.relativeValue(values[index], min, max) -
+                                thumbRect.width / 2;
+                        return thumbOffsets;
+                    case types_1.Direction.Up:
+                        thumbOffsets.x =
+                            ((thumbRect.width - trackRect.width) / 2 +
+                                thumbMargins.left +
+                                trackPadding.left) *
+                                -1;
+                        thumbOffsets.y = -trackPadding.left;
+                        thumbOffsets.y +=
+                            trackRect.height -
+                                trackRect.height * utils_1.relativeValue(values[index], min, max) -
+                                thumbRect.height / 2;
+                        return thumbOffsets;
+                    case types_1.Direction.Down:
+                        thumbOffsets.x =
+                            ((thumbRect.width - trackRect.width) / 2 +
+                                thumbMargins.left +
+                                trackPadding.left) *
+                                -1;
+                        thumbOffsets.y = -trackPadding.left;
+                        thumbOffsets.y +=
+                            trackRect.height * utils_1.relativeValue(values[index], min, max) -
+                                thumbRect.height / 2;
+                        return thumbOffsets;
+                    default:
+                        return utils_1.assertUnreachable(direction);
+                }
+            });
+        };
+        _this.getThumbs = function () {
+            if (_this.trackRef && _this.trackRef.current) {
+                return Array.from(_this.trackRef.current.children).filter(function (el) {
+                    return el.hasAttribute('aria-valuenow');
+                });
+            }
+            console.warn('No thumbs found in the track container. Did you forget to pass & spread the `props` param in renderTrack?');
+            return [];
+        };
+        _this.getTargetIndex = function (e) {
+            return _this.getThumbs().findIndex(function (child) { return child === e.target || child.contains(e.target); });
+        };
+        _this.addTouchEvents = function (e) {
+            document.addEventListener('touchmove', _this.schdOnTouchMove, {
+                passive: false
+            });
+            document.addEventListener('touchend', _this.schdOnEnd, {
+                passive: false
+            });
+            document.addEventListener('touchcancel', _this.schdOnEnd, {
+                passive: false
+            });
+        };
+        _this.addMouseEvents = function (e) {
+            document.addEventListener('mousemove', _this.schdOnMouseMove);
+            document.addEventListener('mouseup', _this.schdOnEnd);
+        };
+        _this.onMouseDownTrack = function (e) {
+            var _a;
+            if (e.button !== 0)
+                return;
+            e.persist();
+            e.preventDefault();
+            _this.addMouseEvents(e.nativeEvent);
+            if (_this.props.values.length > 1 && _this.props.draggableTrack) {
+                if (_this.thumbRefs.some(function (thumbRef) { var _a; return (_a = thumbRef.current) === null || _a === void 0 ? void 0 : _a.contains(e.target); }))
+                    return;
+                // handle dragging the whole track
+                _this.setState({
+                    draggedTrackPos: [e.clientX, e.clientY]
+                }, function () { return _this.onMove(e.clientX, e.clientY); });
+            }
+            else {
+                // get the index of the thumb that is closest to the place where the track is clicked
+                var draggedThumbIndex = utils_1.getClosestThumbIndex(_this.thumbRefs.map(function (t) { return t.current; }), e.clientX, e.clientY, _this.props.direction);
+                // move the thumb which is closest to the place where the track is clicked
+                (_a = _this.thumbRefs[draggedThumbIndex].current) === null || _a === void 0 ? void 0 : _a.focus();
+                _this.setState({
+                    draggedThumbIndex: draggedThumbIndex
+                }, function () { return _this.onMove(e.clientX, e.clientY); });
+            }
+        };
+        _this.onResize = function () {
+            utils_1.translateThumbs(_this.getThumbs(), _this.getOffsets(), _this.props.rtl);
+            _this.calculateMarkOffsets();
+        };
+        _this.onTouchStartTrack = function (e) {
+            var _a;
+            e.persist();
+            _this.addTouchEvents(e.nativeEvent);
+            if (_this.props.values.length > 1 && _this.props.draggableTrack) {
+                if (_this.thumbRefs.some(function (thumbRef) { var _a; return (_a = thumbRef.current) === null || _a === void 0 ? void 0 : _a.contains(e.target); }))
+                    return;
+                // handle dragging the whole track
+                _this.setState({
+                    draggedTrackPos: [e.touches[0].clientX, e.touches[0].clientY]
+                }, function () { return _this.onMove(e.touches[0].clientX, e.touches[0].clientY); });
+            }
+            else {
+                // get the index of the thumb that is closest to the place where the track is clicked
+                var draggedThumbIndex = utils_1.getClosestThumbIndex(_this.thumbRefs.map(function (t) { return t.current; }), e.touches[0].clientX, e.touches[0].clientY, _this.props.direction);
+                // move the thumb which is closest to the place where the track is clicked
+                (_a = _this.thumbRefs[draggedThumbIndex].current) === null || _a === void 0 ? void 0 : _a.focus();
+                _this.setState({
+                    draggedThumbIndex: draggedThumbIndex
+                }, function () { return _this.onMove(e.touches[0].clientX, e.touches[0].clientY); });
+            }
+        };
+        _this.onMouseOrTouchStart = function (e) {
+            if (_this.props.disabled)
+                return;
+            var isTouch = utils_1.isTouchEvent(e);
+            if (!isTouch && e.button !== 0)
+                return;
+            var index = _this.getTargetIndex(e);
+            if (index === -1)
+                return;
+            if (isTouch) {
+                _this.addTouchEvents(e);
+            }
+            else {
+                _this.addMouseEvents(e);
+            }
+            _this.setState({
+                draggedThumbIndex: index,
+                thumbZIndexes: _this.state.thumbZIndexes.map(function (t, i) {
+                    if (i === index) {
+                        return Math.max.apply(Math, _this.state.thumbZIndexes);
+                    }
+                    return t <= _this.state.thumbZIndexes[index] ? t : t - 1;
+                })
+            });
+        };
+        _this.onMouseMove = function (e) {
+            e.preventDefault();
+            _this.onMove(e.clientX, e.clientY);
+        };
+        _this.onTouchMove = function (e) {
+            e.preventDefault();
+            _this.onMove(e.touches[0].clientX, e.touches[0].clientY);
+        };
+        _this.onKeyDown = function (e) {
+            var _a = _this.props, values = _a.values, onChange = _a.onChange, step = _a.step, rtl = _a.rtl;
+            var isChanged = _this.state.isChanged;
+            var index = _this.getTargetIndex(e.nativeEvent);
+            var inverter = rtl ? -1 : 1;
+            if (index === -1)
+                return;
+            if (INCREASE_KEYS.includes(e.key)) {
+                e.preventDefault();
+                _this.setState({
+                    draggedThumbIndex: index,
+                    isChanged: true
+                });
+                onChange(utils_1.replaceAt(values, index, _this.normalizeValue(values[index] + inverter * (e.key === 'PageUp' ? step * 10 : step), index)));
+            }
+            else if (DECREASE_KEYS.includes(e.key)) {
+                e.preventDefault();
+                _this.setState({
+                    draggedThumbIndex: index,
+                    isChanged: true
+                });
+                onChange(utils_1.replaceAt(values, index, _this.normalizeValue(values[index] -
+                    inverter * (e.key === 'PageDown' ? step * 10 : step), index)));
+            }
+            else if (e.key === 'Tab') {
+                _this.setState({ draggedThumbIndex: -1 }, function () {
+                    // If key pressed when thumb was moving, fire onFinalChange
+                    if (isChanged) {
+                        _this.fireOnFinalChange();
+                    }
+                });
+            }
+            else {
+                if (isChanged) {
+                    _this.fireOnFinalChange();
+                }
+            }
+        };
+        _this.onKeyUp = function (e) {
+            var isChanged = _this.state.isChanged;
+            _this.setState({
+                draggedThumbIndex: -1
+            }, function () {
+                if (isChanged) {
+                    _this.fireOnFinalChange();
+                }
+            });
+        };
+        _this.onMove = function (clientX, clientY) {
+            var _a = _this.state, draggedThumbIndex = _a.draggedThumbIndex, draggedTrackPos = _a.draggedTrackPos;
+            var _b = _this.props, direction = _b.direction, min = _b.min, max = _b.max, onChange = _b.onChange, values = _b.values, step = _b.step, rtl = _b.rtl;
+            if (draggedThumbIndex === -1 &&
+                draggedTrackPos[0] === -1 &&
+                draggedTrackPos[1] === -1)
+                return null;
+            var trackElement = _this.trackRef.current;
+            // If component was closed down prematurely, A last onMove could be triggered based on requestAnimationFrame()
+            if (!trackElement)
+                return null;
+            var trackRect = trackElement.getBoundingClientRect();
+            var trackLength = utils_1.isVertical(direction)
+                ? trackRect.height
+                : trackRect.width;
+            if (draggedTrackPos[0] !== -1 && draggedTrackPos[1] !== -1) {
+                // calculate how much it moved since the last update
+                var dX = clientX - draggedTrackPos[0];
+                var dY = clientY - draggedTrackPos[1];
+                // calculate the delta of the value
+                var deltaValue = 0;
+                switch (direction) {
+                    case types_1.Direction.Right:
+                    case types_1.Direction.Left:
+                        deltaValue = (dX / trackLength) * (max - min);
+                        break;
+                    case types_1.Direction.Down:
+                    case types_1.Direction.Up:
+                        deltaValue = (dY / trackLength) * (max - min);
+                        break;
+                    default:
+                        utils_1.assertUnreachable(direction);
+                }
+                // invert for RTL
+                if (rtl) {
+                    deltaValue *= -1;
+                }
+                if (Math.abs(deltaValue) >= step / 2) {
+                    // adjust delta so it fits into the range
+                    for (var i = 0; i < _this.thumbRefs.length; i++) {
+                        if ((values[i] === max && Math.sign(deltaValue) === 1) ||
+                            (values[i] === min && Math.sign(deltaValue) === -1))
+                            return;
+                        var thumbValue = values[i] + deltaValue;
+                        if (thumbValue > max)
+                            deltaValue = max - values[i];
+                        else if (thumbValue < min)
+                            deltaValue = min - values[i];
+                    }
+                    // add the delta to each thumb
+                    var newValues = values.slice(0);
+                    for (var i = 0; i < _this.thumbRefs.length; i++) {
+                        newValues = utils_1.replaceAt(newValues, i, _this.normalizeValue(values[i] + deltaValue, i));
+                    }
+                    _this.setState({
+                        draggedTrackPos: [clientX, clientY]
+                    });
+                    onChange(newValues);
+                }
+            }
+            else {
+                var newValue = 0;
+                switch (direction) {
+                    case types_1.Direction.Right:
+                        newValue =
+                            ((clientX - trackRect.left) / trackLength) * (max - min) + min;
+                        break;
+                    case types_1.Direction.Left:
+                        newValue =
+                            ((trackLength - (clientX - trackRect.left)) / trackLength) *
+                                (max - min) +
+                                min;
+                        break;
+                    case types_1.Direction.Down:
+                        newValue =
+                            ((clientY - trackRect.top) / trackLength) * (max - min) + min;
+                        break;
+                    case types_1.Direction.Up:
+                        newValue =
+                            ((trackLength - (clientY - trackRect.top)) / trackLength) *
+                                (max - min) +
+                                min;
+                        break;
+                    default:
+                        utils_1.assertUnreachable(direction);
+                }
+                // invert for RTL
+                if (rtl) {
+                    newValue = max + min - newValue;
+                }
+                if (Math.abs(values[draggedThumbIndex] - newValue) >= step / 2) {
+                    onChange(utils_1.replaceAt(values, draggedThumbIndex, _this.normalizeValue(newValue, draggedThumbIndex)));
+                }
+            }
+        };
+        _this.normalizeValue = function (value, index) {
+            var _a = _this.props, min = _a.min, max = _a.max, step = _a.step, allowOverlap = _a.allowOverlap, values = _a.values;
+            return utils_1.normalizeValue(value, index, min, max, step, allowOverlap, values);
+        };
+        _this.onEnd = function (e) {
+            e.preventDefault();
+            document.removeEventListener('mousemove', _this.schdOnMouseMove);
+            document.removeEventListener('touchmove', _this.schdOnTouchMove);
+            document.removeEventListener('mouseup', _this.schdOnEnd);
+            document.removeEventListener('touchend', _this.schdOnEnd);
+            document.removeEventListener('touchcancel', _this.schdOnEnd);
+            if (_this.state.draggedThumbIndex === -1 &&
+                _this.state.draggedTrackPos[0] === -1 &&
+                _this.state.draggedTrackPos[1] === -1)
+                return null;
+            _this.setState({ draggedThumbIndex: -1, draggedTrackPos: [-1, -1] }, function () {
+                _this.fireOnFinalChange();
+            });
+        };
+        _this.fireOnFinalChange = function () {
+            _this.setState({ isChanged: false });
+            var _a = _this.props, onFinalChange = _a.onFinalChange, values = _a.values;
+            if (onFinalChange) {
+                onFinalChange(values);
+            }
+        };
+        _this.calculateMarkOffsets = function () {
+            if (!_this.props.renderMark ||
+                !_this.trackRef ||
+                _this.trackRef.current === null)
+                return;
+            var elStyles = window.getComputedStyle(_this.trackRef.current);
+            var trackWidth = parseInt(elStyles.width, 10);
+            var trackHeight = parseInt(elStyles.height, 10);
+            var paddingLeft = parseInt(elStyles.paddingLeft, 10);
+            var paddingTop = parseInt(elStyles.paddingTop, 10);
+            var res = [];
+            for (var i = 0; i < _this.numOfMarks + 1; i++) {
+                var markHeight = 9999;
+                var markWidth = 9999;
+                if (_this.markRefs[i].current) {
+                    var markRect = _this.markRefs[i].current.getBoundingClientRect();
+                    markHeight = markRect.height;
+                    markWidth = markRect.width;
+                }
+                if (_this.props.direction === types_1.Direction.Left ||
+                    _this.props.direction === types_1.Direction.Right) {
+                    res.push([
+                        Math.round((trackWidth / _this.numOfMarks) * i + paddingLeft - markWidth / 2),
+                        -Math.round((markHeight - trackHeight) / 2)
+                    ]);
+                }
+                else {
+                    res.push([
+                        Math.round((trackHeight / _this.numOfMarks) * i + paddingTop - markHeight / 2),
+                        -Math.round((markWidth - trackWidth) / 2)
+                    ]);
+                }
+            }
+            _this.setState({ markOffsets: res });
+        };
+        if (props.step === 0) {
+            throw new Error('"step" property should be a positive number');
+        }
+        _this.numOfMarks = (props.max - props.min) / _this.props.step;
+        _this.schdOnMouseMove = utils_1.schd(_this.onMouseMove);
+        _this.schdOnTouchMove = utils_1.schd(_this.onTouchMove);
+        _this.schdOnEnd = utils_1.schd(_this.onEnd);
+        _this.thumbRefs = props.values.map(function () { return React.createRef(); });
+        for (var i = 0; i < _this.numOfMarks + 1; i++) {
+            _this.markRefs[i] = React.createRef();
+        }
+        return _this;
+    }
+    Range.prototype.componentDidMount = function () {
+        var _this = this;
+        var _a = this.props, values = _a.values, min = _a.min, step = _a.step;
+        this.resizeObserver = window.ResizeObserver
+            ? new window.ResizeObserver(this.onResize)
+            : {
+                observe: function () { return window.addEventListener('resize', _this.onResize); },
+                unobserve: function () { return window.removeEventListener('resize', _this.onResize); }
+            };
+        document.addEventListener('touchstart', this.onMouseOrTouchStart, {
+            passive: false
+        });
+        document.addEventListener('mousedown', this.onMouseOrTouchStart, {
+            passive: false
+        });
+        !this.props.allowOverlap && utils_1.checkInitialOverlap(this.props.values);
+        this.props.values.forEach(function (value) {
+            return utils_1.checkBoundaries(value, _this.props.min, _this.props.max);
+        });
+        this.resizeObserver.observe(this.trackRef.current);
+        utils_1.translateThumbs(this.getThumbs(), this.getOffsets(), this.props.rtl);
+        this.calculateMarkOffsets();
+        values.forEach(function (value) {
+            if (!utils_1.isStepDivisible(min, value, step)) {
+                console.warn('The `values` property is in conflict with the current `step`, `min`, and `max` properties. Please provide values that are accessible using the min, max, and step values.');
+            }
+        });
+    };
+    Range.prototype.componentDidUpdate = function (prevProps, prevState) {
+        var _a = this.props, max = _a.max, min = _a.min, step = _a.step, values = _a.values, rtl = _a.rtl;
+        if (prevProps.max !== max ||
+            prevProps.min !== min ||
+            prevProps.step !== step) {
+            this.markRefs = [];
+            this.numOfMarks = (max - min) / step;
+            for (var i = 0; i < this.numOfMarks + 1; i++) {
+                this.markRefs[i] = React.createRef();
+            }
+        }
+        utils_1.translateThumbs(this.getThumbs(), this.getOffsets(), rtl);
+        // ensure offsets are calculated when the refs for the marks have been created
+        // and those refs have been mounted to the dom
+        // on the state update in calculateOffsets with new markOffsets are calculated
+        if (prevProps.max !== max ||
+            prevProps.min !== min ||
+            prevProps.step !== step ||
+            prevState.markOffsets.length !== this.state.markOffsets.length) {
+            this.calculateMarkOffsets();
+            values.forEach(function (value) {
+                if (!utils_1.isStepDivisible(min, value, step)) {
+                    console.warn('The `values` property is in conflict with the current `step`, `min`, and `max` properties. Please provide values that are accessible using the min, max, and step values.');
+                }
+            });
+        }
+    };
+    Range.prototype.componentWillUnmount = function () {
+        var options = {
+            passive: false
+        };
+        document.removeEventListener('mousedown', this.onMouseOrTouchStart, options);
+        // These need to be removed!!
+        document.removeEventListener('mousemove', this.schdOnMouseMove);
+        document.removeEventListener('touchmove', this.schdOnTouchMove);
+        document.removeEventListener('touchstart', this.onMouseOrTouchStart);
+        document.removeEventListener('mouseup', this.schdOnEnd);
+        document.removeEventListener('touchend', this.schdOnEnd);
+        this.resizeObserver.unobserve(this.trackRef.current);
+    };
+    Range.prototype.render = function () {
+        var _this = this;
+        var _a = this.props, renderTrack = _a.renderTrack, renderThumb = _a.renderThumb, _b = _a.renderMark, renderMark = _b === void 0 ? function () { return null; } : _b, values = _a.values, min = _a.min, max = _a.max, allowOverlap = _a.allowOverlap, disabled = _a.disabled;
+        var _c = this.state, draggedThumbIndex = _c.draggedThumbIndex, thumbZIndexes = _c.thumbZIndexes, markOffsets = _c.markOffsets;
+        return renderTrack({
+            props: {
+                style: {
+                    // creates stacking context that prevents z-index applied to thumbs
+                    // interfere with other elements
+                    transform: 'scale(1)',
+                    cursor: draggedThumbIndex > -1
+                        ? 'grabbing'
+                        : this.props.draggableTrack
+                            ? utils_1.isVertical(this.props.direction)
+                                ? 'ns-resize'
+                                : 'ew-resize'
+                            : values.length === 1 && !disabled
+                                ? 'pointer'
+                                : 'inherit'
+                },
+                onMouseDown: disabled ? utils_1.voidFn : this.onMouseDownTrack,
+                onTouchStart: disabled ? utils_1.voidFn : this.onTouchStartTrack,
+                ref: this.trackRef
+            },
+            isDragged: this.state.draggedThumbIndex > -1,
+            disabled: disabled,
+            children: __spreadArrays(markOffsets.map(function (offset, index, arr) {
+                return renderMark({
+                    props: {
+                        style: _this.props.direction === types_1.Direction.Left ||
+                            _this.props.direction === types_1.Direction.Right
+                            ? {
+                                position: 'absolute',
+                                left: offset[0] + "px",
+                                marginTop: offset[1] + "px"
+                            }
+                            : {
+                                position: 'absolute',
+                                top: offset[0] + "px",
+                                marginLeft: offset[1] + "px"
+                            },
+                        key: "mark" + index,
+                        ref: _this.markRefs[index]
+                    },
+                    index: index
+                });
+            }), values.map(function (value, index) {
+                var isDragged = _this.state.draggedThumbIndex === index;
+                return renderThumb({
+                    index: index,
+                    value: value,
+                    isDragged: isDragged,
+                    props: {
+                        style: {
+                            position: 'absolute',
+                            zIndex: thumbZIndexes[index],
+                            cursor: disabled ? 'inherit' : isDragged ? 'grabbing' : 'grab',
+                            userSelect: 'none',
+                            touchAction: 'none',
+                            WebkitUserSelect: 'none',
+                            MozUserSelect: 'none',
+                            msUserSelect: 'none'
+                        },
+                        key: index,
+                        tabIndex: disabled ? undefined : 0,
+                        'aria-valuemax': allowOverlap ? max : values[index + 1] || max,
+                        'aria-valuemin': allowOverlap ? min : values[index - 1] || min,
+                        'aria-valuenow': value,
+                        draggable: false,
+                        ref: _this.thumbRefs[index],
+                        role: 'slider',
+                        onKeyDown: disabled ? utils_1.voidFn : _this.onKeyDown,
+                        onKeyUp: disabled ? utils_1.voidFn : _this.onKeyUp
+                    }
+                });
+            }))
+        });
+    };
+    Range.defaultProps = {
+        step: 1,
+        direction: types_1.Direction.Right,
+        rtl: false,
+        disabled: false,
+        allowOverlap: false,
+        draggableTrack: false,
+        min: 0,
+        max: 100
+    };
+    return Range;
+}(React.Component));
+exports["default"] = Range;
+
+
+/***/ }),
+
+/***/ "./node_modules/react-range/lib/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/react-range/lib/index.js ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.checkValuesAgainstBoundaries = exports.relativeValue = exports.useThumbOverlap = exports.Direction = exports.getTrackBackground = exports.Range = void 0;
+var Range_1 = __importDefault(__webpack_require__(/*! ./Range */ "./node_modules/react-range/lib/Range.js"));
+exports.Range = Range_1.default;
+var utils_1 = __webpack_require__(/*! ./utils */ "./node_modules/react-range/lib/utils.js");
+Object.defineProperty(exports, "getTrackBackground", ({ enumerable: true, get: function () { return utils_1.getTrackBackground; } }));
+Object.defineProperty(exports, "useThumbOverlap", ({ enumerable: true, get: function () { return utils_1.useThumbOverlap; } }));
+Object.defineProperty(exports, "relativeValue", ({ enumerable: true, get: function () { return utils_1.relativeValue; } }));
+Object.defineProperty(exports, "checkValuesAgainstBoundaries", ({ enumerable: true, get: function () { return utils_1.checkValuesAgainstBoundaries; } }));
+var types_1 = __webpack_require__(/*! ./types */ "./node_modules/react-range/lib/types.js");
+Object.defineProperty(exports, "Direction", ({ enumerable: true, get: function () { return types_1.Direction; } }));
+
+
+/***/ }),
+
+/***/ "./node_modules/react-range/lib/types.js":
+/*!***********************************************!*\
+  !*** ./node_modules/react-range/lib/types.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Direction = void 0;
+var Direction;
+(function (Direction) {
+    Direction["Right"] = "to right";
+    Direction["Left"] = "to left";
+    Direction["Down"] = "to bottom";
+    Direction["Up"] = "to top";
+})(Direction = exports.Direction || (exports.Direction = {}));
+
+
+/***/ }),
+
+/***/ "./node_modules/react-range/lib/utils.js":
+/*!***********************************************!*\
+  !*** ./node_modules/react-range/lib/utils.js ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.useThumbOverlap = exports.assertUnreachable = exports.voidFn = exports.getTrackBackground = exports.replaceAt = exports.schd = exports.translate = exports.getClosestThumbIndex = exports.translateThumbs = exports.getPaddingAndBorder = exports.getMargin = exports.checkInitialOverlap = exports.checkValuesAgainstBoundaries = exports.checkBoundaries = exports.isVertical = exports.relativeValue = exports.normalizeValue = exports.isStepDivisible = exports.isTouchEvent = exports.getStepDecimals = void 0;
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var types_1 = __webpack_require__(/*! ./types */ "./node_modules/react-range/lib/types.js");
+var getStepDecimals = function (step) {
+    var decimals = step.toString().split('.')[1];
+    return decimals ? decimals.length : 0;
+};
+exports.getStepDecimals = getStepDecimals;
+function isTouchEvent(event) {
+    return ((event.touches && event.touches.length) ||
+        (event.changedTouches && event.changedTouches.length));
+}
+exports.isTouchEvent = isTouchEvent;
+function isStepDivisible(min, max, step) {
+    var res = (max - min) / step;
+    var precision = 8;
+    var roundedRes = Number(res.toFixed(precision));
+    return parseInt(roundedRes.toString(), 10) === roundedRes;
+}
+exports.isStepDivisible = isStepDivisible;
+function normalizeValue(value, index, min, max, step, allowOverlap, values) {
+    var BIG_NUM = 10e10;
+    value = Math.round(value * BIG_NUM) / BIG_NUM;
+    if (!allowOverlap) {
+        var prev = values[index - 1];
+        var next = values[index + 1];
+        if (prev && prev > value)
+            return prev;
+        if (next && next < value)
+            return next;
+    }
+    if (value > max)
+        return max;
+    if (value < min)
+        return min;
+    // `remainder` is a difference between the given value and a full step value
+    // that is closest lower to the given value and is in the range between the min value
+    // and the given value
+    var remainder = Math.floor(value * BIG_NUM - min * BIG_NUM) %
+        Math.floor(step * BIG_NUM);
+    var closestLowerNum = Math.floor(value * BIG_NUM - Math.abs(remainder));
+    var rounded = remainder === 0 ? value : closestLowerNum / BIG_NUM;
+    // Values with a remainder `< step/2` are rounded to the closest lower value
+    // while values with a remainder `= > step/2` are rounded to the closest bigger value
+    var res = Math.abs(remainder / BIG_NUM) < step / 2
+        ? rounded
+        : rounded + step;
+    var decimalPlaces = exports.getStepDecimals(step);
+    return parseFloat(res.toFixed(decimalPlaces));
+}
+exports.normalizeValue = normalizeValue;
+function relativeValue(value, min, max) {
+    return (value - min) / (max - min);
+}
+exports.relativeValue = relativeValue;
+function isVertical(direction) {
+    return direction === types_1.Direction.Up || direction === types_1.Direction.Down;
+}
+exports.isVertical = isVertical;
+function checkBoundaries(value, min, max) {
+    if (min >= max) {
+        throw new RangeError("min (" + min + ") is equal/bigger than max (" + max + ")");
+    }
+    if (value < min) {
+        throw new RangeError("value (" + value + ") is smaller than min (" + min + ")");
+    }
+    if (value > max) {
+        throw new RangeError("value (" + value + ") is bigger than max (" + max + ")");
+    }
+}
+exports.checkBoundaries = checkBoundaries;
+function checkValuesAgainstBoundaries(value, min, max) {
+    if (value < min) {
+        // set selectedValue to min
+        return min;
+    }
+    if (value > max) {
+        // set selectedValue to max
+        return max;
+    }
+    else {
+        return value;
+    }
+}
+exports.checkValuesAgainstBoundaries = checkValuesAgainstBoundaries;
+function checkInitialOverlap(values) {
+    if (values.length < 2)
+        return;
+    if (!values.slice(1).every(function (item, i) { return values[i] <= item; })) {
+        throw new RangeError("values={[" + values + "]} needs to be sorted when allowOverlap={false}");
+    }
+}
+exports.checkInitialOverlap = checkInitialOverlap;
+function getMargin(element) {
+    var style = window.getComputedStyle(element);
+    return {
+        top: parseInt(style['margin-top'], 10),
+        bottom: parseInt(style['margin-bottom'], 10),
+        left: parseInt(style['margin-left'], 10),
+        right: parseInt(style['margin-right'], 10)
+    };
+}
+exports.getMargin = getMargin;
+function getPaddingAndBorder(element) {
+    var style = window.getComputedStyle(element);
+    return {
+        top: parseInt(style['padding-top'], 10) + parseInt(style['border-top-width'], 10),
+        bottom: parseInt(style['padding-bottom'], 10) + parseInt(style['border-bottom-width'], 10),
+        left: parseInt(style['padding-left'], 10) + parseInt(style['border-left-width'], 10),
+        right: parseInt(style['padding-right'], 10) + parseInt(style['border-right-width'], 10),
+    };
+}
+exports.getPaddingAndBorder = getPaddingAndBorder;
+function translateThumbs(elements, offsets, rtl) {
+    var inverter = rtl ? -1 : 1;
+    elements.forEach(function (element, index) {
+        return translate(element, inverter * offsets[index].x, offsets[index].y);
+    });
+}
+exports.translateThumbs = translateThumbs;
+/**
+ * Util function for calculating the index of the thumb that is closes to a given position
+ * @param thumbs - array of Thumb element to calculate the distance from
+ * @param clientX - target x position (mouse/touch)
+ * @param clientY - target y position (mouse/touch)
+ * @param direction - the direction of the track
+ */
+function getClosestThumbIndex(thumbs, clientX, clientY, direction) {
+    var thumbIndex = 0;
+    var minThumbDistance = getThumbDistance(thumbs[0], clientX, clientY, direction);
+    for (var i = 1; i < thumbs.length; i++) {
+        var thumbDistance = getThumbDistance(thumbs[i], clientX, clientY, direction);
+        if (thumbDistance < minThumbDistance) {
+            minThumbDistance = thumbDistance;
+            thumbIndex = i;
+        }
+    }
+    return thumbIndex;
+}
+exports.getClosestThumbIndex = getClosestThumbIndex;
+function translate(element, x, y) {
+    element.style.transform = "translate(" + x + "px, " + y + "px)";
+}
+exports.translate = translate;
+// adapted from https://github.com/alexreardon/raf-schd
+var schd = function (fn) {
+    var lastArgs = [];
+    var frameId = null;
+    var wrapperFn = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        lastArgs = args;
+        if (frameId) {
+            return;
+        }
+        frameId = requestAnimationFrame(function () {
+            frameId = null;
+            fn.apply(void 0, lastArgs);
+        });
+    };
+    return wrapperFn;
+};
+exports.schd = schd;
+function replaceAt(values, index, value) {
+    var ret = values.slice(0);
+    ret[index] = value;
+    return ret;
+}
+exports.replaceAt = replaceAt;
+function getTrackBackground(_a) {
+    var values = _a.values, colors = _a.colors, min = _a.min, max = _a.max, _b = _a.direction, direction = _b === void 0 ? types_1.Direction.Right : _b, _c = _a.rtl, rtl = _c === void 0 ? false : _c;
+    if (rtl && direction === types_1.Direction.Right) {
+        direction = types_1.Direction.Left;
+    }
+    else if (rtl && types_1.Direction.Left) {
+        direction = types_1.Direction.Right;
+    }
+    // sort values ascending
+    var progress = values.slice(0).sort(function (a, b) { return a - b; }).map(function (value) { return ((value - min) / (max - min)) * 100; });
+    var middle = progress.reduce(function (acc, point, index) {
+        return acc + ", " + colors[index] + " " + point + "%, " + colors[index + 1] + " " + point + "%";
+    }, '');
+    return "linear-gradient(" + direction + ", " + colors[0] + " 0%" + middle + ", " + colors[colors.length - 1] + " 100%)";
+}
+exports.getTrackBackground = getTrackBackground;
+function voidFn() { }
+exports.voidFn = voidFn;
+function assertUnreachable(x) {
+    throw new Error("Didn't expect to get here");
+}
+exports.assertUnreachable = assertUnreachable;
+/**
+ * Util function for grabbing the true largest width of a thumb
+ * including the label
+ * @param thumbEl - Thumb element to grab the largest width from
+ * @param value - Thumb value, not label value
+ * @param separator - Label separator value
+ */
+var getThumbWidth = function (thumbEl, value, separator, decimalPlaces, valueToLabel) {
+    if (valueToLabel === void 0) { valueToLabel = function (value) { return value; }; }
+    var width = Math.ceil(__spreadArrays([thumbEl], Array.from(thumbEl.children)).reduce(function (width, el) {
+        var elWidth = Math.ceil(el.getBoundingClientRect().width);
+        /**
+         * If a label contains a merged label value, it won't return the true
+         * label width for that Thumb. Clone the label and change the value
+         * to that individual Thumb value in order to grab the true width.
+         */
+        if (el.innerText &&
+            el.innerText.includes(separator) &&
+            el.childElementCount === 0) {
+            var elClone = el.cloneNode(true);
+            elClone.innerHTML = valueToLabel(value.toFixed(decimalPlaces));
+            elClone.style.visibility = 'hidden';
+            document.body.appendChild(elClone);
+            elWidth = Math.ceil(elClone.getBoundingClientRect().width);
+            document.body.removeChild(elClone);
+        }
+        return elWidth > width ? elWidth : width;
+    }, thumbEl.getBoundingClientRect().width));
+    return width;
+};
+/**
+ * Bulk of logic for thumb overlaps
+ * Consider a scenario with 5 thumbs;
+ * Thumb 1 overlaps with thumb 0 and thumb 2
+ * Thumb 2 overlaps with thumb 3
+ * We need an array that contains [0, 1, 2, 3]
+ * The function needs to return the directly overlapping thumbs
+ * and all thumbs overlapping linked to those and so on
+ * @param index - Thumb index calculating overlaps for
+ * @param offsets - Current Array of Thumb offsets for Range
+ * @param thumbs - Array of Thumb elements
+ * @param values - Array of Thumb values
+ * @param separator - String separator for merged label values
+ * @returns overlaps - Array of all overlapping thumbs from the index
+ */
+var getOverlaps = function (index, offsets, thumbs, values, separator, decimalPlaces, valueToLabel) {
+    if (valueToLabel === void 0) { valueToLabel = function (value) { return value; }; }
+    var overlaps = [];
+    /**
+     * Recursive function for building the overlaps Array
+     * If an overlap is found, find the overlaps for that overlap
+     * @param thumbIndex current Thumb index to find overlaps from
+     */
+    var buildOverlaps = function (thumbIndex) {
+        var thumbXWidth = getThumbWidth(thumbs[thumbIndex], values[thumbIndex], separator, decimalPlaces, valueToLabel);
+        var thumbX = offsets[thumbIndex].x;
+        /**
+         * Iterate through the Thumb offsets, if there is a match
+         * add the thumbIndex and siblingIndex to the overlaps Array
+         *
+         * Then build overlaps from the overlapping siblingIndex
+         */
+        offsets.forEach(function (_a, siblingIndex) {
+            var siblingX = _a.x;
+            var siblingWidth = getThumbWidth(thumbs[siblingIndex], values[siblingIndex], separator, decimalPlaces, valueToLabel);
+            if (thumbIndex !== siblingIndex &&
+                ((thumbX >= siblingX && thumbX <= siblingX + siblingWidth) ||
+                    (thumbX + thumbXWidth >= siblingX &&
+                        thumbX + thumbXWidth <= siblingX + siblingWidth))) {
+                if (!overlaps.includes(siblingIndex)) {
+                    overlaps.push(thumbIndex);
+                    overlaps.push(siblingIndex);
+                    overlaps = __spreadArrays(overlaps, [thumbIndex, siblingIndex]);
+                    buildOverlaps(siblingIndex);
+                }
+            }
+        });
+    };
+    buildOverlaps(index);
+    // Sort and remove duplicates from the built overlaps
+    return Array.from(new Set(overlaps.sort()));
+};
+/**
+ * A custom React Hook for calculating whether a thumb overlaps
+ * another and whether labels could/should merge.
+ * @param rangeRef - React ref value of Range component
+ * @param values - current Range values Array
+ * @param index - thumb index
+ * @param step - step value, used to calculate the number of decimal places
+ * @param separator - string to separate thumb values
+ * @returns label value + styling for thumb label
+ */
+var useThumbOverlap = function (rangeRef, values, index, step, separator, valueToLabel) {
+    if (step === void 0) { step = 0.1; }
+    if (separator === void 0) { separator = ' - '; }
+    if (valueToLabel === void 0) { valueToLabel = function (value) { return value; }; }
+    var decimalPlaces = exports.getStepDecimals(step);
+    // Create initial label style and value. Label value defaults to thumb value
+    var _a = react_1.useState({}), labelStyle = _a[0], setLabelStyle = _a[1];
+    var _b = react_1.useState(valueToLabel(values[index].toFixed(decimalPlaces))), labelValue = _b[0], setLabelValue = _b[1];
+    // When the rangeRef or values change, update the Thumb label values and styling
+    react_1.useEffect(function () {
+        if (rangeRef) {
+            var thumbs = rangeRef.getThumbs();
+            if (thumbs.length < 1)
+                return;
+            var newStyle = {};
+            var offsets_1 = rangeRef.getOffsets();
+            /**
+             * Get any overlaps for the given Thumb index. This must return all linked
+             * Thumbs. So if there are 4 Thumbs and Thumbs 2, 3 and 4 overlap. If we are
+             * getting the overlaps for Thumb 1 and it overlaps only Thumb 2, we must get
+             * 2, 3 and 4 also.
+             */
+            var overlaps = getOverlaps(index, offsets_1, thumbs, values, separator, decimalPlaces, valueToLabel);
+            // Set a default label value of the Thumb value
+            var labelValue_1 = valueToLabel(values[index].toFixed(decimalPlaces));
+            /**
+             * If there are overlaps for the Thumb, we need to calculate the correct
+             * Label value along with the relevant styling. We only want to show a Label
+             * for the left most Thumb in an overlapping set.
+             * All other Thumbs will be set to display: none.
+             */
+            if (overlaps.length) {
+                /**
+                 * Get an Array of the offsets for the overlapping Thumbs
+                 * This is so we can determine if the Thumb we are looking at
+                 * is the left most thumb in an overlapping set
+                 */
+                var offsetsX = overlaps.reduce(function (a, c, i, s) {
+                    return a.length ? __spreadArrays(a, [offsets_1[s[i]].x]) : [offsets_1[s[i]].x];
+                }, []);
+                /**
+                 * If our Thumb is the left most Thumb, we can build a Label value
+                 * and set the style for that Label
+                 */
+                if (Math.min.apply(Math, offsetsX) === offsets_1[index].x) {
+                    /**
+                     * First calculate the Label value. To do this,
+                     * grab all the values for the Thumbs in our overlaps.
+                     * Then convert that to a Set and sort it whilst removing duplicates.
+                     */
+                    var labelValues_1 = [];
+                    overlaps.forEach(function (thumb) {
+                        labelValues_1.push(values[thumb].toFixed(decimalPlaces));
+                    });
+                    /**
+                     *  Update the labelValue with the resulting Array
+                     *  joined by our defined separator
+                     */
+                    labelValue_1 = Array.from(new Set(labelValues_1.sort(function (a, b) { return parseFloat(a) - parseFloat(b); })))
+                        .map(valueToLabel)
+                        .join(separator);
+                    /**
+                     * Lastly, build the label styling. The label styling will
+                     * position the label and apply a transform so that it's centered.
+                     * We want the center point between the left edge of the left most Thumb
+                     * and the right edge of the right most Thumb.
+                     */
+                    var first = Math.min.apply(Math, offsetsX);
+                    var last = Math.max.apply(Math, offsetsX);
+                    var lastWidth = thumbs[overlaps[offsetsX.indexOf(last)]].getBoundingClientRect().width;
+                    newStyle.left = Math.abs(first - (last + lastWidth)) / 2 + "px";
+                    newStyle.transform = 'translate(-50%, 0)';
+                }
+                else {
+                    // If the Thumb isn't the left most Thumb, hide the Label!
+                    newStyle.visibility = 'hidden';
+                }
+            }
+            // Update the label value and style
+            setLabelValue(labelValue_1);
+            setLabelStyle(newStyle);
+        }
+    }, [rangeRef, values]);
+    return [labelValue, labelStyle];
+};
+exports.useThumbOverlap = useThumbOverlap;
+/**
+ * Util function for calculating the distance of the center of a thumb
+ * form a given mouse/touch target's position
+ * @param thumbEl - Thumb element to calculate the distance from
+ * @param clientX - target x position (mouse/touch)
+ * @param clientY - target y position (mouse/touch)
+ * @param direction - the direction of the track
+ */
+function getThumbDistance(thumbEl, clientX, clientY, direction) {
+    var _a = thumbEl.getBoundingClientRect(), left = _a.left, top = _a.top, width = _a.width, height = _a.height;
+    return isVertical(direction) ? Math.abs(clientY - (top + height / 2)) : Math.abs(clientX - (left + width / 2));
+}
 
 
 /***/ }),

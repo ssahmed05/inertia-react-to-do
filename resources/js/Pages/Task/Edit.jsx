@@ -128,7 +128,7 @@ const Edit = (props) => {
 
 
                                     <Button className="ml-4" >
-                                        Add Task
+                                        Update
                                     </Button>
                                 </div>
                             </form>

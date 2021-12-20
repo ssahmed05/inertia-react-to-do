@@ -7,12 +7,18 @@ import Pagination from "react-js-pagination"
 import Label from '@/Components/Label'
 import Input from '@/Components/Input'
 import Datepicker from '@/Components/Datepicker'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { Range, getTrackBackground } from "react-range";
+const STEP = 0.1;
+const MIN = 0;
+const MAX = 100;
 
 const List = (props) => {
 
     const { taskGroup } = props;
+    const [state, setState ] = useState({ values : [50]});
+
     const [kaam, setKaam] = useState({
         taskList: "",
     })
@@ -109,8 +115,6 @@ const List = (props) => {
     }
 
     useEffect(() => {
-
-
         fetchData();
         return () => {
             setKaam.current = false;
@@ -252,15 +256,15 @@ const List = (props) => {
                                                     Explanation
                                                 </th>
 
-                                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider">
+                                                {/* <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider">
                                                     Progress
-                                                </th>
+                                                </th> */}
                                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercas border border-gray-300 tracking-wider">
-                                                    Start Date - End Date
+                                                    Date
                                                 </th>
 
                                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider">
-                                                    Date Of complete
+                                                    Progress
                                                 </th>
                                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 text-right uppercase border border-gray-300 tracking-wider">
                                                     Action
@@ -295,7 +299,7 @@ const List = (props) => {
                                                             return (
 
                                                                 <tr key={record.id}>
-                                                                    <td className="px-6 py-4 whitespace-nowrap">
+                                                                    <td className="px-6 py-4">
                                                                         <div className="flex items-center">
 
                                                                             <div className="ml-4">
@@ -306,21 +310,105 @@ const List = (props) => {
                                                                             </div>
                                                                         </div>
                                                                     </td>
-                                                                    <td className="px-6 py-4 whitespace-nowrap">
+                                                                    <td className="px-6 py-4">
                                                                         <div className="text-sm text-gray-900"> {record.explaination}</div>
                                                                     </td>
-                                                                    <td className="px-6 py-4 whitespace-nowrap">
+                                                                    {/* <td className="px-6 py-4">
                                                                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                                                             {record.status}
                                                                         </span>
+                                                                    </td> */}
+                                                                    <td className="px-6 py-4 text-sm text-gray-500">
+                                                                        <div className="basis-full">
+                                                                            <label className='font-bold' htmlFor="">Start Date : </label> <span>{new Date(record.date_of_assign).toLocaleDateString()}</span>
+                                                                        </div>
+                                                                        <div className="basis-full">
+                                                                            <label className='font-bold' htmlFor="">Deadline : </label> <span>{new Date(record.deadline).toLocaleDateString()}</span>
+
+                                                                        </div>
+                                                                        <div className="basis-full">
+                                                                            <label className='font-bold' htmlFor="">Status : </label> <span>
+                                                                                {record.date_of_complete == null ?
+
+                                                                                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                                                        {record.status}
+                                                                                    </span>
+                                                                                    :
+                                                                                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                                                        {record.status + " (" + new Date(record.date_of_complete).toLocaleDateString() + " )"}
+                                                                                    </span>
+                                                                                }
+                                                                            </span>
+
+                                                                        </div>
                                                                     </td>
-                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                        {new Date(record.date_of_assign).toLocaleDateString()} - {new Date(record.deadline).toLocaleDateString()}
+                                                                    <td>
+                                                                        <Range
+                                                                            values={state.values}
+                                                                            step={STEP}
+                                                                            min={MIN}
+                                                                            max={MAX}
+                                                                            onChange={(values) => setState({ values })}
+                                                                            renderTrack={({ props, children }) => (
+                                                                                <div
+                                                                                    onMouseDown={props.onMouseDown}
+                                                                                    onTouchStart={props.onTouchStart}
+                                                                                    style={{
+                                                                                        ...props.style,
+                                                                                        height: "36px",
+                                                                                        display: "flex",
+                                                                                        width: "100%"
+                                                                                    }}
+                                                                                >
+                                                                                    <div
+                                                                                        ref={props.ref}
+                                                                                        style={{
+                                                                                            height: "5px",
+                                                                                            width: "100%",
+                                                                                            borderRadius: "4px",
+                                                                                            background: getTrackBackground({
+                                                                                                values: state.values,
+                                                                                                colors: ["#548BF4", "#ccc"],
+                                                                                                min: MIN,
+                                                                                                max: MAX
+                                                                                            }),
+                                                                                            alignSelf: "center"
+                                                                                        }}
+                                                                                    >
+                                                                                        {children}
+                                                                                    </div>
+                                                                                </div>
+                                                                            )}
+                                                                            renderThumb={({ props, isDragged }) => (
+                                                                                <div
+                                                                                    {...props}
+                                                                                    style={{
+                                                                                        ...props.style,
+                                                                                        height: "42px",
+                                                                                        width: "42px",
+                                                                                        borderRadius: "4px",
+                                                                                        backgroundColor: "#FFF",
+                                                                                        display: "flex",
+                                                                                        justifyContent: "center",
+                                                                                        alignItems: "center",
+                                                                                        boxShadow: "0px 2px 6px #AAA"
+                                                                                    }}
+                                                                                >
+                                                                                    <div
+                                                                                        style={{
+                                                                                            height: "16px",
+                                                                                            width: "5px",
+                                                                                            backgroundColor: isDragged ? "#548BF4" : "#CCC"
+                                                                                        }}
+                                                                                    />
+                                                                                </div>
+                                                                            )}
+                                                                        />
+                                                                        <output style={{ marginTop: "30px" }} id="output">
+                                                                            {state.values[0].toFixed(1)}
+                                                                        </output>
                                                                     </td>
 
-                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                                        {record.date_of_complete == null ? "Not Completed" : new Date(record.date_of_complete).toLocaleDateString()}
-                                                                    </td>
                                                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                                         <InertiaLink href={route('task.edit', record.id)} className="font-bold text-indigo-400 hover:text-indigo-900">Edit</InertiaLink> &nbsp;
                                                                         <a href="#" onClick={() => { deleteTask(record.id) }} className="font-bold text-red-400 hover:text-red-700">Delete</a>
