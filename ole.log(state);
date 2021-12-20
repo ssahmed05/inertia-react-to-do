@@ -1,0 +1,65 @@
+[33mcommit c7ff9a4b99b0aa5ad805ff359a789ecdf523359c[m[33m ([m[1;36mHEAD -> [m[1;32mMain[m[33m, [m[1;31morigin/Main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Sharique <syedshariq05@gmail.com>
+Date:   Mon Dec 20 11:48:43 2021 +0500
+
+    Slider added but still bugs left
+
+[33mcommit 6eb4accaa92a9e2611748429ef0deea0960bb488[m
+Author: Sharique <syedshariq05@gmail.com>
+Date:   Sun Dec 19 21:41:40 2021 +0500
+
+    update completed
+
+[33mcommit aa2ff952d84c8ef5e122aeeece7939b0e9a231ec[m
+Author: Sharique <syedshariq05@gmail.com>
+Date:   Sun Dec 19 12:58:26 2021 +0500
+
+    Removed Status from insert form at task add
+
+[33mcommit 287ecd3d0aa57149a87d46a346ce2679b6a82be6[m
+Author: Sharique <syedshariq05@gmail.com>
+Date:   Sat Dec 18 19:33:33 2021 +0500
+
+    Form bugs resolved
+
+[33mcommit e7ff291485c9f698545ccc450899b8aa7adaaa46[m
+Author: Sharique <syedshariq05@gmail.com>
+Date:   Thu Dec 16 21:48:26 2021 +0500
+
+    Task -- Textarea reset error resolved
+
+[33mcommit 3e11754a7e0045cb51c9b891befb221c55c45c3e[m
+Author: Sharique <syedshariq05@gmail.com>
+Date:   Wed Dec 15 20:33:15 2021 +0500
+
+    Add Show Hide form and style changes
+
+[33mcommit 36749960496a14246b26afbb1089470da1b69824[m
+Author: Sharique <syedshariq05@gmail.com>
+Date:   Wed Dec 15 16:56:14 2021 +0500
+
+    database modification, rename files to jsx, task module added, datepicker added
+
+[33mcommit f2e583f6967fdd4818625d847b68b8e310546ad2[m
+Author: Sharique <syedshariq05@gmail.com>
+Date:   Tue Dec 14 14:09:35 2021 +0500
+
+    Pagination added
+
+[33mcommit 914a44369dbe26f693f971c3d23ab68033480b60[m
+Author: Sharique <syedshariq05@gmail.com>
+Date:   Mon Dec 13 18:00:39 2021 +0500
+
+    task group insert done
+
+[33mcommit 65a3109df6d950f6f7f36722f44562e03adddcec[m
+Author: Sharique <syedshariq05@gmail.com>
+Date:   Mon Dec 13 11:09:36 2021 +0500
+
+    breeze with inertia react installed
+
+[33mcommit ba801d6c3bb6aadaecf69341d6b8237d5293038e[m
+Author: Sharique <syedshariq05@gmail.com>
+Date:   Mon Dec 13 11:00:48 2021 +0500
+
+    laravel installed
