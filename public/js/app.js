@@ -5309,7 +5309,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var STEP = 0.1;
+var STEP = 1;
 var MIN = 0;
 var MAX = 100;
 
@@ -5319,11 +5319,20 @@ var List = function List(props) {
   var taskGroup = props.taskGroup;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({
-    values: [50]
+    values: [0],
+    row: [1]
   }),
       _useState2 = _slicedToArray(_useState, 2),
       state = _useState2[0],
       setState = _useState2[1];
+
+  var onRangeValueChange = function onRangeValueChange(val, id) {
+    setState({
+      values: val,
+      row: id
+    });
+    console.log(state);
+  };
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({
     taskList: ""
@@ -5710,10 +5719,8 @@ var List = function List(props) {
                             step: STEP,
                             min: MIN,
                             max: MAX,
-                            onChange: function onChange(values) {
-                              return setState({
-                                values: values
-                              });
+                            onChange: function onChange(s) {
+                              onRangeValueChange(s, record.id);
                             },
                             renderTrack: function renderTrack(_ref2) {
                               var props = _ref2.props,
@@ -5749,9 +5756,9 @@ var List = function List(props) {
                                   isDragged = _ref3.isDragged;
                               return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", _objectSpread(_objectSpread({}, props), {}, {
                                 style: _objectSpread(_objectSpread({}, props.style), {}, {
-                                  height: "42px",
-                                  width: "42px",
-                                  borderRadius: "4px",
+                                  height: "22px",
+                                  width: "22px",
+                                  borderRadius: "10px",
                                   backgroundColor: "#FFF",
                                   display: "flex",
                                   justifyContent: "center",

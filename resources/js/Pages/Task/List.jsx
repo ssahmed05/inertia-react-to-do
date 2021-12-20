@@ -10,14 +10,21 @@ import Datepicker from '@/Components/Datepicker'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Range, getTrackBackground } from "react-range";
-const STEP = 0.1;
+
+const STEP = 1;
 const MIN = 0;
 const MAX = 100;
 
 const List = (props) => {
 
     const { taskGroup } = props;
-    const [state, setState ] = useState({ values : [50]});
+    const [state, setState ] = useState({
+        values :[0] , row : [1]});
+    const onRangeValueChange = (val, id) => {
+        setState({ values : val, row: id });
+        console.log(state);
+
+    }
 
     const [kaam, setKaam] = useState({
         taskList: "",
@@ -348,7 +355,7 @@ const List = (props) => {
                                                                             step={STEP}
                                                                             min={MIN}
                                                                             max={MAX}
-                                                                            onChange={(values) => setState({ values })}
+                                                                            onChange={(s)=> {onRangeValueChange(s, record.id); }}
                                                                             renderTrack={({ props, children }) => (
                                                                                 <div
                                                                                     onMouseDown={props.onMouseDown}
@@ -359,6 +366,7 @@ const List = (props) => {
                                                                                         display: "flex",
                                                                                         width: "100%"
                                                                                     }}
+
                                                                                 >
                                                                                     <div
                                                                                         ref={props.ref}
@@ -384,15 +392,16 @@ const List = (props) => {
                                                                                     {...props}
                                                                                     style={{
                                                                                         ...props.style,
-                                                                                        height: "42px",
-                                                                                        width: "42px",
-                                                                                        borderRadius: "4px",
+                                                                                        height: "22px",
+                                                                                        width: "22px",
+                                                                                        borderRadius: "10px",
                                                                                         backgroundColor: "#FFF",
                                                                                         display: "flex",
                                                                                         justifyContent: "center",
                                                                                         alignItems: "center",
                                                                                         boxShadow: "0px 2px 6px #AAA"
                                                                                     }}
+
                                                                                 >
                                                                                     <div
                                                                                         style={{
