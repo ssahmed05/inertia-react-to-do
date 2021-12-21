@@ -9,22 +9,10 @@ import Input from '@/Components/Input'
 import Datepicker from '@/Components/Datepicker'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { Range, getTrackBackground } from "react-range";
-
-const STEP = 1;
-const MIN = 0;
-const MAX = 100;
 
 const List = (props) => {
 
     const { taskGroup } = props;
-    const [state, setState ] = useState({
-        values :[0] , row : [1]});
-    const onRangeValueChange = (val, id) => {
-        setState({ values : val, row: id });
-        console.log(state);
-
-    }
 
     const [kaam, setKaam] = useState({
         taskList: "",
@@ -120,7 +108,6 @@ const List = (props) => {
 
         });
     }
-
     useEffect(() => {
         fetchData();
         return () => {
@@ -305,7 +292,7 @@ const List = (props) => {
 
                                                             return (
 
-                                                                <tr key={record.id}>
+                                                                <tr key={record.id} className=' bg-white-50  hover:bg-indigo-50 '>
                                                                     <td className="px-6 py-4">
                                                                         <div className="flex items-center">
 
@@ -320,11 +307,7 @@ const List = (props) => {
                                                                     <td className="px-6 py-4">
                                                                         <div className="text-sm text-gray-900"> {record.explaination}</div>
                                                                     </td>
-                                                                    {/* <td className="px-6 py-4">
-                                                                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                                            {record.status}
-                                                                        </span>
-                                                                    </td> */}
+
                                                                     <td className="px-6 py-4 text-sm text-gray-500">
                                                                         <div className="basis-full">
                                                                             <label className='font-bold' htmlFor="">Start Date : </label> <span>{new Date(record.date_of_assign).toLocaleDateString()}</span>
@@ -349,73 +332,20 @@ const List = (props) => {
 
                                                                         </div>
                                                                     </td>
-                                                                    <td>
-                                                                        <Range
-                                                                            values={state.values}
-                                                                            step={STEP}
-                                                                            min={MIN}
-                                                                            max={MAX}
-                                                                            onChange={(s)=> {onRangeValueChange(s, record.id); }}
-                                                                            renderTrack={({ props, children }) => (
-                                                                                <div
-                                                                                    onMouseDown={props.onMouseDown}
-                                                                                    onTouchStart={props.onTouchStart}
-                                                                                    style={{
-                                                                                        ...props.style,
-                                                                                        height: "36px",
-                                                                                        display: "flex",
-                                                                                        width: "100%"
-                                                                                    }}
+                                                                    <td className=''>
+                                                                        {/* <input
+                                                                            type="range"
+                                                                            min="0"
+                                                                            max="100"
+                                                                            step={1}
+                                                                            defaultValue={0}
+                                                                            className='w-full h-0.5 bg-gray-400 rounded outline-none slider-thumb' name="slider"
+                                                                            onChange={(r) => console.log(r)}
+                                                                        /> */}
+                                                                        <span className="text-lg font-semibold inline-block align-middle py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200 uppercase text-center">
+                                                                           indigo
+                                                                        </span>
 
-                                                                                >
-                                                                                    <div
-                                                                                        ref={props.ref}
-                                                                                        style={{
-                                                                                            height: "5px",
-                                                                                            width: "100%",
-                                                                                            borderRadius: "4px",
-                                                                                            background: getTrackBackground({
-                                                                                                values: state.values,
-                                                                                                colors: ["#548BF4", "#ccc"],
-                                                                                                min: MIN,
-                                                                                                max: MAX
-                                                                                            }),
-                                                                                            alignSelf: "center"
-                                                                                        }}
-                                                                                    >
-                                                                                        {children}
-                                                                                    </div>
-                                                                                </div>
-                                                                            )}
-                                                                            renderThumb={({ props, isDragged }) => (
-                                                                                <div
-                                                                                    {...props}
-                                                                                    style={{
-                                                                                        ...props.style,
-                                                                                        height: "22px",
-                                                                                        width: "22px",
-                                                                                        borderRadius: "10px",
-                                                                                        backgroundColor: "#FFF",
-                                                                                        display: "flex",
-                                                                                        justifyContent: "center",
-                                                                                        alignItems: "center",
-                                                                                        boxShadow: "0px 2px 6px #AAA"
-                                                                                    }}
-
-                                                                                >
-                                                                                    <div
-                                                                                        style={{
-                                                                                            height: "16px",
-                                                                                            width: "5px",
-                                                                                            backgroundColor: isDragged ? "#548BF4" : "#CCC"
-                                                                                        }}
-                                                                                    />
-                                                                                </div>
-                                                                            )}
-                                                                        />
-                                                                        <output style={{ marginTop: "30px" }} id="output">
-                                                                            {state.values[0].toFixed(1)}
-                                                                        </output>
                                                                     </td>
 
                                                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

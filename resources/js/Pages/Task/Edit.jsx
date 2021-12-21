@@ -54,7 +54,7 @@ const Edit = (props) => {
         return () => {
             setData(false) ;
         }
-    },[])
+    })
 
 
     return (
