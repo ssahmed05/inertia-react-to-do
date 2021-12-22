@@ -8,33 +8,42 @@ import Datepicker from '@/Components/Datepicker'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Edit = (props) => {
 
-    const { task } = props;
-
+const Add = (props) => {
+    // console.log(props);
+    // Init form
 
     const { data, errors, setData, post } = useForm({
-        task: task.task,
-        taskGroupId: task.task_group_id,
-        explanation: task.explaination,
-        deadline: task.deadline,
-        date_of_assign: task.date_of_assign,
+        taskGroupId: props.taskGroup.id,
+        task: '',
+        explanation: '',
+        deadline: '',
+        date_of_assign: '',
+        created_by: props.auth.user.name,
     });
 
+    // Change form value change handler
 
     const onHandleChange = (e) => {
-        setData(e.target.name, e.target.value);
-    }
-    const submit = (e) => {
-        e.preventDefault();
-        post(route('task.update', task.id), {
-            preserveScroll: true,
-            onError: (e) => {
-                console.log(e);
-            },
-            onSuccess: (e) => {
 
-                toast.success('Task Updated!', {
+        setData(e.target.name, e.target.value);
+
+    }
+
+    // Submit form
+
+    const submit = (e) => {
+
+        e.preventDefault();
+
+        post(route('task.store'), {
+            preserveScroll: true,
+            onError: (e) => console.log(e),
+            onSuccess: () => {
+
+                // reset();
+
+                toast.success('Task Added!', {
                     position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -44,26 +53,37 @@ const Edit = (props) => {
                     progress: undefined,
                     theme: 'colored'
                 });
+
+                // document.getElementById('textAreaAzab').value = ""; //there was no other way :(
+
+
             }
         });
+
     }
-    useEffect(() => {
-
-        return () => {
-            setData.current = false ;
-        }
-    })
-
 
     return (
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Edit Task "<span className='font-bold'>{task.task}</span>"</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Add Task "<span className='font-bold'>{props.taskGroup.name}</span>"</h2>}
         >
-            <Head title="Task Edit" />
-            <ToastContainer/>
+            <Head title="Task Add" />
+
+            <ToastContainer />
+
             <div className="py-12">
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div className="overflow-hidden shadow-lg">
+                        <div className="bg-indigo-700 text-white p-6 border-b border-gray-200">
+                            <label htmlFor="">Add Task</label>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
                 <div className="max-w-7xl mb-2 mx-auto sm:px-6 lg:px-8">
                     <div className="overflow-hidden shadow-lg">
                         <div className="bg-white p-6 border-b border-gray-200">
@@ -102,7 +122,7 @@ const Edit = (props) => {
                                         <Label forInput="assign_date" value="Assign Date" />
                                         <Datepicker
                                             name='date_of_assign'
-                                            selected={new Date(task.date_of_assign)}
+                                            selected={""}
                                             handleChange={(date) => setData('date_of_assign', date?.format?.('DD-MM-YYYY'))}
 
                                         />
@@ -112,7 +132,7 @@ const Edit = (props) => {
                                         <Label forInput="workEnd" value="DeadLine" />
                                         <Datepicker
                                             name='deadline'
-                                            selected={new Date(task.deadline)}
+                                            selected={""}
                                             handleChange={(endDate) => setData('deadline', endDate?.format?.("DD-MM-YYYY"))}
 
                                         />
@@ -126,7 +146,7 @@ const Edit = (props) => {
 
 
                                     <Button className="ml-4" >
-                                        Update
+                                        Add Task
                                     </Button>
                                 </div>
                             </form>
@@ -140,4 +160,4 @@ const Edit = (props) => {
     )
 }
 
-export default Edit
+export default Add

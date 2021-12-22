@@ -2,85 +2,46 @@ import Authenticated from '@/Layouts/Authenticated'
 import React, { useEffect, useState } from 'react'
 import { Head, InertiaLink, useForm } from '@inertiajs/inertia-react'
 import { Inertia } from '@inertiajs/inertia'
-import Button from '@/Components/Button'
 import Pagination from "react-js-pagination"
-import Label from '@/Components/Label'
-import Input from '@/Components/Input'
-import Datepicker from '@/Components/Datepicker'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import Modal from '@/Components/Modal'
 
 const List = (props) => {
 
-    const { taskGroup } = props;
-
     const [kaam, setKaam] = useState({
-        taskList: "",
+        taskList: false,
     })
 
     const fetchData = async (pageNumber = 1) => {
-
         const api = await fetch(`/Task-List/${props.id}?page=${pageNumber}`);
         setKaam({
             taskList: await api.json()
         });
-    }
-
-    // Add Task
-
-    const initState = {
-        taskGroupId: taskGroup.id,
-        task: '',
-        explanation: '',
-        deadline: '',
-        date_of_assign: '',
-        created_by: props.auth.user.name,
-    }
-
-    const { data, errors, setData, reset, post } = useForm(initState);
-
-    const [show, setShow] = useState(Object.keys(errors).length == 0 ? false : true);
-    const visibleHandle = () => show == false ? setShow(true) : setShow(false);
-    const onHandleChange = (e) => {
-
-        setData(e.target.name, e.target.value);
 
     }
 
-
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route('task.store'), {
-
-            preserveScroll: true,
-            onError: (e) => {
-                console.log(e);
-            },
-
-            onSuccess: () => {
-
-                reset();
-
-                toast.success('Task Added!', {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: 'colored'
-                });
-                document.getElementById('textAreaAzab').value = ""; //there was no other way :(
-                fetchData();
-            }
-
+    const [showModel, setShowModel] = useState({ id: 0 });
+    const handleShowModal = (e) => {
+        setShowModel({
+            id: [e.target.id]
         });
-
-
     }
 
+    const [progressBar, setProgressBar] = useState({
+        id : [],
+        proVal: []
+    });
+
+    const onProgressHandler = (id, value) => {
+
+        setProgressBar({
+            id: [...progressBar.id, id],
+            proVal: [...progressBar.value, value]
+        });
+        // useForm.post()
+        console.log(progressBar);
+    }
     // Delete Task
     function deleteTask(id) {
 
@@ -102,20 +63,24 @@ const List = (props) => {
                     progress: undefined,
                     theme: 'colored'
                 });
-                fetchData();
-
             }
 
         });
     }
+
     useEffect(() => {
-        fetchData();
+
+        let letMyDataLoad = true;
+
+        if (letMyDataLoad) {
+
+            fetchData();
+        }
+
         return () => {
             setKaam.current = false;
-            setShow.current = false;
-            setData.current = false;
-
-
+            setShowModel.current = false;
+            letMyDataLoad = false;
         }
 
     })
@@ -125,111 +90,25 @@ const List = (props) => {
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Task(s) for <span className='font-bold'>{taskGroup.name}</span></h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Task(s) for <span className='font-bold'>{props.taskGroup.name}</span></h2>}
         >
             <Head title="Task" />
             {/* Alert */}
+
             <ToastContainer />
+
             {/* Alert End */}
             <div className="py-12">
 
-
-                {/* Add Task */}
-
-                {show ?
-                    <>
-                        {
-
-                            <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                                <div className="overflow-hidden shadow-lg">
-                                    <div className="bg-indigo-700 text-white p-6 border-b border-gray-200">
-                                        <label htmlFor="">Add Task</label>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        }
-
-                        <div className="max-w-7xl mb-2 mx-auto sm:px-6 lg:px-8">
-                            <div className="overflow-hidden shadow-lg">
-                                <div className="bg-white p-6 border-b border-gray-200">
-                                    <form onSubmit={submit}>
-                                        <div>
-                                            <Label forInput="task" value="Task" />
-
-                                            <Input
-                                                type="text"
-                                                name="task"
-                                                value={data.task}
-                                                className="mt-1 block w-full"
-                                                autoComplete="task"
-                                                handleChange={onHandleChange}
-
-                                            />
-                                            <span className='text-red-500'>{errors.task}</span>
-                                        </div>
-
-                                        <div className='mt-4'>
-                                            <Label forInput="explanation" value="Explanation" />
-                                            <textarea
-                                                className="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm resize rounded-md mt-1 block w-full"
-                                                type="text"
-                                                name="explanation"
-                                                defaultValue={data.explanation}
-                                                id='textAreaAzab'
-                                                autoComplete="task"
-                                                onChange={onHandleChange}
-                                            />
-                                            <span className='text-red-500'>{errors.explanation}</span>
-                                        </div>
-                                        <div className="grid grid-cols-2 gap-4">
-
-                                            <div className='mt-4'>
-                                                <Label forInput="assign_date" value="Assign Date" />
-                                                <Datepicker
-                                                    name='date_of_assign'
-                                                    selected={new Date()}
-                                                    handleChange={(date) => setData('date_of_assign', date?.format?.('DD-MM-YYYY'))}
-
-                                                />
-                                                <span className='text-red-500'>{errors.date_of_assign}</span>
-                                            </div>
-                                            <div className='mt-4'>
-                                                <Label forInput="workEnd" value="DeadLine" />
-                                                <Datepicker
-                                                    name='deadline'
-                                                    selected={new Date()}
-                                                    handleChange={(endDate) => setData('deadline', endDate?.format?.("DD-MM-YYYY"))}
-
-                                                />
-                                                <span className='text-red-500'>{errors.deadline}</span>
-                                            </div>
-
-
-                                        </div>
-
-                                        <div className="flex items-center justify-end mt-4">
-
-
-                                            <Button className="ml-4" >
-                                                Add Task
-                                            </Button>
-                                        </div>
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                    </>
-                    : null}
 
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="overflow-hidden shadow-lg sm:rounded-lg">
                         <div className="bg-indigo-700 text-white p-6 border-b border-gray-200">
                             <label htmlFor="">List Of Task</label>
-                            <button onClick={visibleHandle} className='float-right inline-flex items-center px-4 py-2 bg-indigo-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest active:bg-gray-900 transition ease-in-out duration-150' style={{ marginTop: "-5px" }}>Add</button>
+                            <InertiaLink href={route('task.add', props.taskGroup.id)}
+                                className='float-right inline-flex items-center px-4 py-2 bg-indigo-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest active:bg-gray-900 transition ease-in-out duration-150' style={{ marginTop: "-5px" }}>
+                                Add
+                            </InertiaLink>
                         </div>
 
                     </div>
@@ -249,10 +128,6 @@ const List = (props) => {
                                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider">
                                                     Explanation
                                                 </th>
-
-                                                {/* <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider">
-                                                    Progress
-                                                </th> */}
                                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercas border border-gray-300 tracking-wider">
                                                     Date
                                                 </th>
@@ -332,23 +207,60 @@ const List = (props) => {
 
                                                                         </div>
                                                                     </td>
-                                                                    <td className=''>
-                                                                        {/* <input
-                                                                            type="range"
-                                                                            min="0"
-                                                                            max="100"
-                                                                            step={1}
-                                                                            defaultValue={0}
-                                                                            className='w-full h-0.5 bg-gray-400 rounded outline-none slider-thumb' name="slider"
-                                                                            onChange={(r) => console.log(r)}
-                                                                        /> */}
-                                                                        <span className="text-lg font-semibold inline-block align-middle py-1 px-2 uppercase rounded-full text-indigo-600 bg-indigo-200 uppercase text-center">
-                                                                           indigo
-                                                                        </span>
+                                                                    <td className='px-6 py-4'>
+
+                                                                        {record.status == "Pending" ?
+                                                                            <>
+                                                                                <button onClick={(e) => handleShowModal(e)} id={record.id} className={"bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-2 rounded-full"}>
+                                                                                    {record.status}
+                                                                                </button>
+                                                                                {showModel.id == record.id &&
+                                                                                    <Modal show={showModel} onClose={setShowModel} title={"Set progress for Task : " + record.task} >
+                                                                                        <input
+                                                                                            id={record.id}
+                                                                                            type="range"
+                                                                                            min="0"
+                                                                                            max="100"
+                                                                                            step={1}
+                                                                                            defaultValue={progressBar.id == record.id ? record.status : 0}
+                                                                                            className='w-full h-0.5 bg-gray-400 rounded outline-none slider-thumb' name="slider"
+                                                                                            onChange={(r) => onProgressHandler(r.target.id, r.target.value)}
+                                                                                        />
+                                                                                        <div className="text-center">
+
+                                                                                            <span>{progressBar.id == record.id ? progressBar.proVal : "0"}%</span>
+
+                                                                                        </div>
+                                                                                    </Modal>
+                                                                                }
+                                                                            </>
+                                                                            :
+                                                                            <>
+                                                                                <button onClick={(e) => handleShowModal(e)} id={record.id} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full">
+                                                                                    {record.status}
+                                                                                </button>
+                                                                                {showModel.id == record.id &&
+                                                                                    <Modal show={showModel} onClose={setShowModel} title={"Set progress for Task" + record.task} >
+                                                                                        <input
+                                                                                            type="range"
+                                                                                            min="0"
+                                                                                            max="100"
+                                                                                            step={1}
+                                                                                            defaultValue={0}
+                                                                                            className='w-full h-0.5 bg-gray-400 rounded outline-none slider-thumb' name="slider"
+                                                                                            onChange={(r) => console.log(r)}
+                                                                                        />
+                                                                                    </Modal>
+                                                                                }
+                                                                            </>
+
+
+                                                                        }
 
                                                                     </td>
 
                                                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+
                                                                         <InertiaLink href={route('task.edit', record.id)} className="font-bold text-indigo-400 hover:text-indigo-900">Edit</InertiaLink> &nbsp;
                                                                         <a href="#" onClick={() => { deleteTask(record.id) }} className="font-bold text-red-400 hover:text-red-700">Delete</a>
                                                                     </td>
@@ -409,10 +321,7 @@ const List = (props) => {
 
                 {/* Task List End */}
 
-
             </div>
-
-
 
         </Authenticated>
 

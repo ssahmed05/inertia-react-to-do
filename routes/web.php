@@ -32,16 +32,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/Task-Group', [App\Http\Controllers\TaskGroupController::class, 'index'])->name('task.group.list');
     Route::get('/Task-Group-List', [App\Http\Controllers\TaskGroupController::class, 'taskGroupList']);
+
     Route::get('/Task-Group-Add', [App\Http\Controllers\TaskGroupController::class, 'create'])->name('task.group.add');
     Route::post('/Task-Group-Add', [App\Http\Controllers\TaskGroupController::class, 'store'])->name('task.group.store');
 
     Route::get('/Task/{id}', [App\Http\Controllers\TaskController::class, 'index'])->name('task.list');
     Route::get('/Task-List/{id}', [App\Http\Controllers\TaskController::class, 'taskList']);
+
+    Route::get('/Task-Add/{id}', [App\Http\Controllers\TaskController::class, 'create'])->name('task.add');
     Route::post('/Task-Add', [App\Http\Controllers\TaskController::class, 'store'])->name('task.store');
-    Route::delete('/Task-Delete/{id}', [App\Http\Controllers\TaskController::class, 'destroy'])->name('task.delete');
+
     Route::get('/Task-Edit/{id}', [App\Http\Controllers\TaskController::class, 'edit'])->name('task.edit');
     Route::post('/Task-Edit/{id}', [App\Http\Controllers\TaskController::class, 'update'])->name('task.update');
 
+    Route::delete('/Task-Delete/{id}', [App\Http\Controllers\TaskController::class, 'destroy'])->name('task.delete');
 
 });
 
