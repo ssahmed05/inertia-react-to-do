@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use App\Models\TaskGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -100,8 +101,13 @@ class TaskGroupController extends Controller
      * @param  \App\Models\TaskGroup  $taskGroup
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TaskGroup $taskGroup)
+    public function destroy($id)
     {
-        //
+        $taskGroup = TaskGroup::find($id);
+        $taskGroup->delete();
+
+        $task = Task::where('task_group_id',$id);
+        $task->delete();
+        return back();
     }
 }

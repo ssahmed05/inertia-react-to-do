@@ -3,6 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react'
 import { Head, InertiaLink } from '@inertiajs/inertia-react'
 import Button from '@/Components/Button'
 import Pagination from "react-js-pagination"
+import { Inertia } from '@inertiajs/inertia'
 
 const List = (props) => {
 
@@ -19,6 +20,12 @@ const List = (props) => {
             groupList: await api.json()
         });
     };
+
+    const deleteTask = (id) => {
+
+        Inertia.visit(route('task.group.remove', id), {method:'post'});
+
+    }
 
     useEffect(() => {
         fetchData();
@@ -76,7 +83,9 @@ const List = (props) => {
                                         <div className="flex justify-between">
                                             <label className='m-3 text-md'>{record.name}</label>
                                             <InertiaLink href={route('task.list', {id: record.id} )}>
-                                                <Button className='bg-indigo-500'>Open</Button>
+                                                <Button className='bg-indigo-500 mx-1'>Open</Button>
+                                                <Button type={'button'} handleClick={(e) => e.preventDefault()} className='bg-green-500 mx-1'>Edit</Button>
+                                                <Button handleClick={(e) => { e.preventDefault(); deleteTask(record.id)}} className='bg-red-500 mx-1'>Delete</Button>
                                             </InertiaLink>
                                         </div>
                                     </div>
