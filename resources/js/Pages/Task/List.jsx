@@ -1,6 +1,6 @@
 import Authenticated from '@/Layouts/Authenticated'
 import React, { useEffect, useState } from 'react'
-import { Head, InertiaLink, useForm } from '@inertiajs/inertia-react'
+import { Head, InertiaLink } from '@inertiajs/inertia-react'
 import { Inertia } from '@inertiajs/inertia'
 import Pagination from "react-js-pagination"
 import { ToastContainer, toast } from 'react-toastify'
@@ -29,18 +29,51 @@ const List = (props) => {
     }
 
     const [progressBar, setProgressBar] = useState({
-        id : [],
+        id: [],
         proVal: []
     });
 
     const onProgressHandler = (id, value) => {
-
         setProgressBar({
-            id: [...progressBar.id, id],
-            proVal: [...progressBar.value, value]
+            id: id,
+            proVal: value
         });
-        // useForm.post()
-        console.log(progressBar);
+
+    }
+    const progressSaveHandle = () => {
+
+        Inertia.visit(route('task.setprogress'), {
+            method: 'post',
+            data : progressBar,
+            preserveState: true,
+            preserveScroll: true,
+            onFinish : () => setShowModel(false)
+
+        });
+        //    useForm.post(route('task.setprogress'),{
+        //     preserveScroll: true,
+        //     onError: (e) => console.log(e),
+        //     onSuccess: (reso) => {
+
+        //         console.log(reso);
+        //         // reset();
+
+        //         // toast.success('Task Added!', {
+        //         //     position: "top-right",
+        //         //     autoClose: 3000,
+        //         //     hideProgressBar: false,
+        //         //     closeOnClick: true,
+        //         //     pauseOnHover: true,
+        //         //     draggable: true,
+        //         //     progress: undefined,
+        //         //     theme: 'colored'
+        //         // });
+
+        //         // document.getElementById('textAreaAzab').value = ""; //there was no other way :(
+
+
+        //     }
+        // });
     }
     // Delete Task
     function deleteTask(id) {
@@ -227,30 +260,56 @@ const List = (props) => {
                                                                                             onChange={(r) => onProgressHandler(r.target.id, r.target.value)}
                                                                                         />
                                                                                         <div className="text-center">
-
                                                                                             <span>{progressBar.id == record.id ? progressBar.proVal : "0"}%</span>
+                                                                                        </div>
+                                                                                        <div className="flex justify-end mt-5">
+
+                                                                                            <button
+                                                                                                className="bg-indigo-500 text-white hover:bg-indigo-400 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                                                                                type="button"
+                                                                                                onClick={progressSaveHandle}
+                                                                                            >
+                                                                                                Save Changes
+                                                                                            </button>
 
                                                                                         </div>
+
                                                                                     </Modal>
                                                                                 }
                                                                             </>
                                                                             :
                                                                             <>
                                                                                 <button onClick={(e) => handleShowModal(e)} id={record.id} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded-full">
-                                                                                    {record.status}
+                                                                                    {record.status}%
                                                                                 </button>
                                                                                 {showModel.id == record.id &&
-                                                                                    <Modal show={showModel} onClose={setShowModel} title={"Set progress for Task" + record.task} >
-                                                                                        <input
-                                                                                            type="range"
-                                                                                            min="0"
-                                                                                            max="100"
-                                                                                            step={1}
-                                                                                            defaultValue={0}
-                                                                                            className='w-full h-0.5 bg-gray-400 rounded outline-none slider-thumb' name="slider"
-                                                                                            onChange={(r) => console.log(r)}
-                                                                                        />
-                                                                                    </Modal>
+                                                                                    <Modal show={showModel} onClose={setShowModel} title={"Set progress for Task : " + record.task} >
+                                                                                    <input
+                                                                                        id={record.id}
+                                                                                        type="range"
+                                                                                        min="0"
+                                                                                        max="100"
+                                                                                        step={1}
+                                                                                        defaultValue={record.status}
+                                                                                        className='w-full h-0.5 bg-gray-400 rounded outline-none slider-thumb' name="slider"
+                                                                                        onChange={(r) => onProgressHandler(r.target.id, r.target.value)}
+                                                                                    />
+                                                                                    <div className="text-center">
+                                                                                        <span>{progressBar.id == record.id ? progressBar.proVal : record.status}%</span>
+                                                                                    </div>
+                                                                                    <div className="flex justify-end mt-5">
+
+                                                                                        <button
+                                                                                            className="bg-indigo-500 text-white hover:bg-indigo-400 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                                                                            type="button"
+                                                                                            onClick={progressSaveHandle}
+                                                                                        >
+                                                                                            Save Changes
+                                                                                        </button>
+
+                                                                                    </div>
+
+                                                                                </Modal>
                                                                                 }
                                                                             </>
 

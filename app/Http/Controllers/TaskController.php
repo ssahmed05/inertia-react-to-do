@@ -36,7 +36,6 @@ class TaskController extends Controller
     public function store(Request $request)
     {
 
-
         $request->validate([
             'task' => 'required|string|max:255',
             'explanation' => 'required',
@@ -65,13 +64,6 @@ class TaskController extends Controller
         return Inertia::render("Task/Edit", $data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -93,15 +85,17 @@ class TaskController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Task  $task
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Task $task, $id)
     {
         $resp = $task->destroy($id);
         return back(302);
+    }
+    public function setProgress(Request $request)
+    {
+        $task = Task::find($request->id);
+        $task->status = $request->proVal;
+        $data = $task->save();
+        // return response()->json($task);
+        return back();
     }
 }

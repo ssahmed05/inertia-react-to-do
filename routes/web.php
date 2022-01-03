@@ -24,11 +24,15 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+
+//     return Inertia::render('Dashboard');
+
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/Task-Group', [App\Http\Controllers\TaskGroupController::class, 'index'])->name('task.group.list');
     Route::get('/Task-Group-List', [App\Http\Controllers\TaskGroupController::class, 'taskGroupList']);
@@ -37,6 +41,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/Task-Group-Add', [App\Http\Controllers\TaskGroupController::class, 'store'])->name('task.group.store');
 
     Route::get('/Task/{id}', [App\Http\Controllers\TaskController::class, 'index'])->name('task.list');
+
+    Route::post('/Task/Set-Progress', [App\Http\Controllers\TaskController::class, 'setProgress'])->name('task.setprogress');
+
     Route::get('/Task-List/{id}', [App\Http\Controllers\TaskController::class, 'taskList']);
 
     Route::get('/Task-Add/{id}', [App\Http\Controllers\TaskController::class, 'create'])->name('task.add');
