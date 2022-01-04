@@ -89,7 +89,7 @@ class TaskGroupController extends Controller
     public function edit($id)
     {
 
-        $data['taskGroup'] = TaskGroup::find($id)->get(['id','name','status'])->first();
+        $data['taskGroup'] = TaskGroup::where('id', $id)->get(['id','name','status'])->first();
         return Inertia::render('TaskGroup/Edit', $data);
         // $taskGroup = DB::table('task_groups')
         //             ->select('id', 'name', 'status', 'color')
