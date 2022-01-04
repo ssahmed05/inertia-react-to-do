@@ -7,6 +7,7 @@ import { Inertia } from '@inertiajs/inertia'
 
 const List = (props) => {
 
+
     const [alert, setAlert] = useState(props.flash.message != null ? true : false);
 
     const [state, setData] = useState({
@@ -16,22 +17,21 @@ const List = (props) => {
     const fetchData = async (pageNumber = 1) => {
 
         const api = await fetch(`/Task-Group-List?page=${pageNumber}`);
+
         setData({
             groupList: await api.json()
+
         });
+
     };
 
-    const deleteTask = (id) => {
-
-        Inertia.visit(route('task.group.remove', id), {method:'post'});
-
+    const openTasks = (id) => {
+        Inertia.visit(route('task.list', id), { method: 'get' });
     }
-
     useEffect(() => {
         fetchData();
+
     }, [])
-
-
 
     return (
 
@@ -41,7 +41,6 @@ const List = (props) => {
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Task Group {'>'} List</h2>}
         >
             <Head title="Task Groups" />
-
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     {
@@ -79,17 +78,51 @@ const List = (props) => {
                         state.groupList.data.map((record) => {
                             return (
                                 <div key={record.id} className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                                    <div className="bg-white p-6 mt-5 border-b-4 shadow-sm" style={{ borderBottom: "3", borderColor: record.color }}>
+                                    <div className="
+                                            transition
+                                            transform
+                                            hover:-translate-y-1.5
+                                            motion-reduce:transition-none
+                                            motion-reduce:transform-none
+                                            bg-white
+                                            hover:bg-yellow-100
+                                            p-6 mt-5
+                                            border-b-4
+                                            shadow-lg
+                                            cursor-pointer"
+
+                                        style={{ borderBottom: "3", borderColor: record.color }}
+                                        onClick={() => openTasks(record.id)}
+                                    >
                                         <div className="flex justify-between">
-                                            <label className='m-3 text-md'>{record.name}</label>
-                                            <InertiaLink href={route('task.list', {id: record.id} )}>
-                                                <Button className='bg-indigo-500 mx-1'>Open</Button>
-                                                <Button type={'button'} handleClick={(e) => e.preventDefault()} className='bg-green-500 mx-1'>Edit</Button>
-                                                <Button handleClick={(e) => { e.preventDefault(); deleteTask(record.id)}} className='bg-red-500 mx-1'>Delete</Button>
-                                            </InertiaLink>
+                                            <div>
+
+                                                <label className='m-3 text-md'>{record.name}</label>
+                                                {record.tasks != 0 ? (
+                                                    <span className="inline-flex items-center justify-center px-2 py-1 mr-2 text-sm font-bold leading-none text-red-100 bg-red-600 rounded-full">
+                                                    {record.tasks}
+                                                </span>
+                                                ) : ""}
+
+
+                                            </div>
+
+                                            <div>
+                                                {/* <InertiaLink href={route('task.list', { id: record.id })}>
+                                                    <Button className=' bg-indigo-500 mx-1 '>Open</Button>
+                                                </InertiaLink> */}
+                                                <InertiaLink onClick={(e) => e.stopPropagation()} href={route('task.group.edit', record.id)} >
+                                                    <Button className='bg-green-500 mx-1'>Edit</Button>
+                                                </InertiaLink>
+                                                <InertiaLink onClick={(e) => e.stopPropagation()} href={route('task.group.remove', record.id)} >
+                                                    <Button className='bg-red-500 mx-1'>Delete</Button>
+                                                </InertiaLink>
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
+
                             )
                         }) :
                         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

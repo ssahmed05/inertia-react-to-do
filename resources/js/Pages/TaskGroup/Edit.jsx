@@ -6,36 +6,40 @@ import { Inertia } from '@inertiajs/inertia'
 import { Head, useForm } from '@inertiajs/inertia-react'
 import React from 'react'
 
-const Add = (props) => {
+const Edit = (props) => {
 
-    const { errors } = props;
+    const { errors, taskGroup } = props;
+
     const { data, setData, processing } = useForm({
-        name: '',
-        color: '#3730a3',
-        activeStatus: 'Active',
+
+        id: taskGroup.id,
+        name: taskGroup.name,
+        color: taskGroup.color,
+        activeStatus: taskGroup.status,
+
     });
     const onHandleChange = (e) => {
 
         setData(e.target.name, e.target.value);
     }
-
     const submit = (e) => {
 
         e.preventDefault();
-        Inertia.visit(route('task.group.store'), {
+        Inertia.visit(route('task.group.update', data.id), {
             method: 'post',
             data: data
         });
 
     }
 
+
     return (
         <Authenticated
             auth={props.auth}
             errors={props.errors}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Task Group {'>'} Add</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Task Group {'>'} Edit</h2>}
         >
-            <Head title="Add Task Group" />
+            <Head title="Edit Task Group" />
             <div className="py-12">
 
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -77,20 +81,20 @@ const Add = (props) => {
                                         value={data.activeStatus}
                                         name='activeStatus'
                                         className="form-select appearance-none
-                                        block
-                                        w-full
-                                        px-3
-                                        py-1.5
-                                        text-base
-                                        font-normal
-                                        text-gray-700
-                                        bg-white bg-clip-padding bg-no-repeat
-                                        border border-solid border-gray-300
-                                        rounded
-                                        transition
-                                        ease-in-out
-                                        m-0
-                                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                                                    block
+                                                    w-full
+                                                    px-3
+                                                    py-1.5
+                                                    text-base
+                                                    font-normal
+                                                    text-gray-700
+                                                    bg-white bg-clip-padding bg-no-repeat
+                                                    border border-solid border-gray-300
+                                                    rounded
+                                                    transition
+                                                    ease-in-out
+                                                    m-0
+                                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
                                         <option defaultValue >Select</option>
                                         <option value="Active">Active</option>
                                         <option value="In-active">In-Active</option>
@@ -98,12 +102,9 @@ const Add = (props) => {
                                     <span className='text-red-500'>{errors.activeStatus}</span>
                                 </div>
 
-
                                 <div className="flex items-center justify-end mt-4">
-
-
                                     <Button className="ml-4" processing={processing}>
-                                        Add Task Group
+                                        Update
                                     </Button>
                                 </div>
                             </form>
@@ -117,4 +118,4 @@ const Add = (props) => {
     )
 }
 
-export default Add
+export default Edit

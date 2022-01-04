@@ -7,6 +7,7 @@ use App\Models\TaskGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
+use DB;
 
 class TaskGroupController extends Controller
 {
@@ -23,6 +24,16 @@ class TaskGroupController extends Controller
     public function taskGroupList(){
 
         $data = TaskGroup::paginate(5);
+
+        $data->getCollection()->transform(function($row){ // to append my required data in pagination
+            return [
+                'id'   => $row->id,
+                'name' => $row->name,
+                'color' => $row->color,
+                'status' => $row->status,
+                'tasks' => Task::where('task_group_id', $row->id)->count()
+            ];
+        });
         return $data;
     }
 
@@ -78,9 +89,16 @@ class TaskGroupController extends Controller
      * @param  \App\Models\TaskGroup  $taskGroup
      * @return \Illuminate\Http\Response
      */
-    public function edit(TaskGroup $taskGroup)
+    public function edit($id)
     {
-        //
+
+        $data['taskGroup'] = TaskGroup::find($id)->get(['id','name','status','color'])->first();
+        return Inertia::render('TaskGroup/Edit', $data);
+        // $taskGroup = DB::table('task_groups')
+        //             ->select('id', 'name', 'status', 'color')
+        //             ->where('id', $id)
+        //             ->get();
+
     }
 
     /**
@@ -90,9 +108,20 @@ class TaskGroupController extends Controller
      * @param  \App\Models\TaskGroup  $taskGroup
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TaskGroup $taskGroup)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'color' => 'required',
+            'activeStatus' => 'required',
+        ]);
+
+        $taskGrp = TaskGroup::find($id);
+        $taskGrp->name = $request->name;
+        $taskGrp->color = $request->color;
+        $taskGrp->status = $request->activeStatus;
+        $taskGrp->save();
+        return redirect()->route('task.group.list')->with('message' , "Task Group Edited");
     }
 
     /**

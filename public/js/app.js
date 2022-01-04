@@ -4779,12 +4779,7 @@ function Dashboard(props) {
                   fontSize: '5px',
                   fontWeight: "800"
                 },
-                data: shittyTask //    data={[
-                //        { title: 'A', value: 40, color: "#" + ((1<<24)*Math.random() | 0).toString(16) },
-                //        { title: 'B', value: 15, color: "#" + ((1<<24)*Math.random() | 0).toString(16) },
-                //        { title: 'C', value: 20, color: "#" + ((1<<24)*Math.random() | 0).toString(16) },
-                //    ]}
-
+                data: shittyTask
               }, taskGr.id)
             });
           })
@@ -4908,7 +4903,7 @@ var Add = function Add(props) {
                   onChange: onHandleChange,
                   value: data.activeStatus,
                   name: "activeStatus",
-                  className: "form-select appearance-none\r block\r w-full\r px-3\r py-1.5\r text-base\r font-normal\r text-gray-700\r bg-white bg-clip-padding bg-no-repeat\r border border-solid border-gray-300\r rounded\r transition\r ease-in-out\r m-0\r focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+                  className: "form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
                   "aria-label": "Default select example",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
                     defaultValue: true,
@@ -4941,6 +4936,156 @@ var Add = function Add(props) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Add);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/TaskGroup/Edit.jsx":
+/*!***********************************************!*\
+  !*** ./resources/js/Pages/TaskGroup/Edit.jsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Components_Button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Components/Button */ "./resources/js/Components/Button.js");
+/* harmony import */ var _Components_Input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Components/Input */ "./resources/js/Components/Input.js");
+/* harmony import */ var _Components_Label__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/Label */ "./resources/js/Components/Label.js");
+/* harmony import */ var _Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Layouts/Authenticated */ "./resources/js/Layouts/Authenticated.js");
+/* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var _inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @inertiajs/inertia-react */ "./node_modules/@inertiajs/inertia-react/dist/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+
+
+
+
+var Edit = function Edit(props) {
+  var errors = props.errors,
+      taskGroup = props.taskGroup;
+
+  var _useForm = (0,_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_5__.useForm)({
+    id: taskGroup.id,
+    name: taskGroup.name,
+    color: taskGroup.color,
+    activeStatus: taskGroup.status
+  }),
+      data = _useForm.data,
+      setData = _useForm.setData,
+      processing = _useForm.processing;
+
+  var onHandleChange = function onHandleChange(e) {
+    setData(e.target.name, e.target.value);
+  };
+
+  var submit = function submit(e) {
+    e.preventDefault();
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_4__.Inertia.visit(route('task.group.update', data.id), {
+      method: 'post',
+      data: data
+    });
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_Layouts_Authenticated__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    auth: props.auth,
+    errors: props.errors,
+    header: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("h2", {
+      className: "font-semibold text-xl text-gray-800 leading-tight",
+      children: ["Task Group ", '>', " Edit"]
+    }),
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_5__.Head, {
+      title: "Edit Task Group"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+      className: "py-12",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "max-w-7xl mx-auto sm:px-6 lg:px-8",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "overflow-hidden shadow-lg sm:rounded-lg",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+            className: "bg-white p-6 border-b border-gray-200",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {
+              onSubmit: submit,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                  forInput: "name",
+                  value: "Name"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+                  type: "text",
+                  name: "name",
+                  value: data.name,
+                  className: "mt-1 block w-full",
+                  autoComplete: "name",
+                  isFocused: true,
+                  handleChange: onHandleChange
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                  className: "text-red-500",
+                  children: errors.name
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                className: "mt-4",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                  forInput: "color",
+                  value: "Color"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+                  type: "color",
+                  name: "color",
+                  className: "mt-1 block w-full px-3 my-2 rounded transition focus:border-blue-600 focus:outline-none",
+                  value: data.color,
+                  handleChange: onHandleChange
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                  className: "text-red-500",
+                  children: errors.color
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                className: "mt-4",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Label__WEBPACK_IMPORTED_MODULE_2__["default"], {
+                  forInput: "status",
+                  value: "Status"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("select", {
+                  onChange: onHandleChange,
+                  value: data.activeStatus,
+                  name: "activeStatus",
+                  className: "form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none",
+                  "aria-label": "Default select example",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
+                    defaultValue: true,
+                    children: "Select"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
+                    value: "Active",
+                    children: "Active"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
+                    value: "In-active",
+                    children: "In-Active"
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                  className: "text-red-500",
+                  children: errors.activeStatus
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                className: "flex items-center justify-end mt-4",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Button__WEBPACK_IMPORTED_MODULE_0__["default"], {
+                  className: "ml-4",
+                  processing: processing,
+                  children: "Update"
+                })
+              })]
+            })
+          })
+        })
+      })
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
 
 /***/ }),
 
@@ -5045,9 +5190,9 @@ var List = function List(props) {
     };
   }();
 
-  var deleteTask = function deleteTask(id) {
-    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__.Inertia.visit(route('task.group.remove', id), {
-      method: 'post'
+  var openTasks = function openTasks(id) {
+    _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_6__.Inertia.visit(route('task.list', id), {
+      method: 'get'
     });
   };
 
@@ -5133,37 +5278,43 @@ var List = function List(props) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           className: "max-w-7xl mx-auto sm:px-6 lg:px-8",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-            className: "bg-white p-6 mt-5 border-b-4 shadow-sm",
+            className: " transition transform hover:-translate-y-1.5 motion-reduce:transition-none motion-reduce:transform-none bg-white hover:bg-yellow-100 p-6 mt-5 border-b-4 shadow-lg cursor-pointer",
             style: {
               borderBottom: "3",
               borderColor: record.color
             },
+            onClick: function onClick() {
+              return openTasks(record.id);
+            },
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
               className: "flex justify-between",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("label", {
-                className: "m-3 text-md",
-                children: record.name
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.InertiaLink, {
-                href: route('task.list', {
-                  id: record.id
-                }),
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                  className: "bg-indigo-500 mx-1",
-                  children: "Open"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                  type: 'button',
-                  handleClick: function handleClick(e) {
-                    return e.preventDefault();
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("label", {
+                  className: "m-3 text-md",
+                  children: record.name
+                }), record.tasks != 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                  className: "inline-flex items-center justify-center px-2 py-1 mr-2 text-sm font-bold leading-none text-red-100 bg-red-600 rounded-full",
+                  children: record.tasks
+                }) : ""]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.InertiaLink, {
+                  onClick: function onClick(e) {
+                    return e.stopPropagation();
                   },
-                  className: "bg-green-500 mx-1",
-                  children: "Edit"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                  handleClick: function handleClick(e) {
-                    e.preventDefault();
-                    deleteTask(record.id);
+                  href: route('task.group.edit', record.id),
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                    className: "bg-green-500 mx-1",
+                    children: "Edit"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_inertiajs_inertia_react__WEBPACK_IMPORTED_MODULE_3__.InertiaLink, {
+                  onClick: function onClick(e) {
+                    return e.stopPropagation();
                   },
-                  className: "bg-red-500 mx-1",
-                  children: "Delete"
+                  href: route('task.group.remove', record.id),
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_Components_Button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                    className: "bg-red-500 mx-1",
+                    children: "Delete"
+                  })
                 })]
               })]
             })
@@ -5738,25 +5889,7 @@ var List = function List(props) {
       onFinish: function onFinish() {
         return setShowModel(false);
       }
-    }); //    useForm.post(route('task.setprogress'),{
-    //     preserveScroll: true,
-    //     onError: (e) => console.log(e),
-    //     onSuccess: (reso) => {
-    //         console.log(reso);
-    //         // reset();
-    //         // toast.success('Task Added!', {
-    //         //     position: "top-right",
-    //         //     autoClose: 3000,
-    //         //     hideProgressBar: false,
-    //         //     closeOnClick: true,
-    //         //     pauseOnHover: true,
-    //         //     draggable: true,
-    //         //     progress: undefined,
-    //         //     theme: 'colored'
-    //         // });
-    //         // document.getElementById('textAreaAzab').value = ""; //there was no other way :(
-    //     }
-    // });
+    });
   }; // Delete Task
 
 
@@ -65876,6 +66009,8 @@ var map = {
 	"./Task/List.jsx": "./resources/js/Pages/Task/List.jsx",
 	"./TaskGroup/Add": "./resources/js/Pages/TaskGroup/Add.jsx",
 	"./TaskGroup/Add.jsx": "./resources/js/Pages/TaskGroup/Add.jsx",
+	"./TaskGroup/Edit": "./resources/js/Pages/TaskGroup/Edit.jsx",
+	"./TaskGroup/Edit.jsx": "./resources/js/Pages/TaskGroup/Edit.jsx",
 	"./TaskGroup/List": "./resources/js/Pages/TaskGroup/List.jsx",
 	"./TaskGroup/List.jsx": "./resources/js/Pages/TaskGroup/List.jsx",
 	"./Welcome": "./resources/js/Pages/Welcome.jsx",

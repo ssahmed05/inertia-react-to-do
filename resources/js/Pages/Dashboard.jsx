@@ -64,14 +64,8 @@ export default function Dashboard(props) {
                                             fill: 'white',
                                             fontSize: '5px',
                                             fontWeight: "800",
-                                    }}
-                                    data={shittyTask}
-                                    //    data={[
-                                    //        { title: 'A', value: 40, color: "#" + ((1<<24)*Math.random() | 0).toString(16) },
-                                    //        { title: 'B', value: 15, color: "#" + ((1<<24)*Math.random() | 0).toString(16) },
-                                    //        { title: 'C', value: 20, color: "#" + ((1<<24)*Math.random() | 0).toString(16) },
-                                    //    ]}
-
+                                        }}
+                                        data={shittyTask}
                                         />
 
 

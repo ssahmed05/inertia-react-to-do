@@ -50,30 +50,6 @@ const List = (props) => {
             onFinish : () => setShowModel(false)
 
         });
-        //    useForm.post(route('task.setprogress'),{
-        //     preserveScroll: true,
-        //     onError: (e) => console.log(e),
-        //     onSuccess: (reso) => {
-
-        //         console.log(reso);
-        //         // reset();
-
-        //         // toast.success('Task Added!', {
-        //         //     position: "top-right",
-        //         //     autoClose: 3000,
-        //         //     hideProgressBar: false,
-        //         //     closeOnClick: true,
-        //         //     pauseOnHover: true,
-        //         //     draggable: true,
-        //         //     progress: undefined,
-        //         //     theme: 'colored'
-        //         // });
-
-        //         // document.getElementById('textAreaAzab').value = ""; //there was no other way :(
-
-
-        //     }
-        // });
     }
     // Delete Task
     function deleteTask(id) {

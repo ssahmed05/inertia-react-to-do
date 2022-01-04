@@ -40,7 +40,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Task-Group-Add', [App\Http\Controllers\TaskGroupController::class, 'create'])->name('task.group.add');
     Route::post('/Task-Group-Add', [App\Http\Controllers\TaskGroupController::class, 'store'])->name('task.group.store');
 
-    Route::post('/Task-Group-Delete/{id}', [App\Http\Controllers\TaskGroupController::class, 'destroy'])->name('task.group.remove');
+    Route::get('/Task-Group-Edit/{id}', [App\Http\Controllers\TaskGroupController::class, 'edit'])->name('task.group.edit');
+    Route::post('/Task-Group-Edit/{id}', [App\Http\Controllers\TaskGroupController::class, 'update'])->name('task.group.update');
+
+    Route::get('/Task-Group-Delete/{id}', [App\Http\Controllers\TaskGroupController::class, 'destroy'])->name('task.group.remove');
 
     Route::get('/Task/{id}', [App\Http\Controllers\TaskController::class, 'index'])->name('task.list');
 
