@@ -11,7 +11,6 @@ const Add = (props) => {
     const { errors } = props;
     const { data, setData, processing } = useForm({
         name: '',
-        color: '#3730a3',
         activeStatus: 'Active',
     });
     const onHandleChange = (e) => {
@@ -56,18 +55,6 @@ const Add = (props) => {
 
                                     />
                                     <span className='text-red-500'>{errors.name}</span>
-                                </div>
-
-                                <div className="mt-4">
-                                    <Label forInput="color" value="Color" />
-                                    <Input
-                                        type='color'
-                                        name="color"
-                                        className="mt-1 block w-full px-3 my-2 rounded transition focus:border-blue-600 focus:outline-none"
-                                        value={data.color}
-                                        handleChange={onHandleChange}
-                                    />
-                                    <span className='text-red-500'>{errors.color}</span>
                                 </div>
                                 <div className="mt-4">
                                     <Label forInput="status" value="Status" />

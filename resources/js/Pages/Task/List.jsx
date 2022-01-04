@@ -2,7 +2,6 @@ import Authenticated from '@/Layouts/Authenticated'
 import React, { useEffect, useState } from 'react'
 import { Head, InertiaLink } from '@inertiajs/inertia-react'
 import { Inertia } from '@inertiajs/inertia'
-import Pagination from "react-js-pagination"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Modal from '@/Components/Modal'
@@ -10,16 +9,16 @@ import Modal from '@/Components/Modal'
 const List = (props) => {
 
     const [kaam, setKaam] = useState({
-        taskList: false,
+        taskList: props.tasks,
     })
 
-    const fetchData = async (pageNumber = 1) => {
-        const api = await fetch(`/Task-List/${props.id}?page=${pageNumber}`);
-        setKaam({
-            taskList: await api.json()
-        });
+    // const fetchData = async (pageNumber = 1) => {
+    //     const api = await fetch(`/Task-List/${props.id}?page=${pageNumber}`);
+    //     setKaam({
+    //         taskList: await api.json()
+    //     });
 
-    }
+    // }
 
     const [showModel, setShowModel] = useState({ id: 0 });
     const handleShowModal = (e) => {
@@ -44,10 +43,10 @@ const List = (props) => {
 
         Inertia.visit(route('task.setprogress'), {
             method: 'post',
-            data : progressBar,
+            data: progressBar,
             preserveState: true,
             preserveScroll: true,
-            onFinish : () => setShowModel(false)
+            onFinish: () => setShowModel(false)
 
         });
     }
@@ -79,17 +78,9 @@ const List = (props) => {
 
     useEffect(() => {
 
-        let letMyDataLoad = true;
-
-        if (letMyDataLoad) {
-
-            fetchData();
-        }
-
         return () => {
             setKaam.current = false;
             setShowModel.current = false;
-            letMyDataLoad = false;
         }
 
     })
@@ -128,7 +119,51 @@ const List = (props) => {
                         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                                 <div className="shadow overflow-hidden border-b border-indigo-200 sm:rounded-lg">
-                                    <table className="min-w-full divide-y divide-indigo-200 border-collapse ">
+                                    {
+                                        kaam.taskList == "" ? (
+
+                                            <div className="p-10 border shadow-sm">
+                                                <div className="max-w-sm rounded overflow-hidden shadow-lg">
+                                                    <img className="w-full" src="https://picsum.photos/200" alt="Mountain" />
+                                                    <div className="px-6 py-4">
+                                                        <div className="font-bold text-xl mb-2">No Data</div>
+                                                        <p className="text-gray-700 text-base">
+                                                            Click on Add (+) To add Data
+                                                        </p>
+                                                    </div>
+                                                    <div className="px-6 pt-4 pb-2">
+                                                        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                                                        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                                                        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        ) : kaam?.taskList ?
+                                            kaam.taskList.map(record => {
+                                                console.log(record);
+                                                <div className="p-10 border shadow-sm">
+                                                    <div className="max-w-sm rounded overflow-hidden shadow-lg">
+                                                        <img className="w-full" src="https://picsum.photos/200" alt="Mountain" />
+                                                        <div className="px-6 py-4">
+                                                            <div className="font-bold text-xl mb-2">Mountain</div>
+                                                            <p className="text-gray-700 text-base">
+                                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                                                            </p>
+                                                        </div>
+                                                        <div className="px-6 pt-4 pb-2">
+                                                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                                                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                                                            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            })
+                                            : ""
+                                    }
+
+
+                                    {/* <table className="min-w-full divide-y divide-indigo-200 border-collapse ">
                                         <thead className="bg-gray-50">
                                             <tr>
                                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase border border-gray-300 tracking-wider">
@@ -323,33 +358,9 @@ const List = (props) => {
                                             }
 
                                         </tbody>
-                                    </table>
+                                    </table> */}
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="overflow-hidden shadow-lg bg-white sm:rounded-lg ">
-                        <div className="flex justify-center mb-4">
-
-                            <Pagination
-                                activePage={kaam?.taskList?.current_page ? kaam?.taskList?.current_page : 0}
-                                itemsCountPerPage={kaam?.taskList?.per_page ? kaam?.taskList?.per_page : 0}
-                                totalItemsCount={kaam?.taskList?.total ? kaam?.taskList?.total : 0}
-                                onChange={(pageNumber) => {
-                                    fetchData(pageNumber)
-                                }}
-                                pageRangeDisplayed={6}
-                                itemClass="py-4"
-                                innerClass="relative z-0 inline-flex rounded-full shadow-sm -space-x-px"
-                                activeClass='indigo-500'
-                                activeLinkClass="indigo-500"
-                                linkClass=" px-4 py-2 mx-1  bg-indigo-500 text-sm font-medium text-white hover:bg-indigo-300 rounded-full"
-                                firstPageText="First"
-                                lastPageText="Last"
-                            />
                         </div>
                     </div>
                 </div>

@@ -87,11 +87,9 @@ const List = (props) => {
                                             bg-white
                                             hover:bg-yellow-100
                                             p-6 mt-5
-                                            border-b-4
                                             shadow-lg
-                                            cursor-pointer"
-
-                                        style={{ borderBottom: "3", borderColor: record.color }}
+                                            cursor-pointer
+                                            border-b-4 border-yellow-500"
                                         onClick={() => openTasks(record.id)}
                                     >
                                         <div className="flex justify-between">

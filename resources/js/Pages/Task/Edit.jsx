@@ -17,6 +17,7 @@ const Edit = (props) => {
         task: task.task,
         taskGroupId: task.task_group_id,
         explanation: task.explaination,
+        color : task.color,
         deadline: task.deadline,
         date_of_assign: task.date_of_assign,
     });
@@ -95,6 +96,17 @@ const Edit = (props) => {
                                         onChange={onHandleChange}
                                     />
                                     <span className='text-red-500'>{errors.explanation}</span>
+                                </div>
+                                <div className="mt-4">
+                                    <Label forInput="color" value="Color" />
+                                    <Input
+                                        type='color'
+                                        name="color"
+                                        className="mt-1 block w-full px-3 my-2 rounded transition focus:border-blue-600 focus:outline-none"
+                                        value={data.color}
+                                        handleChange={onHandleChange}
+                                    />
+                                    <span className='text-red-500'>{errors.color}</span>
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
 

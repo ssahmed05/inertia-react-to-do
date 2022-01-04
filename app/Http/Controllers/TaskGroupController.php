@@ -29,7 +29,6 @@ class TaskGroupController extends Controller
             return [
                 'id'   => $row->id,
                 'name' => $row->name,
-                'color' => $row->color,
                 'status' => $row->status,
                 'tasks' => Task::where('task_group_id', $row->id)->count()
             ];
@@ -59,13 +58,11 @@ class TaskGroupController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'color' => 'required',
             'activeStatus' => 'required',
         ]);
 
         $taskGroup = new TaskGroup;
         $taskGroup->name   = $request->name ;
-        $taskGroup->color  = $request->color ;
         $taskGroup->status = $request->activeStatus ;
         $taskGroup->save();
         return redirect()->route('task.group.list')->with('message' , "Task Group Added");
@@ -92,7 +89,7 @@ class TaskGroupController extends Controller
     public function edit($id)
     {
 
-        $data['taskGroup'] = TaskGroup::find($id)->get(['id','name','status','color'])->first();
+        $data['taskGroup'] = TaskGroup::find($id)->get(['id','name','status'])->first();
         return Inertia::render('TaskGroup/Edit', $data);
         // $taskGroup = DB::table('task_groups')
         //             ->select('id', 'name', 'status', 'color')
@@ -112,13 +109,11 @@ class TaskGroupController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'color' => 'required',
             'activeStatus' => 'required',
         ]);
 
         $taskGrp = TaskGroup::find($id);
         $taskGrp->name = $request->name;
-        $taskGrp->color = $request->color;
         $taskGrp->status = $request->activeStatus;
         $taskGrp->save();
         return redirect()->route('task.group.list')->with('message' , "Task Group Edited");
@@ -135,8 +130,7 @@ class TaskGroupController extends Controller
         $taskGroup = TaskGroup::find($id);
         $taskGroup->delete();
 
-        $task = Task::where('task_group_id',$id);
-        $task->delete();
+        $task = Task::where('task_group_id',$id)->delete();
         return back();
     }
 }

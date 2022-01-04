@@ -14,15 +14,9 @@ class TaskController extends Controller
     {
         return Inertia::render('Task/List', [
             'id' => $id,
-            'taskGroup' => TaskGroup::find($id)
+            'taskGroup' => TaskGroup::find($id),
+            'tasks' => Task::where('task_group_id',$id)->get()
         ]);
-    }
-
-    public function taskList($id){
-
-        $data = Task::where('task_group_id',$id)->paginate(10);
-        return $data;
-
     }
 
     public function create($taskGroupId)
@@ -47,6 +41,7 @@ class TaskController extends Controller
         $task->task_group_id  = $request->taskGroupId;
         $task->task           = $request->task;
         $task->explaination   = $request->explanation;
+        $task->color          = $request->color;
         $task->status         = "Pending";
         $task->date_of_assign = date("Y-m-d",strtotime($request->date_of_assign));
         $task->deadline       = date("Y-m-d",strtotime($request->deadline));
@@ -76,6 +71,7 @@ class TaskController extends Controller
         $task                 = Task::find($id);
         $task->task           = $request->task;
         $task->explaination   = $request->explanation;
+        $task->color          = $request->color;
         $task->date_of_assign = date("Y-m-d",strtotime($request->date_of_assign));
         $task->deadline       = date("Y-m-d",strtotime($request->deadline));
         $task->save();
