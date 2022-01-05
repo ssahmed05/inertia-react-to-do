@@ -18,7 +18,7 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('task_group_id');
             $table->string('task');
-            $table->string('explaination');
+            $table->text('explaination');
             $table->string('status');
             $table->sting('color');
             $table->date('date_of_assign');

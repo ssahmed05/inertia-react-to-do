@@ -85,11 +85,11 @@ const List = (props) => {
                                             motion-reduce:transition-none
                                             motion-reduce:transform-none
                                             bg-white
-                                            hover:bg-yellow-100
+                                            hover:bg-indigo-200
                                             p-6 mt-5
                                             shadow-lg
                                             cursor-pointer
-                                            border-b-4 border-yellow-500"
+                                            border-b-4 border-indigo-500"
                                         onClick={() => openTasks(record.id)}
                                     >
                                         <div className="flex justify-between">
@@ -110,7 +110,7 @@ const List = (props) => {
                                                     <Button className=' bg-indigo-500 mx-1 '>Open</Button>
                                                 </InertiaLink> */}
                                                 <InertiaLink onClick={(e) => e.stopPropagation()} href={route('task.group.edit', record.id)} >
-                                                    <Button className='bg-green-500 mx-1'>Edit</Button>
+                                                    <Button className='bg-indigo-500 mx-1'>Edit</Button>
                                                 </InertiaLink>
                                                 <InertiaLink onClick={(e) => e.stopPropagation()} href={route('task.group.remove', record.id)} >
                                                     <Button className='bg-red-500 mx-1'>Delete</Button>

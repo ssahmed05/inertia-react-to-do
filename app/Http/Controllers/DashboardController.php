@@ -25,6 +25,17 @@ class DashboardController extends Controller
 
         });
 
+        $data['taskForCal'] = Task::all()->map(function($tasks) {
+            return [
+                'id'      => $tasks->id,
+                'groupId' => $tasks->task_group_id,
+                'title'   => $tasks->task,
+                'start'   => $tasks->date_of_assign,
+                'end'     => $tasks->deadline,
+                'color'   => $tasks->color,
+            ];
+        });
+
         return Inertia::render('Dashboard',$data);
     }
 

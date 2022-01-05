@@ -161,9 +161,8 @@ const List = (props) => {
                         {
                             props.tasks == "" ? (
 
-                                <div className=" p-10 border shadow-sm">
-                                    <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                                        <img className="w-full" src="https://picsum.photos/200" alt="Mountain" />
+                                <div className=" p-10">
+                                    <div className="max-w-sm bg-white rounded overflow-hidden shadow-lg">
                                         <div className="px-6 py-4">
                                             <div className="font-bold text-xl mb-2">No Data</div>
                                             <p className="text-gray-700 text-base">
