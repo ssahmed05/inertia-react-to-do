@@ -5984,7 +5984,7 @@ var List = function List(props) {
           }) : props.tasks.map(function (record) {
             var applyCheck = record.date_of_complete != null ? true : false;
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-              className: " h-fit transition transform hover:-translate-y-1.5 motion-reduce:transition-none motion-reduce:transform-none p-2 shadow-lg border-b-4 border-t-4 border bg-white ",
+              className: " h-fit mt-2 transition transform hover:-translate-y-1.5 motion-reduce:transition-none motion-reduce:transform-none p-2 shadow-lg border-b-4 border-t-4 border bg-white ",
               style: {
                 borderColor: record.color,
                 borderBottomColor: record.color
@@ -6008,7 +6008,7 @@ var List = function List(props) {
                       children: "Edit"
                     })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
-                    className: "text-gray-700 text-base overflow-auto hover:overflow-y-scroll h-32",
+                    className: "text-gray-700 text-base overflow-auto hover:overflow-y-scroll h-32 journal-scroll",
                     style: {
                       whiteSpace: "pre-line"
                     },

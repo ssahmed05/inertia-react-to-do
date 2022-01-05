@@ -126,8 +126,6 @@ const List = (props) => {
         }
     })
 
-
-
     return (
 
         <Authenticated
@@ -188,6 +186,7 @@ const List = (props) => {
                                             key={record.id}
                                             className="
                                                     h-fit
+                                                    mt-2
                                                     transition
                                                     transform
                                                     hover:-translate-y-1.5
@@ -212,7 +211,7 @@ const List = (props) => {
                                                         <InertiaLink href={route('task.edit', record.id)} className="float-right text-indigo-400 hover:text-indigo-600 uppercase text-xs mr-2">Edit</InertiaLink>
 
                                                     </div>
-                                                    <p className="text-gray-700 text-base overflow-auto hover:overflow-y-scroll h-32" style={{ whiteSpace: "pre-line" }}>
+                                                    <p className="text-gray-700 text-base overflow-auto hover:overflow-y-scroll h-32 journal-scroll" style={{ whiteSpace: "pre-line" }}>
                                                         {record.explaination}
                                                     </p>
                                                 </div>
