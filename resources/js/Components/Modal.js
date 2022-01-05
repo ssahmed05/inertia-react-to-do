@@ -1,6 +1,6 @@
 import React, { Fragment, useCallback } from 'react'
 
-const Modal = ({ show, onClose, title, children }) => {
+const Modal = ({ show, onClose, title, children,style, className }) => {
 
     const handleInputChange = useCallback((event) => {
 
@@ -13,8 +13,8 @@ const Modal = ({ show, onClose, title, children }) => {
       {show ? (
         <>
           <div
-            className="justify-center items-center relative flex overflow-x-hidden h-100 overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-
+            className={"justify-center items-center absolute flex overflow-x-hidden h-100 overflow-y-auto inset-0 z-50 outline-none focus:outline-none " + className}
+            style={style}
           >
             <div className="relative w-full my-auto mx-auto max-w-3xl">
               {/*content*/}

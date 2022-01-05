@@ -91,7 +91,20 @@ class TaskController extends Controller
         $task = Task::find($request->id);
         $task->status = $request->proVal;
         $data = $task->save();
-        // return response()->json($task);
+        return back();
+    }
+    public function setComplete(Request $request)
+    {
+
+        $task = Task::find($request->id);
+        if($request->doc == null){
+
+            $task->date_of_complete = $request->doc;
+        } else {
+
+            $task->date_of_complete = date('Y-m-d', strtotime($request->doc));
+        }
+        $data = $task->save();
         return back();
     }
 }
