@@ -20,7 +20,7 @@ class CreateTasksTable extends Migration
             $table->string('task');
             $table->text('explaination');
             $table->string('status');
-            $table->sting('color');
+            $table->string('color');
             $table->date('date_of_assign');
             $table->date('deadline');
             $table->date('date_of_complete')->nullable();
